@@ -28,7 +28,7 @@ export default function TeamSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Who am I?</h2>
+      <h2 className={classes.title}>What do I do?</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -65,12 +65,12 @@ export default function TeamSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={8} container alignItems="center">
             <p className={classes.description}>
-              Whilst studying Computer Science MEng in a top 10 ranked university my humbled beginnings began with an internship
-              working on mobile OS software at Motorola. Since graduating with a 1st Hons. degree I have accumulated over 10 years experience
-              working in a variety of areas including virtualisation, devops, desktop app and full stack web development. I adapt quickly to
-              new environments and have used many technologies from backend such as C#, Java, C++, ASP.NET Core, SQL, PowerShell, to the frontend such
-              as WPF, WinForms, Javascript, TypeScript, Angular and React. These days I find myself firmly rooted in the .NET world though
-              often end up dabbling with some front end too.
+              Whilst studying Computer Science MEng in a top 10 ranked UK university my humbled beginnings began with an internship
+              working on mobile OS software. Since graduating with a 1st Hons. degree I have accumulated over 10 years experience working as a software
+              developer at companies ranging from large multibillion dollar enterprises to small startups in a variety of areas including
+              virtualisation, devops, desktop app and full stack web development. I adapt quickly to new environments and have used many technologies
+              from backend such as C#, Java, C++, ASP.NET Core, SQL, PowerShell, to the frontend such as WPF, WinForms, Javascript, TypeScript, Angular
+              and React. These days I find myself firmly rooted in the .NET world though often end up dabbling with some front end too.
             </p>
           </GridItem>
         </GridContainer>
