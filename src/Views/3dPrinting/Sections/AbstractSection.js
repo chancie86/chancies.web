@@ -1,14 +1,8 @@
 import React from "react";
 
-
-// nodejs library that concatenates classes
-import classNames from "classnames";
-
 // @material-ui/core components
 import Link from '@material-ui/core/Link';
 import { makeStyles } from "@material-ui/core/styles";
-
-// @material-ui/icons
 
 import styles from "../../../assets/jss/material-kit-react/views/projectPageSections/sectionStyle.js";
 

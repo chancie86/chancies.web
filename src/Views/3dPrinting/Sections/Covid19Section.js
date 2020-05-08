@@ -1,9 +1,24 @@
 import React from "react";
 
+// nodejs library that concatenates classes
+import classNames from "classnames";
+
+// react component for creating beautiful carousel
+import Carousel from "react-slick";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
 import ExternalLink from '../../../Components/ExternalLink'
+import GridContainer from "../../../Components/Grid/GridContainer.js";
+import GridItem from "../../../Components/Grid/GridItem.js";
+import Card from "../../../Components/Card/Card.js";
+
+import assembledShieldImage from "../../../assets/img/projects/3dprinting/assembledShield.jpg";
+import deliveryRunImage from "../../../assets/img/projects/3dprinting/deliveryRun.jpg";
+import printedFramesImage from "../../../assets/img/projects/3dprinting/printedFrames.jpg";
+import printerAndFramesImage from "../../../assets/img/projects/3dprinting/printerAndFrames.jpg";
+import shieldImage from "../../../assets/img/projects/3dprinting/shield.jpg";
 
 import styles from "../../../assets/jss/material-kit-react/views/projectPageSections/sectionStyle.js";
 
@@ -11,26 +26,47 @@ const useStyles = makeStyles(styles);
 
 export default function Covid19Section() {
   const classes = useStyles();
+
+  const imageClasses = classNames(
+    classes.imgRaised,
+    classes.imgRounded,
+    classes.imgFluid,
+  );
+
+  const carouselSettings = {
+    autoplay: true,
+    autoplaySpeed: 15000,
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   
   return (
     <div className={classes.section}>
       <h2 className={classes.title}>What&apos;s this about a PPE shortage?</h2>
       <p>
         The shortage of PPE that the UK and the rest of the world has experienced during the Covid-19 outbreak has been
-        well covered in news. About the time I received delivery of my printer I had read a&nbsp;
+        well covered in the news. About the time I received delivery of my printer I had read a&nbsp;
         <ExternalLink href="https://www.bbc.co.uk/news/technology-52111522">BBC article</ExternalLink> during my research (thanks
         Google Assistant for bubbling it up to me) about a group of 3D printer owners based here in the UK who had pledged to
         use their printers to produce face shields for front line workers. At first I dismissed this on the basis that, at
         the time, I didn&apos;t have a clue what I was doing with it. However, once I had a working printer set up and had achieved
-        a couple of prints working one of my friends mentioned it to me in passing and I read into it a bit more.
+        a couple of prints one of my friends mentioned the same story from the local news to me in passing so I read into it a bit more.
       </p>
       <p>
         Prusa, the manufacturer of my printer, decided to try to find a way of helping with the PPE shortage using 3D printer technology
         and they came up with a design to create face shields. Each shield has two printed parts, the frame and a bottom reinforcement
         bracket. These are both attached to a transparent plastic sheet and then and piece of elastic is attach to the main frame. Their
         design was approved in the Czech Republic (where they are based) by their Ministry of Health. The designs and <code>.gcode</code>&nbsp;
-        for it were released publically and it has been a hit world wide.
+        for it were released publically and it had become a hit world wide.
       </p>
+      <GridContainer className={classes.imageCenter}>
+        <Card className={classes.singleImage}>
+          <img src={shieldImage} alt="Prusa Face Shield" className={imageClasses} style={{ maxHeight: '30em' }} />
+        </Card>
+      </GridContainer>
       <p>
         So all I had to do was download the <code>.gcode</code> and press the print button? But what about the other aspects of it? Materials,
         distribution, the non-printable parts and cleaning? The organisation I had read about,&nbsp;
@@ -60,6 +96,38 @@ export default function Covid19Section() {
         a car which has been doing very little since lockdown, I&apos;ve also started to help with distribution, be it delivery of fully assembled shields
         to the front line or distributing materials. Volunteer drivers form a relay so that no one has to drive too far away from their local area.
       </p>
+      <GridContainer className={classes.imageCenter}>
+        <GridItem xs={12} sm={12} md={9}>
+          <Card carousel>
+            <Carousel {...carouselSettings}>
+              <div>
+                <img src={printedFramesImage} alt="Hot off the print bed" className="slick-image" />
+                <div className="slick-caption">
+                  <h4>Hot off the print bed</h4>
+                </div>
+              </div>
+              <div>
+                <img src={printerAndFramesImage} alt="Ready to send to the hub" className="slick-image" />
+                <div className="slick-caption">
+                  <h4>Ready to send to the hub</h4>
+                </div>
+              </div>
+              <div>
+                <img src={assembledShieldImage} alt="Assembly time" className="slick-image" />
+                <div className="slick-caption">
+                  <h4>Assembly time</h4>
+                </div>
+              </div>
+              <div>
+                <img src={deliveryRunImage} alt="Delivery run" className="slick-image" />
+                <div className="slick-caption">
+                  <h4>Delivery run</h4>
+                </div>
+              </div>
+            </Carousel>
+          </Card> 
+        </GridItem>
+      </GridContainer>
     </div>
   );
 }

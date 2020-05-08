@@ -63,7 +63,7 @@ export default function PreMadePrintingSection() {
       </p>
       <GridContainer className={classes.imageCenter}>
         <Card className={classes.singleImage}>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/hts7AdCdYMU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe title="singing" width="560" height="315" src="https://www.youtube.com/embed/hts7AdCdYMU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </Card>
       </GridContainer>
     </div>

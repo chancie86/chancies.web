@@ -61,6 +61,8 @@ export default function Printing(props) {
           <Sections.PreMadePrinting />
           <Sections.Covid19 />
           <Sections.CustomPrinting />
+          <Sections.Drawing />
+          <Sections.Summary />
         </div>
       </div>
       <Footer />
