@@ -16,12 +16,12 @@ import GridItem from "../../Components/Grid/GridItem.js";
 import HeaderLinks from "../../Components/Header/HeaderLinks.js";
 import Parallax from "../../Components/Parallax/Parallax.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPage.js";
+import styles from "../../assets/jss/material-kit-react/views/landingPage.js";
 
 import config from 'config.json';
 
 // Sections for this page
-import IntroSection from "./Sections/IntroSection.js";
+import * as Sections from "./Sections";
 
 const dashboardRoutes = [];
 
@@ -49,7 +49,7 @@ export default function LandingPage(props) {
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Welcome.</h1>
-              <h4>
+              <h4 className={classes.subtitle}>
                 Hello, you've accidentally stumbled upon my personal website. You poor soul! Joking aside, you'll find some
                 general information about my professional self as well as links to social media for getting in touch.
               </h4>
@@ -60,7 +60,8 @@ export default function LandingPage(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <IntroSection />
+          <Sections.Intro />
+          <Sections.SummaryInfo />
         </div>
       </div>
       <Footer />

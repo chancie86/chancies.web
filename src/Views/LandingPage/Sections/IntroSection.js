@@ -1,10 +1,10 @@
 import React from "react";
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
-// @material-ui/icons
 
 // core components
 import GridContainer from "../../../Components/Grid/GridContainer.js";
@@ -13,13 +13,13 @@ import Button from "../../../Components/CustomButtons/Button.js";
 import Card from "../../../Components/Card/Card.js";
 import CardBody from "../../../Components/Card/CardBody.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
+import styles from "../../../assets/jss/material-kit-react/views/landingPageSections/introStyle.js";
 
 import team1 from "assets/img/faces/hoi.jpg";
 
 const useStyles = makeStyles(styles);
 
-export default function TeamSection() {
+export default function IntroSection() {
   const classes = useStyles();
   const imageClasses = classNames(
     classes.imgRaised,
@@ -65,12 +65,12 @@ export default function TeamSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={8} container alignItems="center">
             <p className={classes.description}>
-              Whilst studying Computer Science MEng in a top 10 ranked UK university my humbled beginnings began with an internship
-              working on mobile OS software. Since graduating with a 1st Hons. degree I have accumulated over 10 years experience working as a software
-              developer at companies ranging from large multibillion dollar enterprises to small startups in a variety of areas including
-              virtualisation, devops, desktop app and full stack web development. I adapt quickly to new environments and have used many technologies
-              from backend such as C#, Java, C++, ASP.NET Core, SQL, PowerShell, to the frontend such as WPF, WinForms, Javascript, TypeScript, Angular
-              and React. These days I find myself firmly rooted in the .NET world though often end up dabbling with some front end too.
+              I have been a software developer for over 10 years. At my humbled beginnings I began with an internship
+              working on mobile OS software. Since then I have progressed my career as an engineer at companies ranging from large multibillion
+              dollar enterprises to small startups in a variety of areas including virtualisation, devops, desktop app and full stack web development.
+              I adapt quickly to new environments and have used many technologies from backend such as C#, Java, C++, ASP.NET Core, SQL, PowerShell,
+              to the frontend such as WPF, WinForms, JavaScript, TypeScript, Angular and React. These days I find myself firmly rooted in the .NET
+              world though often end up dabbling with infrastructure and front end too.
             </p>
           </GridItem>
         </GridContainer>
