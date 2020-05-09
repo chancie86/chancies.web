@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
