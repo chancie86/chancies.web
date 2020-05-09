@@ -16,10 +16,10 @@ export default function IntroSection() {
     <div className={classes.section}>
       <h2 className={classes.title}>Intro</h2>
       <p>
-        In mid-March 2020 I had just started working at from home amid the Covid-19 crisis. Being in the lockdown meant that I would have to find
+        In mid-March 2020 I had just started working from home amid the Covid-19 crisis. Being in the lockdown meant that I would have to find
         more ways to bide the time indoors which was the perfect opportunity to spend time on hobbies and to learn some new things. I picked up the
         guitar for the first time in years and also fixed the bike to enjoy the roads whilst they would be the quietest I'd probably ever see them.
-        I also decided that I would buy piece of tech to play with and it was a toss up between a VR headset and a 3D printer. Despite having a strong
+        I also decided that I would buy a piece of tech to play with and it became a toss up between a VR headset and a 3D printer. Despite having a strong
         urge to play Half Life: Alyx, it was the printer that won out. 
       </p>
       <p>
@@ -33,9 +33,10 @@ export default function IntroSection() {
         add up to form a full object.
       </p>
       <p>
-        I reached out to a friend who is a Mechanical Engineer by trade and regularly uses them for prototyping parts. He recommended the&nbsp;
-        <ExternalLink href="https://www.prusa3d.com/">Prusa i3 MK3S</ExternalLink>, so after a bit of research on it, I decided they were a pretty cool
-        company and I gleefully bashed the buy button!
+        I reached out to a friend who is a Mechanical Engineer and regularly uses them for prototyping designs. He recommended the&nbsp;
+        <ExternalLink href="https://www.prusa3d.com/">Prusa i3 MK3S</ExternalLink>, so after a bit of research on it, I decided they were a&nbsp;
+        <ExternalLink href="https://www.youtube.com/watch?v=xX3pDDi9PeU&amp;feature=emb_title">pretty cool company</ExternalLink> and I gleefully bashed the
+        buy button!
       </p>
     </div>
   );

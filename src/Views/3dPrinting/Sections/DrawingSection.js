@@ -45,9 +45,9 @@ export default function DrawingSection() {
         This were there&apos;s no real shortcuts. You simply have to choose a drawing package and learn how to use it.
         I went with a popular and free package (for hobbyists) called <ExternalLink href="https://www.autodesk.co.uk/products/fusion-360/overview">AutoDesk
         Fusion 360</ExternalLink>. There are free tutorials available which are enough to get you started and you&apos;ll also find loads of helpful guides
-        on YouTube. Drawing simply geometric shapes was very easy to pick up, but go deeper than that and it starts to get quite tricky. One object I made
+        on YouTube. Drawing simple geometric shapes was very easy to pick up, but go deeper than that and it starts to get quite tricky. One object I made
         was an adaptor that allowed me to plug in my Dyson vacuum cleaner into a Makita orbital sander power tool. This required drawing a shape onto
-        a cylinder. Learning to draw onto a curved surface was suprisingingly tricky! Here are a few pictures of the models I have made so far.
+        a cylinder. Learning to draw onto a curved surface was surprisingly tricky! Here are a few pictures of the models I have made so far.
       </p>
       <GridContainer className={classes.imageCenter}>
         <GridItem xs={12} sm={12} md={9}>

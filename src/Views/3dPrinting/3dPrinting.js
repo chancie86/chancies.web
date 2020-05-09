@@ -48,7 +48,7 @@ export default function Printing(props) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>3D Printing</h1>
               <br />
-              <p className={classes.title}>07 May 2020</p>
+              <p className={classes.title}>09 May 2020</p>
             </GridItem>
           </GridContainer>
         </div>

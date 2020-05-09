@@ -10,6 +10,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 // @material-ui/icons
+import HomeIcon from '@material-ui/icons/Home';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 
 // core components
@@ -24,6 +25,15 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/"
+          color="transparent"
+          className={classes.navLink}
+        >
+          <HomeIcon />
+        </Button>
+      </ListItem>
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding

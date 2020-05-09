@@ -112,11 +112,12 @@ export default function AssemblySection() {
       </GridContainer>
       <p>
         The main components here are 3 motors for XYZ axis control respectively, the extruder which heats and spits out the plastic, and the heatbed which is
-        a hot metal plate which moves back and forth (controlled by the Y axis motor). The reason it is heated (to about 60°C) is because when the plastic
-        starts cooling it shrinks and this can cause the object to start warping before the object has completed printing. There are lots of features this
-        particular model includes like the LCD display, SD Card, reader and removable/flexible print bed, as well as optional features to add wifi support and
-        to print with multiple plastic materials and/or colours. You read about these on the <ExternalLink href="https://www.prusa3d.com/">Prusa website</ExternalLink>
-        &nbsp;if you're interested.
+        a hot metal plate which moves back and forth (controlled by the Y axis motor). The reason the bed is heated (to about 60°C) is because when the plastic
+        starts cooling it shrinks and this can cause the object to start warping and lift off the print bed before the object has completed printing. This can
+        be further mitigated by ensuring that the print surface is super clean and you can use various chemicals to do this which include anything from window
+        cleaning spray to isopropanol, available on Amazon. There are lots of features this particular model includes like the LCD display, SD Card, reader and
+        removable/flexible print bed, as well as optional features to add wifi support and to print with multiple plastic materials and/or colours. You read
+        about these on the <ExternalLink href="https://www.prusa3d.com/">Prusa website</ExternalLink> if you're interested.
       </p>
     </div>
   );

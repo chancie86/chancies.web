@@ -17,11 +17,11 @@ export default function AbstractSection() {
       <p>
         Having seen 3D printers at university, industry and trade shows over the last 15 years I always thought it would be cool to have access
         to one. However, there&apos;s always been a few barriers to entry for me. The price was prohibitively expensive, the learning curve too
-        high and the whole thing didn't seem very consumer friendly. I am not someone who works in trade or manufacturing and will probably stare
-        at you blankly if you start talking about extruding materials. However, since the early days they&apos;ve come down in price significantly
-        and the quality of prints have improved along the way. Materials can now be bought on Amazon and there are several websites that offer freely
-        available models that are ready to print. Drawing software is also free and there are plenty of videos on YouTube to teach you how to use them.
-        I won&apos;t be going into any technical details here but I wanted to share my initial experiences as a total novice.
+        high, and the whole thing didn't seem very consumer friendly. I am not someone who works in trade or manufacturing and will probably stare
+        at you blankly if you start talking about extruding materials. However, since the early days they&apos;ve become more accessible, reduced
+        in price significantly, and the quality of prints have improved along the way. Materials can now be bought on Amazon and there are several
+        websites that offer freely available models that are ready to print. Drawing software is also free and there are plenty of videos on YouTube
+        to teach you how to use them. I won&apos;t be going into deep technical details here but I wanted to share my initial experiences as a total novice.
       </p>
       <p>
         By the time I finally received and assembled the printer, the Covid-19 lockdown was in full swing and there was a huge shortage of Personal

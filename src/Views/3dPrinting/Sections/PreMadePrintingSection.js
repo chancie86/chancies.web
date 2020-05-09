@@ -29,14 +29,14 @@ export default function PreMadePrintingSection() {
       <h2 className={classes.title}>Phew, now let's print something!</h2>
       <p>
         Now that the complicated assembly is out the way the printing bit is easy, right?! Sort of, let&apos;s start with the easy stuff.
-        So, first off, I didn't buy the additional unit that allows you to send prints via Wi-Fi. The printer needs files in <code>.gcode</code>
+        So, first off, I didn't buy the additional unit that allows you to send prints via Wi-Fi. The printer needs files in <code>.gcode</code>&nbsp;
         format which are copied onto an SD card first and which is then plugged in to the printer. On the printer you then use the LCD display
-        to choose the file to print. The supplied SD card did come with some sample files loaded and ready to print which are useful to
+        to choose the file to print. The supplied SD card did come with some sample files preloaded and ready to print which are useful to
         test that the printer works.
       </p>
       <p>
-        Now to find some cool stuff to print! There are several websites out there where people have already created their own 3D models and
-        uploaded them to make them freely available for anyone to use. They're easy enough to find on Google, but here&apos;s a few:
+        Now to find some cool stuff to print! There are several websites out there where people have already created and uploaded their own 3D models
+        to make them freely available for anyone to use. They're easy enough to find on Google, but here&apos;s a few:
       </p>
         <ul>
           <li><ExternalLink href="https://www.prusaprinters.org/">Prusa Printers</ExternalLink></li>
@@ -44,7 +44,7 @@ export default function PreMadePrintingSection() {
           <li><ExternalLink href="https://cults3d.com//">Cults</ExternalLink></li>
         </ul>
       <p>
-        If you check out download files from these websites you'll quickly find that the most common file format is <code>.stl</code>. The printer
+        If you download files from these websites you'll quickly find that the most common file format is <code>.stl</code>. The printer
         is unable to use this file type directly to print (more on this later). Prusa Printers, however, has <code>.gcode</code> files available for download
         and there are plenty of useful things on there from toys, hangers, tools, etc. Just download, copy to the SD card, plug it into the printer
         and select it to print. Pretty simple, right? Just ask Bender...
@@ -63,7 +63,7 @@ export default function PreMadePrintingSection() {
       </p>
       <GridContainer className={classes.imageCenter}>
         <Card className={classes.singleImage}>
-          <iframe title="singing" width="560" height="315" src="https://www.youtube.com/embed/hts7AdCdYMU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe title="singing" width="560" height="315" src="https://www.youtube.com/embed/hts7AdCdYMU" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </Card>
       </GridContainer>
     </div>

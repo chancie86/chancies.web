@@ -35,8 +35,8 @@ export default function CustomPrintingSection() {
         to know to perform the print including the speed the motors move, the speed at which the plastic comes out, the temperature of the
         heatbed and extruder, etc. Now, this doesn't sound very interesting but it's actually very important for one reason - the
         filament material. I mentioned at the start that you need to learn a little bit about <b>how</b> the machine prints and with which <b>material</b>.
-        Let&apos;s have a skim over the details. The extruder is fed plastic filament, which is just a reel of plastic. It turns out that plastic isn&apos;t
-        just plastic though so when you buy filament you will have to choose what it&apos;s made from. There are many different common types available such
+        Let&apos;s have a skim over the details. The extruder is fed plastic filament, which is just a reel of plastic. It turns out not all plastics are equal
+        so when you buy filament you will have to choose what it&apos;s made from. There are many different common types available such
         as ABS, PETG, PLA, nylon, etc. and these all have different physical characteristics meaning that they need different speeds and heat to be applied.
         For instance, PETG requires a temperature around 15-30°C hotter than PLA. It also has a tendency to ooze when it goes between positions
         which can result in a print that appears to have stringy cobwebs strewn all over it. This can be mitigated by adjusting a setting called <b>retraction</b>;
@@ -53,7 +53,7 @@ export default function CustomPrintingSection() {
         (and the Prusa came with a reel of it included) so I would recommend sticking with that unless there's a specific need to use something else.
       </p>
       <p>
-        So how do we go about taking a <code>.stl</code> file and adding all of the necessary info to create a printable <code>.gcode</code> file? This is where
+        So how do we go about taking a <code>.stl</code> file and adding all of the necessary info to create a printable <code>.gcode</code> file? This is where&nbsp;
         <b>slicers</b> come into play. A slicer is an app which can import a model, including an <code>.stl</code>, and provides the tools you need to specify
         all the necessary parameters. Prusa has a free one called PrusaSlicer which is very easy to use. In the simplest case, you simply import your model,
         select one of the built in profiles that represents your material, e.g. &apos;Generic PLA&apos;, and then hit the &apos;Slice Now&apos; button. You can
@@ -78,7 +78,7 @@ export default function CustomPrintingSection() {
         a minimal amount of materal and are easy to snap away after the print is complete. The support structures give the overhanging parts of the model something to
         rest on. In practice, sometimes they work well and other times they are difficult to remove but either way, they are necessary. It simply depends on your model
         and where the support is generated. It&apos;s also worth mentioning that the support does attach to the model so when you snap it off it will leave bits of plastic
-        on the surface of the printed part which you may have to smooth off with tools like a knife or sandpaper. You don&apos;t need supports for all overhangs, though.
+        on the surface of the printed part which you may have to smooth off with tools like a knife or a file. You don&apos;t need supports for all overhangs, though.
         Generally the rule of thumb is that you can get away for up to a 45° overhang without supports.
       </p>
     </div>
