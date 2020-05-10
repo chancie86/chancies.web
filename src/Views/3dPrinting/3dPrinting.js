@@ -54,16 +54,20 @@ export default function Printing(props) {
         </div>
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <Sections.Abstract />
-          <Sections.Intro />
-          <Sections.Assembly />
-          <Sections.PreMadePrinting />
-          <Sections.Covid19 />
-          <Sections.CustomPrinting />
-          <Sections.Drawing />
-          <Sections.Summary />
-        </div>
+        <GridItem container alignItems="center">
+          <GridItem xs={0} sm={1} md={2} lg={3}></GridItem>
+          <GridItem xs={12} sm={10} md={8} lg={6}>
+            <Sections.Abstract />
+            <Sections.Intro />
+            <Sections.Assembly />
+            <Sections.PreMadePrinting />
+            <Sections.Covid19 />
+            <Sections.CustomPrinting />
+            <Sections.Drawing />
+            <Sections.Summary />
+          </GridItem>
+          <GridItem xs={0} sm={1} md={2} xl={3}></GridItem>
+        </GridItem>
       </div>
       <Footer />
     </div>

@@ -1,5 +1,7 @@
 import React from "react";
 
+import ResponsiveEmbed from 'react-responsive-embed';
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
 
@@ -61,11 +63,7 @@ export default function PreMadePrintingSection() {
         19 minutes to print. It is relatively tall standing at about 18cm although it is hollow on the inside. When curves are printed it sings to you with
         some weird and delightful digital sounds which make me reminisce about watching The Matrix. Check it out below.
       </p>
-      <GridContainer className={classes.imageCenter}>
-        <Card className={classes.singleImage}>
-          <iframe title="singing" width="560" height="315" src="https://www.youtube.com/embed/hts7AdCdYMU" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-        </Card>
-      </GridContainer>
+      <ResponsiveEmbed src='https://www.youtube.com/embed/hts7AdCdYMU' allowfullscreen />
     </div>
   );
 }

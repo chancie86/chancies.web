@@ -3,7 +3,7 @@ import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const sectionStyle = {
   section: {
-    padding: "0 70px 00 ",
+    padding: "70px 0 0",
   },
   title: {
     ...title,
@@ -33,7 +33,7 @@ const sectionStyle = {
   },
   justifyCenter: {
     justifyContent: "center !important"
-  },
+  }
 };
 
 export default sectionStyle;
