@@ -27,7 +27,7 @@ export default function CustomPrintingSection() {
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>But how to do I print those <code>.stl</code> files?</h2>
+      <h2 id="custom" className={classes.title}>But how to do I print those <code>.stl</code> files?</h2>
       <p>
         Previously, I mentioned that <code>.stl</code> files are commonly distributed by people sharing 3D drawings they've made such as those
         distributed on <ExternalLink href="https://www.thingiverse.com/">thingiverse</ExternalLink>. <code>.stl</code> files describe an object only

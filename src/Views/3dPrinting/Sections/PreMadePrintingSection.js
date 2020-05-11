@@ -28,7 +28,7 @@ export default function PreMadePrintingSection() {
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Phew, now let's print something!</h2>
+      <h2 id="premade" className={classes.title}>Phew, now let's print something!</h2>
       <p>
         Now that the complicated assembly is out the way the printing bit is easy, right?! Sort of, let&apos;s start with the easy stuff.
         So, first off, I didn't buy the additional unit that allows you to send prints via Wi-Fi. The printer needs files in <code>.gcode</code>&nbsp;
@@ -63,7 +63,7 @@ export default function PreMadePrintingSection() {
         19 minutes to print. It is relatively tall standing at about 18cm although it is hollow on the inside. When curves are printed it sings to you with
         some weird and delightful digital sounds which make me reminisce about watching The Matrix. Check it out below.
       </p>
-      <ResponsiveEmbed src='https://www.youtube.com/embed/hts7AdCdYMU' allowfullscreen />
+      <ResponsiveEmbed src='https://www.youtube.com/embed/hts7AdCdYMU' allowFullScreen />
     </div>
   );
 }

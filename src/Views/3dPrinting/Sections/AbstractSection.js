@@ -1,5 +1,7 @@
 import React from "react";
 
+import classNames from 'classnames';
+
 // @material-ui/core components
 import Link from '@material-ui/core/Link';
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,7 +15,7 @@ export default function AbstractSection() {
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>TL;DR</h2>
+      <h2 id="abstract" className={classNames(classes.title, 'js-toc-ignore')}>TL;DR</h2>
       <p>
         Having seen 3D printers at university, industry and trade shows over the last 15 years I always thought it would be cool to have access
         to one. However, there&apos;s always been a few barriers to entry for me. The price was prohibitively expensive, the learning curve too

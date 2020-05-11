@@ -40,7 +40,7 @@ export default function AssemblySection() {
 
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Some Assembly Required</h2>
+      <h2 id="assembly" className={classes.title}>Some Assembly Required</h2>
       <p>
         Whilst Prusa do have an option where they ship you a pre-built printer, it costed an additional $150 and meant there would a further
         delay in an already long delivery time (they were in exceptionally high demand during the start of the Covid-19 crisis). I figured

@@ -19,6 +19,7 @@ const profilePageStyle = {
   ...imagesStyle,
   main: {
     background: "#FFFFFF",
+    paddingBottom: '70px',
     position: "relative",
     zIndex: "3"
   },
@@ -52,6 +53,21 @@ const profilePageStyle = {
   navWrapper: {
     margin: "20px auto 50px auto",
     textAlign: "center"
+  },
+  toc: {
+    "& li": {
+      listStyle: 'none',
+    },
+    height: '2em',
+    marginTop: '2em',
+    position: 'fixed',
+    right: '0',
+    transform: 'translateX(100%)',
+    transition: 'all 200ms ease-in-out',
+  },
+  tocVisible: {
+    right: '4em',
+    transform: 'translateX(0)',
   }
 };
 

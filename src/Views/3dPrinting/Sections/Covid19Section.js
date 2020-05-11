@@ -25,7 +25,7 @@ import styles from "../../../assets/jss/material-kit-react/views/projectPageSect
 const useStyles = makeStyles(styles);
 
 export default function Covid19Section() {
-  const classes = useStyles();
+  const classes = useStyles(styles);
 
   const imageClasses = classNames(
     classes.imgRaised,
@@ -45,7 +45,7 @@ export default function Covid19Section() {
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>What&apos;s this about a PPE shortage?</h2>
+      <h2 id="ppe" className={classes.title}>What&apos;s this about a PPE shortage?</h2>
       <p>
         The shortage of Personal Protective Equipment [PPE] that the UK and the rest of the world has experienced during the Covid-19 outbreak
         has been well covered in the news. About the time I received delivery of my printer I had read a&nbsp;

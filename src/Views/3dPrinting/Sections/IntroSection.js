@@ -14,7 +14,7 @@ export default function IntroSection() {
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Intro</h2>
+      <h2 id="intro" className={classes.title}>Intro</h2>
       <p>
         In mid-March 2020 I had just started working from home amid the Covid-19 crisis. Being in the lockdown meant that I would have to find
         more ways to bide the time indoors which was the perfect opportunity to spend time on hobbies and to learn some new things. I picked up the

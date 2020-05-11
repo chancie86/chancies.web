@@ -8,11 +8,11 @@ import styles from "../../../assets/jss/material-kit-react/views/projectPageSect
 const useStyles = makeStyles(styles);
 
 export default function SummarySection() {
-  const classes = useStyles();
+  const classes = useStyles(styles);
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Was it worth it?</h2>
+      <h2 id="summary" className={classes.title}>Was it worth it?</h2>
       <p>
         Yes, absolutely! It&apos;s not yet as simple as a regular desktop printer where you can buy one
         from the shop, take a picture on your phone and then send it straight to the printer to make. That would be super

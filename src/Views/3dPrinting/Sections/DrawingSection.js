@@ -40,7 +40,7 @@ export default function DrawingSection() {
 
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>What about making my own objects?</h2>
+      <h2 id="drawing" className={classes.title}>What about making my own objects?</h2>
       <p>
         This were there&apos;s no real shortcuts. You simply have to choose a drawing package and learn how to use it.
         I went with a popular and free package (for hobbyists) called <ExternalLink href="https://www.autodesk.co.uk/products/fusion-360/overview">AutoDesk
