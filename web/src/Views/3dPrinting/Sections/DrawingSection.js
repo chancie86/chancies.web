@@ -42,7 +42,7 @@ export default function DrawingSection() {
     <div className={classes.section}>
       <h2 id="drawing" className={classes.title}>What about making my own objects?</h2>
       <p>
-        This were there&apos;s no real shortcuts. You simply have to choose a drawing package and learn how to use it.
+        This is where there&apos;s no real shortcuts. You simply have to choose a drawing package and learn how to use it.
         I went with a popular and free package (for hobbyists) called <ExternalLink href="https://www.autodesk.co.uk/products/fusion-360/overview">AutoDesk
         Fusion 360</ExternalLink>. There are free tutorials available which are enough to get you started and you&apos;ll also find loads of helpful guides
         on YouTube. Drawing simple geometric shapes was very easy to pick up, but go deeper than that and it starts to get quite tricky. One object I made
