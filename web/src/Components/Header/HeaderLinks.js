@@ -14,16 +14,30 @@ import HomeIcon from '@material-ui/icons/Home';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 
 // core components
-import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
-import Button from "../CustomButtons/Button.js";
-
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import { useAuth } from "Hooks/useAuth";
+import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
 import AuthButton from "../CustomButtons/AuthButton";
+import Button from "../CustomButtons/Button.js";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+
+  var auth = useAuth();
+
+  const projects = [
+    <Link to="/3dPrinting" className={classes.dropdownLink}>
+      3D Printing
+    </Link>
+  ];
+
+  if (auth.isAuthenticated) {
+    projects.push(<Link to="/3dPrinting" className={classes.dropdownLink}>
+      Add new project
+  </Link>)
+  }
 
   return (
     <List className={classes.list}>
@@ -45,11 +59,7 @@ export default function HeaderLinks(props) {
             color: "transparent"
           }}
           buttonIcon={WorkOutlineIcon}
-          dropdownList={[
-            <Link to="/3dPrinting" className={classes.dropdownLink}>
-              3D Printing
-            </Link>
-          ]}
+          dropdownList={projects}
         />
       </ListItem>
       <ListItem className={classes.listItem}>
