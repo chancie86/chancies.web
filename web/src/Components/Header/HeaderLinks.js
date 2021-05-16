@@ -18,11 +18,13 @@ import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
 import Button from "../CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import AuthButton from "../CustomButtons/AuthButton";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -69,6 +71,9 @@ export default function HeaderLinks(props) {
         >
           <i className={classes.socialIcons + " fab fa-linkedin"} />
         </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <AuthButton />
       </ListItem>
     </List>
   );
