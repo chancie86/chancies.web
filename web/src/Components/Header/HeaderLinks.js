@@ -34,7 +34,7 @@ export default function HeaderLinks(props) {
   ];
 
   if (auth.isAuthenticated) {
-    projects.push(<Link to="/3dPrinting" className={classes.dropdownLink}>
+    projects.push(<Link to="/Sandbox" className={classes.dropdownLink}>
       Add new project
   </Link>)
   }
