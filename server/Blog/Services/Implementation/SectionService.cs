@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using chancies.Blog.DataModels;
 using chancies.Blog.Repository;
@@ -24,6 +25,11 @@ namespace chancies.Blog.Services.Implementation
         public async Task<Section> Get(Guid id)
         {
             return await _sectionRepository.Read(id);
+        }
+
+        public async Task<IList<Section>> Get()
+        {
+            return await _sectionRepository.Read();
         }
 
         public async Task Delete(Guid id)

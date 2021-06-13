@@ -6,6 +6,7 @@
         {
             return new SectionDto
             {
+                Id = self.Id,
                 Name = self.Name
             };
         }

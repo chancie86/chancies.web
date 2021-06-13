@@ -1,7 +1,5 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Autofac;
-using chancies.Persistence.Cosmos.Config;
 using chancies.Persistence.Cosmos.Startup;
 
 namespace chancies.Persistence.Cosmos

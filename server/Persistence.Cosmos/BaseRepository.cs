@@ -22,7 +22,7 @@ namespace chancies.Persistence.Cosmos
 
         public async Task<Guid> Create(TDocument document)
         {
-            var response = await _container.CreateItemAsync<TDocument>(document, _partitionKey);
+            var response = await _container.CreateItemAsync(document, _partitionKey);
             return response.Resource.Id;
         }
 
@@ -46,7 +46,7 @@ namespace chancies.Persistence.Cosmos
 
         public async Task<IList<TDocument>> Read()
         {
-            var sqlQuery = $"SELECT * FROM {typeof(TDocument).Name};";
+            var sqlQuery = $"SELECT * FROM c where c.Type = '{typeof(TDocument).Name}'";
             var queryDefinition = new QueryDefinition(sqlQuery);
             var queryResultSetIterator = _container.GetItemQueryIterator<TDocument>(queryDefinition);
 

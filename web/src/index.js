@@ -19,6 +19,7 @@ ReactDOM.render(
     domain="chancies.eu.auth0.com"
     clientId="7oXkopPIjEbo8LzAfMnI6nHLcuL4mWxX"
     redirectUri={window.location.origin}
+    audience="https://chancies.co.uk"
   >
     <App history={history}>
       <Router history={history}>
