@@ -4,7 +4,7 @@ using chancies.Blog.Repository;
 namespace chancies.Persistence.Cosmos.Blog
 {
     public class SectionRepository
-        : BaseRepository<Section, SectionId>, ISectionRepository
+        : BaseRepository<Section, SectionId, SectionListItem>, ISectionRepository
     {
         public SectionRepository(ICosmosService cosmosService)
             : base(cosmosService)

@@ -1,6 +1,6 @@
 ﻿namespace chancies.Blog.DataModels
 {
-    public class Section
+    public class SectionListItem
         : BaseDataModel<SectionId>
     {
     }

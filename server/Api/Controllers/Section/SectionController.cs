@@ -22,14 +22,12 @@ namespace chancies.Api.Controllers.Section
             _sectionService = sectionService;
         }
 
-        [Authorize(Permissions.Section.Read)]
         [HttpGet]
         public async Task<ActionResult<IList<SectionDto>>> List()
         {
-            return (await _sectionService.Get()).Select(s => s.ToDto()).ToList();
+            return (await _sectionService.List()).Select(s => s.ToDto()).ToList();
         }
 
-        [Authorize(Permissions.Section.Read)]
         [HttpGet("{id}")]
         public async Task<ActionResult<SectionDto>> GetById(Guid id)
         {

@@ -9,7 +9,7 @@ namespace chancies.Blog.Services
     {
         Task<DocumentId> Create(Document document);
         Task<DocumentViewModel> Get(DocumentId id);
-        Task<IList<DocumentViewModel>> Get();
+        Task<IList<DocumentListItem>> List();
         Task Delete(DocumentId id);
         Task Update(Document document);
     }

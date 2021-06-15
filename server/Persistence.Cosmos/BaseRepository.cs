@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using chancies.Blog.DataModels;
 using chancies.Blog.Exception;
@@ -7,8 +8,9 @@ using Microsoft.Azure.Cosmos;
 
 namespace chancies.Persistence.Cosmos
 {
-    public abstract class BaseRepository<TDocument, TId>
+    public abstract class BaseRepository<TDocument, TId, TList>
         where TDocument : BaseDataModel<TId>
+        where TList : BaseDataModel<TId>
     {
         private readonly Container _container;
         private readonly PartitionKey _partitionKey;
@@ -44,13 +46,24 @@ namespace chancies.Persistence.Cosmos
             return document;
         }
 
-        public async Task<IList<TDocument>> Read()
+        public virtual async Task<IList<TList>> List()
         {
-            var sqlQuery = $"SELECT * FROM c where c.Type = '{typeof(TDocument).Name}'";
-            var queryDefinition = new QueryDefinition(sqlQuery);
-            var queryResultSetIterator = _container.GetItemQueryIterator<TDocument>(queryDefinition);
+            return await ListInternal();
+        }
 
-            var results = new List<TDocument>();
+        protected async Task<IList<TList>> ListInternal(params string[] additionalFields)
+        {
+            const string separator = ", c.";
+
+            var additionalColumns = (additionalFields == null || !additionalFields.Any())
+                ? string.Empty
+                : separator + string.Join(separator, additionalFields);
+
+            var sqlQuery = $"SELECT c.id, c.Name{additionalColumns} FROM c where c.Type = '{typeof(TDocument).Name}'";
+            var queryDefinition = new QueryDefinition(sqlQuery);
+            var queryResultSetIterator = _container.GetItemQueryIterator<TList>(queryDefinition);
+
+            var results = new List<TList>();
 
             while (queryResultSetIterator.HasMoreResults)
             {

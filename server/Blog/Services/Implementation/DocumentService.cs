@@ -36,12 +36,9 @@ namespace chancies.Blog.Services.Implementation
             return new DocumentViewModel(document, section);
         }
 
-        public async Task<IList<DocumentViewModel>> Get()
+        public async Task<IList<DocumentListItem>> List()
         {
-            var sections = (await _sectionRepository.Read()).ToDictionary(x => x.Id, x => x);
-            var documents = await _documentRepository.Read();
-
-            return documents.Select(d => new DocumentViewModel(d, sections[d.SectionId])).ToArray();
+            return await _documentRepository.List();
         }
 
         public async Task Delete(DocumentId id)

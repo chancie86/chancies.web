@@ -3,7 +3,7 @@
 namespace chancies.Blog.Repository
 {
     public interface ISectionRepository
-        : ICrudRepository<Section, SectionId>
+        : ICrudRepository<Section, SectionId, SectionListItem>
     {
     }
 }

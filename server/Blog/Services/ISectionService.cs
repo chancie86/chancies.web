@@ -8,7 +8,7 @@ namespace chancies.Blog.Services
     {
         Task<SectionId> Create(Section section);
         Task<Section> Get(SectionId id);
-        Task<IList<Section>> Get();
+        Task<IList<SectionListItem>> List();
         Task Delete(SectionId id);
         Task Update(Section section);
     }

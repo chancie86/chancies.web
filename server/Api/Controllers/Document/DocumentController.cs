@@ -22,18 +22,16 @@ namespace chancies.Api.Controllers.Document
             _documentService = documentService;
         }
 
-        [Authorize(Permissions.Section.Read)]
         [HttpGet]
-        public async Task<ActionResult<IList<DocumentDto>>> List()
+        public async Task<ActionResult<IList<DocumentListItemDto>>> List()
         {
-            return (await _documentService.Get()).Select(s => s.ToDto()).ToArray();
+            return (await _documentService.List()).Select(s => s.ToDocumentListItemDto()).ToArray();
         }
 
-        [Authorize(Permissions.Document.Read)]
         [HttpGet("{id}")]
         public async Task<ActionResult<DocumentDto>> GetById(Guid id)
         {
-            return (await _documentService.Get(id)).ToDto();
+            return (await _documentService.Get(id)).ToDocumentDto();
         }
 
         [Authorize(Permissions.Document.Create)]

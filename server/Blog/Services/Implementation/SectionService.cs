@@ -27,9 +27,9 @@ namespace chancies.Blog.Services.Implementation
             return await _sectionRepository.Read(id);
         }
 
-        public async Task<IList<Section>> Get()
+        public async Task<IList<SectionListItem>> List()
         {
-            return await _sectionRepository.Read();
+            return await _sectionRepository.List();
         }
 
         public async Task Delete(SectionId id)
