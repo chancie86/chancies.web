@@ -16,13 +16,13 @@ namespace chancies.Blog.Services.Implementation
             _sectionRepository = sectionRepository ?? throw new ArgumentNullException(nameof(sectionRepository));
         }
 
-        public async Task<Guid> Create(Section section)
+        public async Task<SectionId> Create(Section section)
         {
-            section.Id = Guid.NewGuid();
+            section.Id = (SectionId)Guid.NewGuid();
             return await _sectionRepository.Create(section);
         }
 
-        public async Task<Section> Get(Guid id)
+        public async Task<Section> Get(SectionId id)
         {
             return await _sectionRepository.Read(id);
         }
@@ -32,7 +32,7 @@ namespace chancies.Blog.Services.Implementation
             return await _sectionRepository.Read();
         }
 
-        public async Task Delete(Guid id)
+        public async Task Delete(SectionId id)
         {
             await _sectionRepository.Delete(id);
         }

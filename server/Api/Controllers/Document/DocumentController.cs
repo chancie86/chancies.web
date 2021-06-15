@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using chancies.Api.Controllers.Document.Dto;
 using chancies.Api.Controllers.Document.Dto.Extensions;
-using chancies.Api.Permissions;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace chancies.Api.Controllers.Document
 {
@@ -22,12 +22,12 @@ namespace chancies.Api.Controllers.Document
             _documentService = documentService;
         }
 
-        //[Authorize(Permissions.Document.Read)]
-        //[HttpGet]
-        //public async Task<ActionResult<DocumentDto>> List()
-        //{
-        //    return (await _documentService.Get()).ToDto();
-        //}
+        [Authorize(Permissions.Section.Read)]
+        [HttpGet]
+        public async Task<ActionResult<IList<DocumentDto>>> List()
+        {
+            return (await _documentService.Get()).Select(s => s.ToDto()).ToArray();
+        }
 
         [Authorize(Permissions.Document.Read)]
         [HttpGet("{id}")]
@@ -36,7 +36,7 @@ namespace chancies.Api.Controllers.Document
             return (await _documentService.Get(id)).ToDto();
         }
 
-        [Authorize(Permissions.Document.Read)]
+        [Authorize(Permissions.Document.Create)]
         [HttpPost]
         public async Task<Guid> Create(CreateDocumentDto dto)
         {

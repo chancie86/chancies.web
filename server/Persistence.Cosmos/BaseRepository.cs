@@ -7,8 +7,8 @@ using Microsoft.Azure.Cosmos;
 
 namespace chancies.Persistence.Cosmos
 {
-    public abstract class BaseRepository<TDocument>
-        where TDocument : BaseDataModel
+    public abstract class BaseRepository<TDocument, TId>
+        where TDocument : BaseDataModel<TId>
     {
         private readonly Container _container;
         private readonly PartitionKey _partitionKey;
@@ -20,18 +20,18 @@ namespace chancies.Persistence.Cosmos
             _container = cosmosService.GetContainer();
         }
 
-        public async Task<Guid> Create(TDocument document)
+        public async Task<TId> Create(TDocument document)
         {
             var response = await _container.CreateItemAsync(document, _partitionKey);
             return response.Resource.Id;
         }
 
-        public async Task Delete(Guid id)
+        public async Task Delete(TId id)
         {
             await _container.DeleteItemAsync<TDocument>(id.ToString(), _partitionKey);
         }
 
-        public async Task<TDocument> Read(Guid id)
+        public async Task<TDocument> Read(TId id)
         {
             var response = await _container.ReadItemAsync<TDocument>(id.ToString(), _partitionKey);
             var document = response.Resource;

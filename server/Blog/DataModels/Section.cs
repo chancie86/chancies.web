@@ -3,7 +3,7 @@
 namespace chancies.Blog.DataModels
 {
     public class Section
-        : BaseDataModel
+        : BaseDataModel<SectionId>
     {
     }
 }

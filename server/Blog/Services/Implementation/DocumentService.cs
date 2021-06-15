@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using chancies.Blog.DataModels;
 using chancies.Blog.Repository;
@@ -18,20 +20,31 @@ namespace chancies.Blog.Services.Implementation
             _sectionRepository = sectionRepository ?? throw new ArgumentNullException(nameof(sectionRepository));
         }
 
-        public async Task<Guid> Create(Document document)
+        public async Task<DocumentId> Create(Document document)
         {
+            // Check section exists
+            _ = await _sectionRepository.Read(document.SectionId);
+            
             document.Id = Guid.NewGuid();
             return await _documentRepository.Create(document);
         }
 
-        public async Task<DocumentViewModel> Get(Guid id)
+        public async Task<DocumentViewModel> Get(DocumentId id)
         {
             var document = await _documentRepository.Read(id);
             var section = await _sectionRepository.Read(document.SectionId);
             return new DocumentViewModel(document, section);
         }
 
-        public async Task Delete(Guid id)
+        public async Task<IList<DocumentViewModel>> Get()
+        {
+            var sections = (await _sectionRepository.Read()).ToDictionary(x => x.Id, x => x);
+            var documents = await _documentRepository.Read();
+
+            return documents.Select(d => new DocumentViewModel(d, sections[d.SectionId])).ToArray();
+        }
+
+        public async Task Delete(DocumentId id)
         {
             await _documentRepository.Delete(id);
         }

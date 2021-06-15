@@ -3,9 +3,9 @@
 namespace chancies.Blog.DataModels
 {
     public class Document
-        : BaseDataModel
+        : BaseDataModel<DocumentId>
     {
-        public Guid SectionId { get; set; }
+        public SectionId SectionId { get; set; }
 
         public string Content { get; set; }
     }

@@ -3,7 +3,7 @@
 namespace chancies.Blog.Repository
 {
     public interface IDocumentRepository
-        : ICrudRepository<Document>
+        : ICrudRepository<Document, DocumentId>
     {
     }
 }

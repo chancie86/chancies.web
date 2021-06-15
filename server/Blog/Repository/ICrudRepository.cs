@@ -5,13 +5,13 @@ using chancies.Blog.DataModels;
 
 namespace chancies.Blog.Repository
 {
-    public interface ICrudRepository<TDocument>
-        where TDocument : BaseDataModel
+    public interface ICrudRepository<TDocument, TId>
+        where TDocument : BaseDataModel<TId>
     {
-        Task<Guid> Create(TDocument document);
-        Task Delete(Guid id);
+        Task<TId> Create(TDocument document);
+        Task Delete(TId id);
         Task<IList<TDocument>> Read();
-        Task<TDocument> Read(Guid id);
+        Task<TDocument> Read(TId id);
         Task Update(TDocument document);
     }
 }

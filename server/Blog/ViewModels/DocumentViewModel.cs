@@ -1,5 +1,4 @@
-﻿using System;
-using chancies.Blog.DataModels;
+﻿using chancies.Blog.DataModels;
 
 namespace chancies.Blog.ViewModels
 {
@@ -11,7 +10,7 @@ namespace chancies.Blog.ViewModels
             Section = section;
         }
 
-        public Guid Id => Document.Id;
+        public DocumentId Id => Document.Id;
 
         public string Name => Document.Name;
 

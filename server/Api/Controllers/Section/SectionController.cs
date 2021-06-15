@@ -7,7 +7,6 @@ using chancies.Api.Controllers.Section.Dto.Extensions;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace chancies.Api.Controllers.Section
 {
@@ -23,7 +22,6 @@ namespace chancies.Api.Controllers.Section
             _sectionService = sectionService;
         }
 
-        //[Authorize]
         [Authorize(Permissions.Section.Read)]
         [HttpGet]
         public async Task<ActionResult<IList<SectionDto>>> List()

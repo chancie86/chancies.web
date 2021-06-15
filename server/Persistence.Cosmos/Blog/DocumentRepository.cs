@@ -4,7 +4,7 @@ using chancies.Blog.Repository;
 namespace chancies.Persistence.Cosmos.Blog
 {
     internal class DocumentRepository
-        : BaseRepository<Document>, IDocumentRepository
+        : BaseRepository<Document, DocumentId>, IDocumentRepository
     {
         public DocumentRepository(ICosmosService cosmosService)
             : base(cosmosService)
