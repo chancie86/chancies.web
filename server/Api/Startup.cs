@@ -31,7 +31,7 @@ namespace chancies.Api
                 .Configure<CosmosConfig>(Configuration.GetSection("Azure"))
                 .Configure<Auth0Config>(Configuration.GetSection("Auth0"));
 
-            services.AddChanciesAuthentication(ScopesHelper.GetScopes());
+            services.AddChanciesAuthentication(PermissionsHelper.GetPermissions());
 
             services
                 .AddControllers();

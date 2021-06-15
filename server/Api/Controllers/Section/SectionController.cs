@@ -23,6 +23,7 @@ namespace chancies.Api.Controllers.Section
             _sectionService = sectionService;
         }
 
+        //[Authorize]
         [Authorize(Permissions.Section.Read)]
         [HttpGet]
         public async Task<ActionResult<IList<SectionDto>>> List()

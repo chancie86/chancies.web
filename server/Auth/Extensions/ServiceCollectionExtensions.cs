@@ -3,6 +3,7 @@ using System.Security.Claims;
 using chancies.Auth.Config;
 using chancies.Auth.Policies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -12,7 +13,7 @@ namespace chancies.Auth.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddChanciesAuthentication(this IServiceCollection self, IList<string> scopes)
+        public static IServiceCollection AddChanciesAuthentication(this IServiceCollection self, IList<string> permissions)
         {
             var provider = self.BuildServiceProvider();
             var config = provider.GetService<IOptions<Auth0Config>>().Value;
@@ -31,9 +32,7 @@ namespace chancies.Auth.Extensions
                     };
                 });
 
-            self.AddPolicies(config.Domain, scopes);
-
-            return self;
+            return self.AddPolicies(config.Domain, permissions);
         }
 
         public static IApplicationBuilder UseChanciesAuthentication(this IApplicationBuilder self)
@@ -43,15 +42,16 @@ namespace chancies.Auth.Extensions
                 .UseAuthorization();
         }
 
-        private static void AddPolicies(this IServiceCollection self, string domain, IList<string> scopes)
+        private static IServiceCollection AddPolicies(this IServiceCollection self, string domain, IList<string> scopes)
         {
-            self.AddAuthorization(options =>
+            return self.AddAuthorization(options =>
             {
                 foreach (var scope in scopes)
                 {
-                    options.AddPolicy(scope, policy => policy.Requirements.Add(new HasScopeRequirement(scope, domain)));
+                    options.AddPolicy(scope, policy => policy.Requirements.Add(new HasPermissionRequirement(scope, domain)));
                 }
-            });
+            })
+            .AddSingleton<IAuthorizationHandler, HasPermissionHandler>();
         }
     }
 }

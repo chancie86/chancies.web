@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace chancies.Api.Permissions
 {
-    internal static class ScopesHelper
+    internal static class PermissionsHelper
     {
-        public static IList<string> GetScopes()
+        public static IList<string> GetPermissions()
         {
             var types = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(t =>
@@ -16,17 +16,17 @@ namespace chancies.Api.Permissions
                         && t.IsPublic
                 );
 
-            var scopes = new List<string>();
+            var permissions = new List<string>();
 
             foreach (var t in types)
             {
                 var fields = t.GetFields(BindingFlags.Public | BindingFlags.Static)
                     .Where(p => p.FieldType == typeof(string));
 
-                scopes.AddRange(fields.Select(p => p.GetValue(null).ToString()));
+                permissions.AddRange(fields.Select(p => p.GetValue(null).ToString()));
             }
 
-            return scopes;
+            return permissions;
         }
     }
 }
