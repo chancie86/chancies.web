@@ -47,5 +47,18 @@ namespace chancies.Api.Controllers.Document
         {
             await _documentService.Delete(id);
         }
+
+        [Authorize(Permissions.Section.Update)]
+        [HttpPut("id")]
+        public async Task Update(DocumentDto section)
+        {
+            await _documentService.Update(new Blog.DataModels.Document
+            {
+                Id = section.Id,
+                Name = section.Name,
+                Content = section.Content,
+                SectionId = section.Section.Id
+            });
+        }
     }
 }

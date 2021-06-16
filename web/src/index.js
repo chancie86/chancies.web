@@ -1,18 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import history from "./history";
 import { Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import App from './App';
+import { Auth0Provider } from "@auth0/auth0-react";
+
+import store from "./store";
+import history from "./history";
+
+import App from "./App";
 import "assets/scss/material-kit-react.scss?v=1.8.0";
 
 // pages for this product
 import LandingPage from "./Views/LandingPage";
 import Printing from "./Views/3dPrinting";
+import Document from "./Views/Document";
 import Sandbox from "./Views/Sandbox";
-
-import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
   <Auth0Provider
@@ -21,15 +24,18 @@ ReactDOM.render(
     redirectUri={window.location.origin}
     audience="https://chancies.co.uk"
   >
-    <App history={history}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/" component={LandingPage} exact />
-          <Route path="/3dPrinting" component={Printing} />
-          <Route path="/Sandbox" component={Sandbox} />
-        </Switch>
-      </Router>
-    </App>
+    <Provider store={store}>
+      <App history={history}>
+        <Router history={history}>
+          <Switch>
+            <Route path="/" component={LandingPage} exact />
+            <Route path="/3dPrinting" component={Printing} />
+            <Route path="/document" component={Document} />
+            <Route path="/Sandbox" component={Sandbox} />
+          </Switch>
+        </Router>
+      </App>
+    </Provider>
   </Auth0Provider>,
   document.getElementById("root")
 );

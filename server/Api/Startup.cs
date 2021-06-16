@@ -1,3 +1,4 @@
+using System.Linq;
 using Autofac;
 using chancies.Api.Permissions;
 using chancies.Auth.Config;
@@ -34,6 +35,19 @@ namespace chancies.Api
             services.AddChanciesAuthentication(PermissionsHelper.GetPermissions());
 
             services
+                .AddCors(options =>
+                {
+                    options.AddDefaultPolicy(builder =>
+                    {
+                        var allowedOrigins = Configuration.GetSection("Cors:AllowedOrigins")?
+                            .GetChildren()
+                            .Select(selector => selector.Value)
+                            .ToArray();
+                        builder.WithOrigins(allowedOrigins)
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+                })
                 .AddControllers();
             services.AddSwaggerGen(options =>
             {
@@ -67,22 +81,19 @@ namespace chancies.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseSwagger()
+            app.UseHttpsRedirection()
+                .UseSwagger()
                 .UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
+                })
+                .UseRouting()
+                .UseChanciesAuthentication()
+                .UseCors()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
                 });
-
-            app.UseRouting();
-
-            app.UseChanciesAuthentication();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
 
         public void ConfigureContainer(ContainerBuilder cb)

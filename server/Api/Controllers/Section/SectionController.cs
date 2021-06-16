@@ -50,5 +50,16 @@ namespace chancies.Api.Controllers.Section
         {
             await _sectionService.Delete(id);
         }
+
+        [Authorize(Permissions.Section.Update)]
+        [HttpPut("id")]
+        public async Task Update(SectionDto section)
+        {
+            await _sectionService.Update(new Blog.DataModels.Section
+            {
+                Id = section.Id,
+                Name = section.Name
+            });
+        }
     }
 }
