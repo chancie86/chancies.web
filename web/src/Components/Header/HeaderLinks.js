@@ -19,8 +19,7 @@ import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { useAuth } from "Hooks/useAuth";
 
-import { listSections } from "../../actions/sectionActions";
-import { listDocuments } from "../../actions/documentActions";
+import { listSections, listDocuments } from "../../actions/headerActions";
 import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
 import AuthButton from "../CustomButtons/AuthButton";
 import Button from "../CustomButtons/Button.js";
@@ -28,11 +27,11 @@ import Button from "../CustomButtons/Button.js";
 const useStyles = makeStyles(styles);
 
 const getSections = state => {
-  const sections = state.sections.ids.map(id => state.sections.byId[id]);
+  const sections = state.header.sections.ids.map(id => state.header.sections.byId[id]);
   const result = [];
   
   sections.forEach(s => {
-    const docList = state.documents.bySectionId[s.id];
+    const docList = state.header.documents.bySectionId[s.id];
     if (docList) {
       result.push({
         documents: docList,
@@ -58,7 +57,7 @@ export default function HeaderLinks(props) {
 
   var auth = useAuth();
 
-  const sectionButtons = sections.map(s => <ListItem className={classes.listItem}>
+  const sectionButtons = sections.map(s => <ListItem key={s.id} className={classes.listItem}>
     <CustomDropdown
       noLiPadding
       buttonText={s.name}
@@ -68,7 +67,7 @@ export default function HeaderLinks(props) {
       }}
       buttonIcon={WorkOutlineIcon}
       dropdownList={s.documents.map(d =>
-        <Link to={`document/${d.id}`} className={classes.dropdownLink}>
+        <Link key={d.id} to={`/document/${d.id}`} className={classes.dropdownLink}>
           {d.name}
         </Link>)
       }

@@ -13,6 +13,7 @@ namespace chancies.Api.Controllers.Document.Dto.Extensions
                 Content = self.Content,
                 Id = self.Id,
                 Name = self.Name,
+                Created = self.Created,
                 Section = new SectionDto()
                 {
                     Id = self.Section.Id,

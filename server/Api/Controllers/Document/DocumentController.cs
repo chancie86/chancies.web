@@ -48,7 +48,7 @@ namespace chancies.Api.Controllers.Document
             await _documentService.Delete(id);
         }
 
-        [Authorize(Permissions.Section.Update)]
+        [Authorize(Permissions.Document.Update)]
         [HttpPut("id")]
         public async Task Update(DocumentDto section)
         {

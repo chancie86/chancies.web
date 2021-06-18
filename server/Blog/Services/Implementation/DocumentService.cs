@@ -26,6 +26,7 @@ namespace chancies.Blog.Services.Implementation
             _ = await _sectionRepository.Read(document.SectionId);
             
             document.Id = Guid.NewGuid();
+            document.Created = DateTime.UtcNow;
             return await _documentRepository.Create(document);
         }
 

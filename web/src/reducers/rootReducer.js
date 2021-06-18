@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import sectionReducer from "./sectionReducer";
+import headerReducer from "./headerReducer";
 import documentReducer from "./documentReducer";
 
 const rootReducer = combineReducers({
-  sections: sectionReducer,
-  documents: documentReducer
+  header: headerReducer,
+  document: documentReducer
 });
 
 export default rootReducer;

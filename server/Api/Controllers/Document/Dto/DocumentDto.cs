@@ -7,6 +7,7 @@ namespace chancies.Api.Controllers.Document.Dto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public DateTime Created { get; set; }
         public string Content { get; set; }
         public SectionDto Section { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using chancies.Blog.DataModels;
+﻿using System;
+using chancies.Blog.DataModels;
 
 namespace chancies.Blog.ViewModels
 {
@@ -13,6 +14,8 @@ namespace chancies.Blog.ViewModels
         public DocumentId Id => Document.Id;
 
         public string Name => Document.Name;
+
+        public DateTime Created => Document.Created;
 
         public string Content => Document.Content;
 

@@ -7,6 +7,8 @@ namespace chancies.Blog.DataModels
     {
         public SectionId SectionId { get; set; }
 
+        public DateTime Created { get; set; }
+
         public string Content { get; set; }
     }
 }

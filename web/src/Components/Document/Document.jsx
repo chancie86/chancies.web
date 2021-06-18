@@ -31,11 +31,7 @@ const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
 
-// const getDocument = state => {
-//   const sections = state.sections.ids.map(id => state.sections.byId[id]);
-// };
-
-export default function Document({ documentId }) {
+export default function Document({ id }) {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -57,8 +53,20 @@ export default function Document({ documentId }) {
   }, [mediaMatch]);
 
   React.useEffect(() => {
-    dispatch(getDocument(documentId));
-  }, []);
+    if (id) {
+      dispatch(getDocument(id));
+    }
+  }, [id]);
+
+  const document = useSelector(state => state.document);
+  if (document?.created) {
+    const date = new Date(document.created);
+    document.created = date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
 
   return (
     <div>
@@ -72,15 +80,14 @@ export default function Document({ documentId }) {
           height: 200,
           color: "white"
         }}
-        // {...rest}
       />
       <Parallax small filter image={require("assets/img/3dprinting.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>3D Printing</h1>
+              <h1 className={classes.title}>{document?.name}</h1>
               <br />
-              <p className={classes.title}>09 May 2020</p>
+              <p className={classes.title}>{document?.created}</p>
             </GridItem>
           </GridContainer>
         </div>
@@ -96,8 +103,8 @@ export default function Document({ documentId }) {
                 mediaMatch ? classes.tocVisible : ""
               )}
             />
-            <div className="js-toc-content">
-
+            <div className="js-toc-content" style={{ padding: "70px 0 0 0" }}>
+              {document?.content}
             </div>
           </GridItem>
           <GridItem sm={1} md={2} xl={3}></GridItem>
@@ -109,5 +116,5 @@ export default function Document({ documentId }) {
 }
 
 Document.propTypes = {
-  documentId: PropTypes.string.isRequired
+  documentId: PropTypes.string
 };
