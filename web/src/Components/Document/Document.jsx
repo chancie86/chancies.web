@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,10 +10,15 @@ import classNames from "classnames";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import EditIcon from "@material-ui/icons/Edit";
+
 // styles for table of contents
 import tocbot from "tocbot/src/js";
 
 // core components
+import { useAuth } from "../../Hooks/useAuth";
+import Button from "../../Components/CustomButtons/Button";
+import Editor from "../../Components/Editor";
 import Header from "../../Components/Header/Header.js";
 import Footer from "../../Components/Footer/Footer.js";
 import GridContainer from "../../Components/Grid/GridContainer.js";
@@ -23,7 +28,7 @@ import Parallax from "../../Components/Parallax/Parallax.js";
 
 import styles from "../../assets/jss/material-kit-react/views/projectPage.js";
 
-import { getDocument } from "../../actions/documentActions";
+import { getDocument, saveDocument } from "../../actions/documentActions";
 
 import config from "config.json";
 
@@ -34,9 +39,10 @@ const useStyles = makeStyles(styles);
 export default function Document({ id }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  const { isAuthenticated } = useAuth();
   const theme = useTheme();
   const mediaMatch = useMediaQuery(theme.breakpoints.up("lg"));
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     tocbot.init({
@@ -58,7 +64,18 @@ export default function Document({ id }) {
     }
   }, [id]);
 
+  const onSave = content => {
+    if (!document) {
+      return;
+    }
+
+    dispatch(
+      saveDocument(document.id, document.name, content, document.section.id)
+    ).then(() => setIsEditing(false));
+  };
+
   const document = useSelector(state => state.document);
+
   if (document?.created) {
     const date = new Date(document.created);
     document.created = date.toLocaleDateString("en-GB", {
@@ -103,9 +120,29 @@ export default function Document({ id }) {
                 mediaMatch ? classes.tocVisible : ""
               )}
             />
-            <div className="js-toc-content" style={{ padding: "70px 0 0 0" }}>
-              {document?.content}
-            </div>
+            {isEditing && document ? (
+              <GridContainer>
+                <GridItem>
+                  <Editor
+                    content={document.content}
+                    onSave={onSave}
+                    onCancel={() => setIsEditing(false)}
+                  />
+                </GridItem>
+              </GridContainer>
+            ) : (
+              <div className="js-toc-content" style={{ padding: "70px 0 0 0" }}>
+                {isAuthenticated && (
+                  <GridContainer justify="flex-end">
+                    <Button onClick={() => setIsEditing(true)}>
+                      <EditIcon />
+                      Edit Content
+                    </Button>
+                  </GridContainer>
+                )}
+                <GridItem>{document?.content}</GridItem>
+              </div>
+            )}
           </GridItem>
           <GridItem sm={1} md={2} xl={3}></GridItem>
         </GridItem>
@@ -116,5 +153,5 @@ export default function Document({ id }) {
 }
 
 Document.propTypes = {
-  documentId: PropTypes.string
+  id: PropTypes.string
 };

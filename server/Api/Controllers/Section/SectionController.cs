@@ -45,20 +45,20 @@ namespace chancies.Api.Controllers.Section
         }
 
         [Authorize(Permissions.Section.Delete)]
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task Delete(Guid id)
         {
             await _sectionService.Delete(id);
         }
 
         [Authorize(Permissions.Section.Update)]
-        [HttpPut("id")]
-        public async Task Update(SectionDto section)
+        [HttpPut("{id}")]
+        public async Task Update(Guid id, UpdateSectionDto payload)
         {
             await _sectionService.Update(new Blog.DataModels.Section
             {
-                Id = section.Id,
-                Name = section.Name
+                Id = id,
+                Name = payload.Name
             });
         }
     }

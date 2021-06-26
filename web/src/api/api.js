@@ -12,4 +12,12 @@ export async function getDocument(id) {
   return await client.get(`document/${id}`);
 }
 
+export async function saveDocument(id, name, content, sectionId) {
+  return await client.put(`document/${id}`, {
+    name,
+    content,
+    sectionId
+  });
+}
+
 export function createSection() {}

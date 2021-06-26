@@ -42,22 +42,22 @@ namespace chancies.Api.Controllers.Document
         }
 
         [Authorize(Permissions.Document.Delete)]
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task Delete(Guid id)
         {
             await _documentService.Delete(id);
         }
 
         [Authorize(Permissions.Document.Update)]
-        [HttpPut("id")]
-        public async Task Update(DocumentDto section)
+        [HttpPut("{id}")]
+        public async Task Update(Guid id, UpdateDocumentDto payload)
         {
             await _documentService.Update(new Blog.DataModels.Document
             {
-                Id = section.Id,
-                Name = section.Name,
-                Content = section.Content,
-                SectionId = section.Section.Id
+                Id = id,
+                Name = payload.Name,
+                Content = payload.Content,
+                SectionId = payload.SectionId
             });
         }
     }

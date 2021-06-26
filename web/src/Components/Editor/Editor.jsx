@@ -1,6 +1,12 @@
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
 
 import { Editor } from "@tinymce/tinymce-react";
+
+import SaveIcon from "@material-ui/icons/Save";
+import ClearIcon from "@material-ui/icons/Clear";
+
+import Button from "../CustomButtons/Button";
 
 // nodejs library that concatenates classes
 //import classNames from "classnames";
@@ -12,18 +18,15 @@ import { Editor } from "@tinymce/tinymce-react";
 
 //const useStyles = makeStyles(styles);
 
-export default function LandingPage(props) {
+export default function EditorComponent({ content, onSave, onCancel }) {
   const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+
   return (
     <>
       <Editor
+        apiKey="sqau6ebuvggckxhyx0l3duhwl09b56asde48ekeib8119uee"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        initialValue={content}
         init={{
           height: 500,
           menubar: false,
@@ -41,7 +44,21 @@ export default function LandingPage(props) {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
         }}
       />
-      <button onClick={log}>Log editor content</button>
+      <Button
+        color="success"
+        onClick={() => onSave(editorRef.current.getContent())}
+      >
+        <SaveIcon /> Save
+      </Button>
+      <Button color="danger" onClick={onCancel}>
+        <ClearIcon /> Discard
+      </Button>
     </>
   );
 }
+
+EditorComponent.propTypes = {
+  content: PropTypes.string.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
+};

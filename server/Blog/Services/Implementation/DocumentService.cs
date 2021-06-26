@@ -49,6 +49,8 @@ namespace chancies.Blog.Services.Implementation
 
         public async Task Update(Document document)
         {
+            var doc = await _documentRepository.Read(document.Id);
+            document.Created = doc.Created;
             await _documentRepository.Update(document);
         }
     }
