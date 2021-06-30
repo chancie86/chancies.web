@@ -18,9 +18,13 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
   let data;
   try {
     const response = await window.fetch(`${baseUrl}/${endpoint}`, config);
-    data = await response.json();
     if (response.ok) {
-      return data;
+      switch(response.status) {
+        case 200:
+        case 500:
+          data = await response.json();
+      }
+      return Promise.resolve(data);
     }
     throw new Error(response.statusText);
   } catch (err) {

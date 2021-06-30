@@ -31,9 +31,7 @@ namespace chancies.Api
             services
                 .Configure<CosmosConfig>(Configuration.GetSection("Azure"))
                 .Configure<Auth0Config>(Configuration.GetSection("Auth0"));
-
-            services.AddChanciesAuthentication(PermissionsHelper.GetPermissions());
-
+            
             services
                 .AddCors(options =>
                 {
@@ -50,6 +48,9 @@ namespace chancies.Api
                     });
                 })
                 .AddControllers();
+
+            services.AddChanciesAuthentication(PermissionsHelper.GetPermissions());
+
             services.AddSwaggerGen(options =>
             {
                 var securityScheme = new OpenApiSecurityScheme
@@ -89,8 +90,8 @@ namespace chancies.Api
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
                 })
                 .UseRouting()
-                .UseChanciesAuthentication()
                 .UseCors()
+                .UseChanciesAuthentication()
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();

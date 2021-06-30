@@ -9,7 +9,7 @@ namespace chancies.Persistence.Cosmos.Startup
         : IStartable
     {
         private readonly ICosmosService _cosmosService;
-
+        
         public Initialiser(ICosmosService cosmosService)
         {
             _cosmosService = cosmosService ?? throw new ArgumentNullException();

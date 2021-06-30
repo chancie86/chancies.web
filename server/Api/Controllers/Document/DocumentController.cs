@@ -43,14 +43,15 @@ namespace chancies.Api.Controllers.Document
 
         [Authorize(Permissions.Document.Delete)]
         [HttpDelete("{id}")]
-        public async Task Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             await _documentService.Delete(id);
+            return base.NoContent();
         }
 
         [Authorize(Permissions.Document.Update)]
         [HttpPut("{id}")]
-        public async Task Update(Guid id, UpdateDocumentDto payload)
+        public async Task<IActionResult> Update(Guid id, UpdateDocumentDto payload)
         {
             await _documentService.Update(new Blog.DataModels.Document
             {
@@ -59,6 +60,7 @@ namespace chancies.Api.Controllers.Document
                 Content = payload.Content,
                 SectionId = payload.SectionId
             });
+            return base.NoContent();
         }
     }
 }

@@ -12,6 +12,7 @@
     "@tinymce/tinymce-react": "^3.12.4",
     "classnames": "2.2.6",
     "history": "4.9.0",
+    "html-react-parser": "^1.2.7",
     "moment": "2.24.0",
     "node-sass": "4.14.1",
     "nouislider": "14.0.2",

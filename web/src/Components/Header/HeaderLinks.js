@@ -55,8 +55,6 @@ export default function HeaderLinks(props) {
     dispatch(listDocuments());
   }, []);
 
-  var auth = useAuth();
-
   const sectionButtons = sections.map(s => <ListItem key={s.id} className={classes.listItem}>
     <CustomDropdown
       noLiPadding
@@ -73,12 +71,6 @@ export default function HeaderLinks(props) {
       }
     />
   </ListItem>)
-
-  // if (auth.isAuthenticated) {
-  //   projects.push(<Link to="/Sandbox" className={classes.dropdownLink}>
-  //     Add new project
-  // </Link>)
-  // }
 
   return (
     <List className={classes.list}>

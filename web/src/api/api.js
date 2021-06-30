@@ -1,4 +1,5 @@
 import { client } from "./client";
+import { authClient } from "./authClient";
 
 export async function listSections() {
   return await client.get("section");
@@ -13,7 +14,7 @@ export async function getDocument(id) {
 }
 
 export async function saveDocument(id, name, content, sectionId) {
-  return await client.put(`document/${id}`, {
+  return await authClient.put(`document/${id}`, {
     name,
     content,
     sectionId

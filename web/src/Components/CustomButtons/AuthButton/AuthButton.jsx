@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useAuth } from "Hooks/useAuth";
+import { useAuth } from "../../../Hooks/useAuth";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import Button from "../Button";
 import { withStyles, withTheme } from "@material-ui/core";

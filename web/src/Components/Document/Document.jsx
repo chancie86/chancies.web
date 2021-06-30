@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 
+import parse from 'html-react-parser';
+
 // @material-ui/core components
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -69,9 +71,9 @@ export default function Document({ id }) {
       return;
     }
 
-    dispatch(
-      saveDocument(document.id, document.name, content, document.section.id)
-    ).then(() => setIsEditing(false));
+    dispatch(saveDocument(document.id, document.name, content, document.section.id))
+    dispatch(getDocument(id));
+    setIsEditing(false);
   };
 
   const document = useSelector(state => state.document);
@@ -140,7 +142,7 @@ export default function Document({ id }) {
                     </Button>
                   </GridContainer>
                 )}
-                <GridItem>{document?.content}</GridItem>
+                <GridItem>{document?.content ? parse(document.content) : ""}</GridItem>
               </div>
             )}
           </GridItem>
