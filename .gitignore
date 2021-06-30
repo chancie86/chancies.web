@@ -85,3 +85,4 @@ artifacts/
 # Nuget personal access tokens and Credentials
 nuget.config
 /web/.vscode
+.vs/
