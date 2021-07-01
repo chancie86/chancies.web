@@ -66,13 +66,13 @@ export default function Document({ id }) {
     }
   }, [id]);
 
-  const onSave = content => {
+  const onSave = async content => {
     if (!document) {
       return;
     }
 
-    dispatch(saveDocument(document.id, document.name, content, document.section.id))
-    dispatch(getDocument(id));
+    await dispatch(saveDocument(document.id, document.name, content, document.section.id))
+    await dispatch(getDocument(id));
     setIsEditing(false);
   };
 

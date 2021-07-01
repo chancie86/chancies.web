@@ -23,6 +23,9 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
         case 200:
         case 500:
           data = await response.json();
+          break;
+        default:
+          break;
       }
       return Promise.resolve(data);
     }
