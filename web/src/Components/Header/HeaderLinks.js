@@ -20,6 +20,7 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 import { useAuth } from "Hooks/useAuth";
 
 import { listSections, listDocuments } from "../../actions/headerActions";
+import { showErrorStatus } from "../../actions/statusActions";
 import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
 import AuthButton from "../CustomButtons/AuthButton";
 import Button from "../CustomButtons/Button.js";
@@ -51,8 +52,16 @@ export default function HeaderLinks(props) {
   const sections = useSelector(state => getSections(state));
 
   React.useEffect(() => {
-    dispatch(listSections()),
-    dispatch(listDocuments());
+    const load = async () => {
+      try {
+        await dispatch(listSections());
+        await dispatch(listDocuments());
+      } catch (error) {
+        dispatch(showErrorStatus(error));
+      }
+}
+
+    load();
   }, []);
 
   const sectionButtons = sections.map(s => <ListItem key={s.id} className={classes.listItem}>

@@ -33,6 +33,7 @@ import styles from "../../assets/jss/material-kit-react/views/projectPage.js";
 import { getDocument, saveDocument } from "../../actions/documentActions";
 
 import config from "config.json";
+import { showSuccessStatus } from "actions/statusActions";
 
 const dashboardRoutes = [];
 
@@ -72,6 +73,7 @@ export default function Document({ id }) {
     }
 
     await dispatch(saveDocument(document.id, document.name, content, document.section.id))
+    dispatch(showSuccessStatus("Saved"));
     await dispatch(getDocument(id));
     setIsEditing(false);
   };

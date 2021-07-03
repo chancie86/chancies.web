@@ -5,6 +5,7 @@ export const listSections = () => {
   return async (dispatch, getState) => {
     const response = await api.listSections();
     dispatch({ type: actionTypes.LIST_SECTIONS_SUCCESS, payload: response });
+    return Promise.resolve();
   };
 };
 
@@ -12,5 +13,6 @@ export const listDocuments = () => {
   return async (dispatch, getState) => {
     const response = await api.listDocuments();
     dispatch({ type: actionTypes.LIST_DOCUMENTS_SUCCESS, payload: response });
+    return Promise.resolve();
   };
 };
