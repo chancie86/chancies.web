@@ -14,6 +14,7 @@ namespace chancies.Api.Controllers.Document.Dto.Extensions
                 Id = self.Id,
                 Name = self.Name,
                 Created = self.Created,
+                LastUpdated = self.LastUpdated,
                 Section = new SectionDto
                 {
                     Id = self.Section.Id,

@@ -28,7 +28,7 @@ import GridItem from "../../Components/Grid/GridItem.js";
 import HeaderLinks from "../../Components/Header/HeaderLinks.js";
 import Parallax from "../../Components/Parallax/Parallax.js";
 
-import styles from "../../assets/jss/material-kit-react/views/projectPage.js";
+import styles from "../../assets/jss/material-kit-react/views/basePageStyle.js";
 
 import { getDocument, saveDocument } from "../../actions/documentActions";
 
@@ -38,6 +38,15 @@ import { showSuccessStatus } from "actions/statusActions";
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
+
+const getDate = (dateTime) => {
+  const date = new Date(dateTime);
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
 
 export default function Document({ id }) {
   const dispatch = useDispatch();
@@ -102,11 +111,12 @@ export default function Document({ id }) {
 
   if (document?.created) {
     const date = new Date(document.created);
-    document.created = date.toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
+    document.created = getDate(date);
+  }
+
+  if (document?.lastUpdated) {
+    const date = new Date(document.lastUpdated);
+    document.lastUpdated = getDate(date);
   }
 
   return (
@@ -128,7 +138,7 @@ export default function Document({ id }) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>{document?.name}</h1>
               <br />
-              <p className={classes.title}>{document?.created}</p>
+              <p className={classes.title}>{document?.created} {(document?.created != document?.lastUpdated ? `(updated ${document?.lastUpdated})` : null)}</p>
             </GridItem>
           </GridContainer>
         </div>

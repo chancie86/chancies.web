@@ -18,6 +18,8 @@ namespace chancies.Blog.ViewModels
 
         public DateTime Created => Document.Created;
 
+        public DateTime LastUpdated => Document.LastUpdated;
+
         public IList<DocumentElement> Elements => Document.Elements;
 
         public Section Section { get; }

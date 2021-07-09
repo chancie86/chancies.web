@@ -10,6 +10,7 @@ namespace chancies.Api.Controllers.Document.Dto
         public Guid Id { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
         public IList<DocumentElement> Elements { get; set; }
         public SectionDto Section { get; set; }
     }
