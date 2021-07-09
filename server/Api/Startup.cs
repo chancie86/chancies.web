@@ -31,7 +31,7 @@ namespace chancies.Api
             services
                 .Configure<CosmosConfig>(Configuration.GetSection("Azure"))
                 .Configure<Auth0Config>(Configuration.GetSection("Auth0"));
-            
+
             services
                 .AddCors(options =>
                 {
@@ -47,7 +47,8 @@ namespace chancies.Api
                             .AllowCredentials();
                     });
                 })
-                .AddControllers();
+                .AddControllers()
+                .AddNewtonsoftJson();
 
             services.AddChanciesAuthentication(PermissionsHelper.GetPermissions());
 

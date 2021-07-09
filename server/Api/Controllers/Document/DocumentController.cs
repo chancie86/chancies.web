@@ -57,9 +57,10 @@ namespace chancies.Api.Controllers.Document
             {
                 Id = id,
                 Name = payload.Name,
-                Content = payload.Content,
+                Elements = payload.Elements,
                 SectionId = payload.SectionId
             });
+
             return base.NoContent();
         }
     }

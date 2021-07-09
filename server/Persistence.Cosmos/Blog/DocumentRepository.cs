@@ -15,7 +15,7 @@ namespace chancies.Persistence.Cosmos.Blog
 
         public override async Task<IList<DocumentListItem>> List()
         {
-            return await base.ListInternal("SectionId");
+            return await base.ListInternal("sectionId");
         }
     }
 }

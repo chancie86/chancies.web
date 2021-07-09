@@ -59,7 +59,7 @@ namespace chancies.Persistence.Cosmos
                 ? string.Empty
                 : separator + string.Join(separator, additionalFields);
 
-            var sqlQuery = $"SELECT c.id, c.Name{additionalColumns} FROM c where c.Type = '{typeof(TDocument).Name}'";
+            var sqlQuery = $"SELECT c.id, c.name{additionalColumns} FROM c where c.type = '{typeof(TDocument).Name}'";
             var queryDefinition = new QueryDefinition(sqlQuery);
             var queryResultSetIterator = _container.GetItemQueryIterator<TList>(queryDefinition);
 

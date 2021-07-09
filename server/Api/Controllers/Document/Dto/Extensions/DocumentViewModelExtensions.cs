@@ -8,13 +8,13 @@ namespace chancies.Api.Controllers.Document.Dto.Extensions
     {
         public static DocumentDto ToDocumentDto(this DocumentViewModel self)
         {
-            return new DocumentDto()
+            return new DocumentDto
             {
-                Content = self.Content,
+                Elements = self.Elements,
                 Id = self.Id,
                 Name = self.Name,
                 Created = self.Created,
-                Section = new SectionDto()
+                Section = new SectionDto
                 {
                     Id = self.Section.Id,
                     Name = self.Section.Name,

@@ -9,9 +9,9 @@ export const getDocument = id => {
   };
 };
 
-export const saveDocument = (id, name, content, sectionId) => {
+export const saveDocument = (id, name, elements, sectionId) => {
   return async (dispatch, getState) => {
-    await api.saveDocument(id, name, content, sectionId);
+    await api.saveDocument(id, name, elements, sectionId);
     dispatch({ type: actionTypes.SAVE_DOCUMENT_SUCCESS });
     return Promise.resolve()
   };

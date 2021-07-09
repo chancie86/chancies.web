@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using chancies.Persistence.Cosmos.Config;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.Options;
 using Persistence.Cosmos;
 
@@ -33,8 +34,10 @@ namespace chancies.Persistence.Cosmos
             }
 
             var primaryKey = await _secretsService.GetSecret("cosmosPrimaryKey");
-
-            _cosmosClient = new CosmosClient(_config.CosmosEndpointUrl, primaryKey, new CosmosClientOptions());
+            var builder = new CosmosClientBuilder(_config.CosmosEndpointUrl, primaryKey)
+                .WithSerializerOptions(new CosmosSerializationOptions()
+                    {PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase});
+            _cosmosClient = builder.Build();
             _database = await _cosmosClient.CreateDatabaseIfNotExistsAsync(_config.DatabaseName);
             _container = await _database.CreateContainerIfNotExistsAsync(_config.ContainerName, $"/{Constants.PartitionKey}", 400);
 

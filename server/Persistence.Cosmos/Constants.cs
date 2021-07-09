@@ -2,6 +2,6 @@
 {
     internal static class Constants
     {
-        public const string PartitionKey = "Type";
+        public const string PartitionKey = "type";
     }
 }

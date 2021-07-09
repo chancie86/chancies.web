@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using chancies.Blog.DataModels;
 
 namespace chancies.Blog.ViewModels
@@ -17,7 +18,7 @@ namespace chancies.Blog.ViewModels
 
         public DateTime Created => Document.Created;
 
-        public string Content => Document.Content;
+        public IList<DocumentElement> Elements => Document.Elements;
 
         public Section Section { get; }
 

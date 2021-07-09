@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Cosmos", "Persistence.Cosmos\Persistence.Cosmos.csproj", "{B1B1E984-1E15-469E-A381-F0AFD03CB04D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{C9AADF61-99D0-4A59-BDAC-A4D26CC0DB34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "Auth\Auth.csproj", "{C9AADF61-99D0-4A59-BDAC-A4D26CC0DB34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{B212B8AE-FDDC-4731-BCEB-1769C504D325}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C9AADF61-99D0-4A59-BDAC-A4D26CC0DB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9AADF61-99D0-4A59-BDAC-A4D26CC0DB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9AADF61-99D0-4A59-BDAC-A4D26CC0DB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B212B8AE-FDDC-4731-BCEB-1769C504D325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B212B8AE-FDDC-4731-BCEB-1769C504D325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B212B8AE-FDDC-4731-BCEB-1769C504D325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B212B8AE-FDDC-4731-BCEB-1769C504D325}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

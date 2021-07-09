@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 
-import parse from 'html-react-parser';
+import parseHtml from 'html-react-parser';
 
 // @material-ui/core components
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -67,18 +67,38 @@ export default function Document({ id }) {
     }
   }, [id]);
 
-  const onSave = async content => {
+  const onSave = async elements => {
     if (!document) {
       return;
     }
 
-    await dispatch(saveDocument(document.id, document.name, content, document.section.id))
+    await dispatch(saveDocument(document.id, document.name, elements, document.section.id))
     dispatch(showSuccessStatus("Saved"));
     await dispatch(getDocument(id));
     setIsEditing(false);
   };
 
   const document = useSelector(state => state.document);
+
+  const getContent = () => {
+    let elements = [];
+
+    if (document?.elements) {
+      document.elements.forEach(x => 
+        {
+          switch(x.type) {
+            case "Html":
+              elements.push(<div key={x.id}>{parseHtml(x.content)}</div>);
+              break;
+            case "Images":
+              elements.push(<div key={x.id}>"images"</div>);
+              break;
+          }
+        });
+    }
+
+    return elements;
+  };
 
   if (document?.created) {
     const date = new Date(document.created);
@@ -128,7 +148,7 @@ export default function Document({ id }) {
               <GridContainer>
                 <GridItem>
                   <Editor
-                    content={document.content}
+                    documentElements={document.elements}
                     onSave={onSave}
                     onCancel={() => setIsEditing(false)}
                   />
@@ -144,7 +164,7 @@ export default function Document({ id }) {
                     </Button>
                   </GridContainer>
                 )}
-                <GridItem>{document?.content ? parse(document.content) : ""}</GridItem>
+                <GridItem>{getContent()}</GridItem>
               </div>
             )}
           </GridItem>

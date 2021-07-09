@@ -13,10 +13,10 @@ export async function getDocument(id) {
   return await client.get(`document/${id}`);
 }
 
-export async function saveDocument(id, name, content, sectionId) {
+export async function saveDocument(id, name, elements, sectionId) {
   return await authClient.put(`document/${id}`, {
     name,
-    content,
+    elements,
     sectionId
   });
 }

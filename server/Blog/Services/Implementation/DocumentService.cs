@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using chancies.Blog.DataModels;
@@ -26,7 +27,11 @@ namespace chancies.Blog.Services.Implementation
             _ = await _sectionRepository.Read(document.SectionId);
             
             document.Id = Guid.NewGuid();
-            document.Created = DateTime.UtcNow;
+            document.Created = document.LastUpdated = DateTime.UtcNow;
+
+            document.Elements ??= new List<DocumentElement>();
+            ValidateDocumentElement(document.Elements);
+
             return await _documentRepository.Create(document);
         }
 
@@ -49,9 +54,21 @@ namespace chancies.Blog.Services.Implementation
 
         public async Task Update(Document document)
         {
+            ValidateDocumentElement(document.Elements);
+
             var doc = await _documentRepository.Read(document.Id);
             document.Created = doc.Created;
+            document.LastUpdated = DateTime.UtcNow;
             await _documentRepository.Update(document);
+        }
+
+        private void ValidateDocumentElement(IList<DocumentElement> elements)
+        {
+            var ids = elements.Select(x => x.Id).ToHashSet();
+            if (ids.Count != elements.Count)
+            {
+                throw new InvalidDataException($"{nameof(DocumentElement)} ids must be unique");
+            }
         }
     }
 }
