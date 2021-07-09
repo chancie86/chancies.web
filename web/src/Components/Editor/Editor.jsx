@@ -5,8 +5,15 @@ import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
 
 import Button from "../CustomButtons/Button";
+import ElementWrapper from "./ElementWrapper";
 import HtmlEditor from "./HtmlEditor";
 import { useEffect, useState } from "react";
+
+const swap = (arr, i, j) => {
+  const tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
+};
 
 export default function Editor({
   documentElements,
@@ -19,10 +26,7 @@ export default function Editor({
 
   const getDocumentElements = () => {
     return elementIds.map(elementId => {
-      const element = 
-      {
-        ...elementMap[elementId]
-      };
+      const element = { ...elementMap[elementId] };
 
       switch(element.type) {
         case "Html":
@@ -49,15 +53,39 @@ export default function Editor({
     setElementIds(order);
     setElementMap(map);
   }, [documentElements]);
+
+  const handleUp = (id) => {
+    const ids = [ ...elementIds ];
+    for (let i = 1; i < ids.length; i++) {
+      if (ids[i] == id) {
+        swap(ids, i, i -  1);
+      }
+    }
+    setElementIds(ids);
+  };
+
+  const handleDown = (id) => {
+    const ids = [ ...elementIds ];
+    for (let i = ids.length - 2; i >= 0; i--) {
+      if (ids[i] == id) {
+        swap(ids, i, i + 1);
+      }
+    }
+    setElementIds(ids);
+  };
   
   const elements = elementIds.map((id) => {
     const element = elementMap[id];
 
     switch(element.type) {
       case "Html":
-        return <HtmlEditor ref={el => elementRefs.current[id] = el} content={element.content} key={id} />;
+        return <ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
+          <HtmlEditor ref={el => elementRefs.current[id] = el} content={element.content} />
+        </ElementWrapper>;
       case "Images":
-        return <div key={id}>images</div>;
+        return <ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
+          images
+        </ElementWrapper>;
     };
   });
 

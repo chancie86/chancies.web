@@ -54,7 +54,7 @@ export default function Document({ id }) {
   const { isAuthenticated } = useAuth();
   const theme = useTheme();
   const mediaMatch = useMediaQuery(theme.breakpoints.up("lg"));
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
     tocbot.init({
