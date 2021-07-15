@@ -70,6 +70,18 @@ export default function Editor({
     setElementIds(ids);
   };
 
+  const handleDelete = (id) => {
+    const newElementMap = { ...elementMap };
+    delete newElementMap[id];
+
+    const index = elementIds.indexOf(id);
+    const newElementIds = [ ...elementIds ];
+    newElementIds.splice(index, 1);
+
+    setElementIds(newElementIds);
+    setElementMap(newElementMap);
+  };
+
   const handleAddElement = (index, element) => {
     const newElementIds = [ ...elementIds ];
     newElementIds.splice(index, 0, element.id);
@@ -91,12 +103,12 @@ export default function Editor({
 
     switch(element.type) {
       case "Html":
-        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
+        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)} onDelete={() => handleDelete(id)}>
           <HtmlEditor ref={el => elementRefs.current[id] = el} content={element.content} />
         </ElementWrapper>);
         break;
       case "Images":
-        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
+        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)} onDelete={() => handleDelete(id)}>
           images
         </ElementWrapper>);
         break;
