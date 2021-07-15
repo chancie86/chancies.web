@@ -1,19 +1,15 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
-import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
+import SaveIcon from "@material-ui/icons/Save";
 
+import { swap } from "../../utils/utils";
 import Button from "../CustomButtons/Button";
+import AddElementDivider from "./AddElementDivider";
 import ElementWrapper from "./ElementWrapper";
 import HtmlEditor from "./HtmlEditor";
 import { useEffect, useState } from "react";
-
-const swap = (arr, i, j) => {
-  const tmp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = tmp;
-};
 
 export default function Editor({
   documentElements,
@@ -73,21 +69,41 @@ export default function Editor({
     }
     setElementIds(ids);
   };
-  
-  const elements = elementIds.map((id) => {
+
+  const handleAddElement = (index, element) => {
+    const newElementIds = [ ...elementIds ];
+    newElementIds.splice(index, 0, element.id);
+
+    const newElementMap = { ...elementMap };
+    newElementMap[element.id] = element;
+
+    setElementMap(newElementMap);
+    setElementIds(newElementIds);
+  };
+
+  const elements = [];
+
+  for (let i = 0; i < elementIds.length; i++) {
+    const id = elementIds[i]; 
+    elements.push(<AddElementDivider index={i} onAdd={handleAddElement} />);
+
     const element = elementMap[id];
 
     switch(element.type) {
       case "Html":
-        return <ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
+        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
           <HtmlEditor ref={el => elementRefs.current[id] = el} content={element.content} />
-        </ElementWrapper>;
+        </ElementWrapper>);
+        break;
       case "Images":
-        return <ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
+        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)}>
           images
-        </ElementWrapper>;
+        </ElementWrapper>);
+        break;
     };
-  });
+  }
+
+  elements.push(<AddElementDivider index={elements.length} onAdd={handleAddElement} />);
 
   return <>
     {elements}

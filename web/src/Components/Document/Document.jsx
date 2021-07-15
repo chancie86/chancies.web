@@ -9,6 +9,7 @@ import classNames from "classnames";
 import parseHtml from 'html-react-parser';
 
 // @material-ui/core components
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -88,6 +89,7 @@ export default function Document({ id }) {
   };
 
   const document = useSelector(state => state.document);
+  const isLoading = useSelector(state => state.isLoading);
 
   const getContent = () => {
     let elements = [];
@@ -154,7 +156,9 @@ export default function Document({ id }) {
                 mediaMatch ? classes.tocVisible : ""
               )}
             />
-            {isEditing && document ? (
+            {isLoading && <CircularProgress />}
+            {!isLoading && isEditing && document
+            ? (
               <GridContainer>
                 <GridItem>
                   <Editor

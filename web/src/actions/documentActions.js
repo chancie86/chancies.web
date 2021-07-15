@@ -3,6 +3,7 @@ import * as actionTypes from "./documentActionTypes";
 
 export const getDocument = id => {
   return async (dispatch, getState) => {
+    dispatch({ type: actionTypes.FETCH_DOCUMENT_REQUEST, payload: response });
     const response = await api.getDocument(id);
     dispatch({ type: actionTypes.FETCH_DOCUMENT_SUCCESS, payload: response });
     return Promise.resolve()

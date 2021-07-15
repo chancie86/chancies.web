@@ -8,14 +8,11 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-import Button from "../CustomButtons/Button";
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles({
-    button: {
-        width: '1em'
-    },
-    child: {
-        outline: "2px solid #F3F3F3"
+    deleteButton: {
+        color: "red"
     }
 });
   
@@ -29,18 +26,18 @@ export default function ElementWrapper({
 
   return <Grid container direction="column">
     <Grid container justify="flex-end">
-        <Button color="primary" onClick={onUp} className={classes.button}>
+        <IconButton onClick={onUp}>
             <ArrowUpwardIcon />
-        </Button>
-        <Button color="primary" onClick={onDown} className={classes.button}>
+        </IconButton>
+        <IconButton onClick={onDown}>
             <ArrowDownwardIcon />
-        </Button>
-        <Button color="danger" onClick={onDelete} className={classes.button}>
+        </IconButton>
+        <IconButton onClick={onDelete} className={classes.deleteButton}>
             <DeleteForeverIcon />
-        </Button>
+        </IconButton>
     </Grid>
     <Grid item>
-        <div className={classes.child}>{children}</div>
+        {children}
     </Grid>
   </Grid>;
 }
