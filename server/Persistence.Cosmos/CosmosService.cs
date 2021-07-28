@@ -20,9 +20,9 @@ namespace chancies.Persistence.Cosmos
 
         private bool _initialised;
 
-        public CosmosService(IOptions<CosmosConfig> config, ISecretsService secretsService)
+        public CosmosService(IOptions<AzureConfig> config, ISecretsService secretsService)
         {
-            _config = config?.Value ?? throw new ArgumentNullException(nameof(config));
+            _config = config?.Value?.Cosmos ?? throw new ArgumentNullException(nameof(config), "Azure Cosmos configuration is missing");
             _secretsService = secretsService ?? throw new ArgumentNullException(nameof(secretsService));
         }
 
@@ -33,7 +33,7 @@ namespace chancies.Persistence.Cosmos
                 return;
             }
 
-            var primaryKey = await _secretsService.GetSecret("cosmosPrimaryKey");
+            var primaryKey = await _secretsService.GetSecret(_config.KeySecretName);
             var builder = new CosmosClientBuilder(_config.CosmosEndpointUrl, primaryKey)
                 .WithSerializerOptions(new CosmosSerializationOptions()
                     {PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase});

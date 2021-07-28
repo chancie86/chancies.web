@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using chancies.Blog.DataModels;
 using chancies.Blog.Repository;
 
-namespace chancies.Persistence.Cosmos.Blog
+namespace chancies.Persistence.Cosmos.Repository
 {
     internal class DocumentRepository
         : BaseRepository<Document, DocumentId, DocumentListItem>, IDocumentRepository
@@ -15,7 +15,7 @@ namespace chancies.Persistence.Cosmos.Blog
 
         public override async Task<IList<DocumentListItem>> List()
         {
-            return await base.ListInternal("sectionId");
+            return await ListInternal("sectionId");
         }
     }
 }

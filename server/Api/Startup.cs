@@ -29,7 +29,7 @@ namespace chancies.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .Configure<CosmosConfig>(Configuration.GetSection("Azure"))
+                .Configure<AzureConfig>(Configuration.GetSection("Azure"))
                 .Configure<Auth0Config>(Configuration.GetSection("Auth0"));
 
             services

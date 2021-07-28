@@ -6,6 +6,7 @@ using chancies.Api.Controllers.Document.Dto;
 using chancies.Api.Controllers.Document.Dto.Extensions;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chancies.Api.Controllers.Document
@@ -16,10 +17,12 @@ namespace chancies.Api.Controllers.Document
         : ControllerBase
     {
         private readonly IDocumentService _documentService;
+        private readonly IImageService _imageService;
 
-        public DocumentController(IDocumentService documentService)
+        public DocumentController(IDocumentService documentService, IImageService imageService)
         {
             _documentService = documentService;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -62,6 +65,39 @@ namespace chancies.Api.Controllers.Document
             });
 
             return base.NoContent();
+        }
+
+        [HttpPost("{id}/images")]
+        public async Task<IActionResult> UploadImage(Guid id, ICollection<IFormFile> files)
+        {
+            if (files.Count == 0)
+            {
+                return BadRequest("No files received from the upload");
+            }
+
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    await using var stream = formFile.OpenReadStream();
+                    await _imageService.Upload(id, stream, formFile.FileName);
+                }
+            }
+
+            return Ok();
+        }
+
+        [HttpGet("{id}/images")]
+        public async Task<IList<string>> ListImages(Guid id)
+        {
+            var result = await _imageService.List(id);
+            return result;
+        }
+
+        [HttpDelete("{id}/images")]
+        public async Task Delete(Guid id, string filePath)
+        {
+            await _imageService.Delete(id, filePath);
         }
     }
 }

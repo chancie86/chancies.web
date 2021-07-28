@@ -11,9 +11,9 @@ namespace chancies.Persistence.Cosmos
     public class SecretsService
         : ISecretsService
     {
-        private readonly CosmosConfig _config;
+        private readonly AzureConfig _config;
 
-        public SecretsService(IOptions<CosmosConfig> config)
+        public SecretsService(IOptions<AzureConfig> config)
         {
             _config = config?.Value ?? throw new ArgumentNullException(nameof(config));
         }
