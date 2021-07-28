@@ -8,7 +8,7 @@ namespace chancies.Blog.Services
     public interface IImageService
     {
         Task Upload(DocumentId documentId, Stream fileStream, string filePath);
-        Task<IList<string>> List(DocumentId documentId);
+        Task<IList<ImageReference>> List(DocumentId documentId);
         Task Delete(DocumentId documentId, string filePath);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using chancies.Blog.DataModels;
 
 namespace chancies.Blog.Repository
 {
@@ -8,7 +9,7 @@ namespace chancies.Blog.Repository
     {
         Task Upload(Stream fileStream, string path);
 
-        Task<IList<string>> List(string prefix);
+        Task<IList<ImageReference>> List(string prefix);
 
         Task Delete(string path);
     }

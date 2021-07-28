@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Azure.Storage;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
+using chancies.Blog.DataModels;
 using chancies.Blog.Repository;
 using chancies.Persistence.Cosmos.Config;
 using Microsoft.Extensions.Options;
@@ -33,9 +35,9 @@ namespace chancies.Persistence.Cosmos.Repository
             await blobClient.UploadAsync(fileStream);
         }
 
-        public async Task<IList<string>> List(string prefix)
+        public async Task<IList<ImageReference>> List(string prefix)
         {
-            var results = new List<string>();
+            var results = new Dictionary<string, string>();
             var credential = await GetCredential();
             var blobServiceClient = new BlobServiceClient(new Uri(BaseUrl), credential);
             
@@ -43,16 +45,24 @@ namespace chancies.Persistence.Cosmos.Repository
 
             if (!await container.ExistsAsync())
             {
-                return new string[0];
+                return new ImageReference[0];
             }
 
             await List(container, prefix, results);
 
             // Chop off the original prefix for the file paths
-            return results.Select(x => x.Substring(prefix.Length + 1)).ToList();
+            return results.Select(x =>
+            {
+                var path = x.Key.Substring(prefix.Length + 1);
+                return new ImageReference()
+                {
+                    Path = path,
+                    Url = x.Value
+                };
+            }).ToList();
         }
 
-        private async Task List(BlobContainerClient container, string prefix, IList<string> results)
+        private async Task List(BlobContainerClient container, string prefix, IDictionary<string, string> results)
         {   
             // Call the listing operation and return pages of the specified size.
             var resultSegment = container
@@ -72,7 +82,8 @@ namespace chancies.Persistence.Cosmos.Repository
                     }
                     else if (blobHierarchyItem.IsBlob)
                     {
-                        results.Add(blobHierarchyItem.Blob.Name);
+                        var blockBlobClient = container.GetBlockBlobClient(blobHierarchyItem.Blob.Name);
+                        results[blobHierarchyItem.Blob.Name] = blockBlobClient.Uri.AbsoluteUri;
                     }
                 }
             }

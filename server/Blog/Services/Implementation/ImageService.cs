@@ -25,8 +25,8 @@ namespace chancies.Blog.Services.Implementation
             _ = await _documentRepository.Read(documentId);
             await _imageRepository.Upload(fileStream, $"{documentId}/{filePath}");
         }
-
-        public async Task<IList<string>> List(DocumentId documentId)
+        
+        public async Task<IList<ImageReference>> List(DocumentId documentId)
         {
             // Check that the document exists
             _ = await _documentRepository.Read(documentId);

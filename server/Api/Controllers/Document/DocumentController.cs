@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using chancies.Api.Controllers.Document.Dto;
 using chancies.Api.Controllers.Document.Dto.Extensions;
+using chancies.Blog.DataModels;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -88,7 +89,7 @@ namespace chancies.Api.Controllers.Document
         }
 
         [HttpGet("{id}/images")]
-        public async Task<IList<string>> ListImages(Guid id)
+        public async Task<IList<ImageReference>> ListImages(Guid id)
         {
             var result = await _imageService.List(id);
             return result;
