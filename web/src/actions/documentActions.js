@@ -3,10 +3,18 @@ import * as actionTypes from "./documentActionTypes";
 
 export const getDocument = id => {
   return async (dispatch, getState) => {
-    dispatch({ type: actionTypes.FETCH_DOCUMENT_REQUEST, payload: response });
-    const response = await api.getDocument(id);
-    dispatch({ type: actionTypes.FETCH_DOCUMENT_SUCCESS, payload: response });
-    return Promise.resolve()
+    dispatch({ type: actionTypes.FETCH_DOCUMENT_REQUEST });
+    const responses = await Promise.all([
+      api.getDocument(id),
+      api.listImages(id)
+    ]);
+    
+    const documentResponse = responses[0];
+    const imageResponses = responses[1];
+
+    dispatch({ type: actionTypes.FETCH_DOCUMENT_SUCCESS, payload: documentResponse });
+    dispatch({ type: actionTypes.FETCH_IMAGEREFERENCES_SUCCESS, payload: imageResponses });
+    return Promise.resolve();
   };
 };
 

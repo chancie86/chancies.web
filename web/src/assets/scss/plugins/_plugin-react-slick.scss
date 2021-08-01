@@ -39,6 +39,8 @@
   .slick-slide {
     > div:first-child {
       position: relative;
+      display: flex;
+      justify-content: center;
     }
   }
   .slick-icons {
@@ -46,8 +48,9 @@
     top: 5px;
   }
   .slick-image {
-    width: 100% !important;
+    width: auto !important;
     display: inline-flex !important;
+    max-height: 30em;
   }
 }
 
@@ -171,6 +174,7 @@ button.slick-arrow.slick-next {
     color: white;
     font-size: 30px;
     width: 100%;
+    text-shadow: 0 0 8px black;
   }
 }
 .slick-next {
@@ -189,6 +193,7 @@ button.slick-arrow.slick-next {
     color: #fff;
     font-size: 30px;
     width: 100%;
+    text-shadow: 0 0 8px black;
   }
 }
 .slick-list {

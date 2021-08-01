@@ -27,6 +27,7 @@ import Footer from "../../Components/Footer/Footer.js";
 import GridContainer from "../../Components/Grid/GridContainer.js";
 import GridItem from "../../Components/Grid/GridItem.js";
 import HeaderLinks from "../../Components/Header/HeaderLinks.js";
+import ImageCarousel from "../../Components/ImageCarousel";
 import Parallax from "../../Components/Parallax/Parallax.js";
 
 import styles from "../../assets/jss/material-kit-react/views/basePageStyle.js";
@@ -89,7 +90,7 @@ export default function Document({ id }) {
   };
 
   const document = useSelector(state => state.document);
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector(state => state.document.isLoading);
 
   const getContent = () => {
     let elements = [];
@@ -102,7 +103,9 @@ export default function Document({ id }) {
               elements.push(<div key={x.id}>{parseHtml(x.content)}</div>);
               break;
             case "Images":
-              elements.push(<div key={x.id}>"images"</div>);
+              elements.push(<div key={x.id}>
+                <ImageCarousel images={x.images} />
+              </div>);
               break;
           }
         });

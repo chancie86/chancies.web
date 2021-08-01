@@ -21,4 +21,8 @@ export async function saveDocument(id, name, elements, sectionId) {
   });
 }
 
+export async function listImages(documentId) {
+  return await client.get(`document/${documentId}/images`);
+}
+
 export function createSection() {}

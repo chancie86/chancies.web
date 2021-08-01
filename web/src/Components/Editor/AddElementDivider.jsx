@@ -36,7 +36,7 @@ export default function AddElementDivider({
         onAdd(index, {
             id: uuidv4(),
             type: "Images",
-            Urls: []
+            images: []
         });
         handleCloseMenu();
     };
