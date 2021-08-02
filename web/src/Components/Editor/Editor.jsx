@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import ClearIcon from "@material-ui/icons/Clear";
@@ -9,7 +9,7 @@ import Button from "../CustomButtons/Button";
 import AddElementDivider from "./AddElementDivider";
 import ElementWrapper from "./ElementWrapper";
 import HtmlEditor from "./HtmlEditor";
-import { useEffect, useState } from "react";
+import ImageElementEditor from "./ImageElementEditor";
 
 export default function Editor({
   documentElements,
@@ -50,7 +50,7 @@ export default function Editor({
     setElementMap(map);
   }, [documentElements]);
 
-  const handleUp = (id) => {
+  const handleUpElement = (id) => {
     const ids = [ ...elementIds ];
     for (let i = 1; i < ids.length; i++) {
       if (ids[i] == id) {
@@ -60,7 +60,7 @@ export default function Editor({
     setElementIds(ids);
   };
 
-  const handleDown = (id) => {
+  const handleDownElement = (id) => {
     const ids = [ ...elementIds ];
     for (let i = ids.length - 2; i >= 0; i--) {
       if (ids[i] == id) {
@@ -70,7 +70,7 @@ export default function Editor({
     setElementIds(ids);
   };
 
-  const handleDelete = (id) => {
+  const handleDeleteElement = (id) => {
     const newElementMap = { ...elementMap };
     delete newElementMap[id];
 
@@ -93,6 +93,45 @@ export default function Editor({
     setElementIds(newElementIds);
   };
 
+  const handleRemoveImage = (index, element) => {
+    const newImages = [ ...element.images ];
+    newImages.splice(index, 1);
+
+    const newElementMap = { ...elementMap };
+    newElementMap[element.id] = {
+      ...element,
+      images: newImages
+    };
+    
+    setElementMap(newElementMap);
+  };
+
+  const handleUpImage = (index, element) => {
+    const newImages = [ ...element.images ];
+    swap(newImages, index, index - 1);
+
+    const newElementMap = { ...elementMap };
+    newElementMap[element.id] = {
+      ...element,
+      images: newImages
+    };
+    
+    setElementMap(newElementMap);
+  };
+
+  const handleDownImage = (index, element) => {
+    const newImages = [ ...element.images ];
+    swap(newImages, index, index + 1);
+
+    const newElementMap = { ...elementMap };
+    newElementMap[element.id] = {
+      ...element,
+      images: newImages
+    };
+    
+    setElementMap(newElementMap);
+  };
+
   const elements = [];
 
   for (let i = 0; i < elementIds.length; i++) {
@@ -103,13 +142,18 @@ export default function Editor({
 
     switch(element.type) {
       case "Html":
-        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)} onDelete={() => handleDelete(id)}>
+        elements.push(<ElementWrapper key={id} onUp={() => handleUpElement(id)} onDown={() => handleDownElement(id)} onDelete={() => handleDeleteElement(id)}>
           <HtmlEditor ref={el => elementRefs.current[id] = el} content={element.content} />
         </ElementWrapper>);
         break;
       case "Images":
-        elements.push(<ElementWrapper key={id} onUp={() => handleUp(id)} onDown={() => handleDown(id)} onDelete={() => handleDelete(id)}>
-          images
+        elements.push(<ElementWrapper key={id} onUp={() => handleUpElement(id)} onDown={() => handleDownElement(id)} onDelete={() => handleDeleteElement(id)}>
+          <ImageElementEditor
+            images={element.images}
+            onUp={index => handleUpImage(index, element)}
+            onDown={index => handleDownImage(index, element)}
+            onRemove={index => handleRemoveImage(index, element)}
+          />
         </ElementWrapper>);
         break;
     };

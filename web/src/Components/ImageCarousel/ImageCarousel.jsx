@@ -4,10 +4,10 @@ import Carousel from "react-slick";
 
 import { useSelector } from "react-redux";
 
+import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
 import Card from "../Card/Card";
-import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
     container: {

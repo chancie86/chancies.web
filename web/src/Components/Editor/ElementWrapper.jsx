@@ -36,7 +36,7 @@ export default function ElementWrapper({
             <DeleteForeverIcon />
         </IconButton>
     </Grid>
-    <Grid item>
+    <Grid item style={{ width: "100%" }}>
         {children}
     </Grid>
   </Grid>;
