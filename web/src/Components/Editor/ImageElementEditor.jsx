@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { Grid } from "@material-ui/core";
@@ -10,13 +10,12 @@ import WebAssetIcon from '@material-ui/icons/WebAsset';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Button from "../CustomButtons/Button";
 import ImageCarousel from '../ImageCarousel';
-import { useState } from "react";
+import ImageSelectorDialog from './ImageSelectorDialog';
 
 const useStyles = makeStyles({
   deleteButton: {
@@ -26,20 +25,24 @@ const useStyles = makeStyles({
 
 export default function ImageElementEditor({
   images,
+  onAdd,
   onUp,
   onDown,
   onRemove
 }) {
-  
   const classes = useStyles();
-
   const [importDialogVisible, setImportDialogVisible] = useState(false);
 
+  const handleSave = (caption, path) => {
+    onAdd(caption, path);
+    setImportDialogVisible(false);
+  };
+  
   return (
     <Grid container direction="column">
       <ImageCarousel images={images} />
       <List dense>
-        {images.map((x, index) => <ListItem>
+        {images.map((x, index) => <ListItem key={x.path}>
           <ListItemIcon>
             <IconButton onClick={() => onRemove(index)} className={classes.deleteButton}>
               <ClearIcon />
@@ -57,8 +60,13 @@ export default function ImageElementEditor({
       <Button
         onClick={() => setImportDialogVisible(true)}
       >
-        <WebAssetIcon /> Import Existing Asset
+        <WebAssetIcon /> Add Existing Image
       </Button>
+      <ImageSelectorDialog
+        isOpen={importDialogVisible}
+        onCancel={() => setImportDialogVisible(false)}
+        onSave={handleSave}
+      />
     </Grid>
   );
 };

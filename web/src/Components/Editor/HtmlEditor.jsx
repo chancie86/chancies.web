@@ -1,17 +1,6 @@
 import React, { useRef, forwardRef, useImperativeHandle } from "react";
-import PropTypes from "prop-types";
 
 import { Editor } from "@tinymce/tinymce-react";
-
-// nodejs library that concatenates classes
-//import classNames from "classnames";
-
-// @material-ui/core components
-//import { makeStyles } from "@material-ui/core/styles";
-
-// @material-ui/icons
-
-//const useStyles = makeStyles(styles);
 
 function HtmlEditor(props, ref) {
   const editorRef = useRef(null);

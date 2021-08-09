@@ -19,7 +19,7 @@ export default function useAuth() {
     } else {
       window.localStorage.removeItem("token");
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, getAccessTokenSilently])
 
   return {
     isAuthenticated,

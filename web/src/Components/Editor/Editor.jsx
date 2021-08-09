@@ -30,6 +30,8 @@ export default function Editor({
           break;
         case "Images":
           break;
+        default:
+          break;
       };
       return element;
     });
@@ -53,7 +55,7 @@ export default function Editor({
   const handleUpElement = (id) => {
     const ids = [ ...elementIds ];
     for (let i = 1; i < ids.length; i++) {
-      if (ids[i] == id) {
+      if (ids[i] === id) {
         swap(ids, i, i -  1);
       }
     }
@@ -63,7 +65,7 @@ export default function Editor({
   const handleDownElement = (id) => {
     const ids = [ ...elementIds ];
     for (let i = ids.length - 2; i >= 0; i--) {
-      if (ids[i] == id) {
+      if (ids[i] === id) {
         swap(ids, i, i + 1);
       }
     }
@@ -91,6 +93,24 @@ export default function Editor({
 
     setElementMap(newElementMap);
     setElementIds(newElementIds);
+  };
+
+  const handleAddImage = (element, caption, imagePath) => {
+    const newImages = [
+      ...element.images,
+      {
+        path: imagePath,
+        title: caption
+      }
+    ];
+
+    const newElementMap = { ...elementMap };
+    newElementMap[element.id] = {
+      ...element,
+      images: newImages
+    };
+    
+    setElementMap(newElementMap);
   };
 
   const handleRemoveImage = (index, element) => {
@@ -150,11 +170,14 @@ export default function Editor({
         elements.push(<ElementWrapper key={id} onUp={() => handleUpElement(id)} onDown={() => handleDownElement(id)} onDelete={() => handleDeleteElement(id)}>
           <ImageElementEditor
             images={element.images}
+            onAdd={(caption, imagePath) => handleAddImage(element, caption, imagePath)}
             onUp={index => handleUpImage(index, element)}
             onDown={index => handleDownImage(index, element)}
             onRemove={index => handleRemoveImage(index, element)}
           />
         </ElementWrapper>);
+        break;
+      default:
         break;
     };
   }

@@ -4,7 +4,7 @@ export async function authClient(endpoint, { headers, ...rest }) {
   const token = window.localStorage.getItem("token");
 
   if (!token) {
-    throw "Not authenticated";
+    throw new Error("Not authenticated");
   }
 
   const headersWithToken = {

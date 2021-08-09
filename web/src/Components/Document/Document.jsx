@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -76,7 +76,7 @@ export default function Document({ id }) {
     if (id) {
       dispatch(getDocument(id));
     }
-  }, [id]);
+  }, [id, dispatch]);
 
   const onSave = async elements => {
     if (!document) {
@@ -106,6 +106,8 @@ export default function Document({ id }) {
               elements.push(<div key={x.id}>
                 <ImageCarousel images={x.images} />
               </div>);
+              break;
+            default:
               break;
           }
         });
@@ -143,7 +145,7 @@ export default function Document({ id }) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>{document?.name}</h1>
               <br />
-              <p className={classes.title}>{document?.created} {(document?.created != document?.lastUpdated ? `(updated ${document?.lastUpdated})` : null)}</p>
+              <p className={classes.title}>{document?.created} {(document?.created !== document?.lastUpdated ? `(updated ${document?.lastUpdated})` : null)}</p>
             </GridItem>
           </GridContainer>
         </div>
@@ -174,7 +176,7 @@ export default function Document({ id }) {
             ) : (
               <div className="js-toc-content" style={{ padding: "70px 0 0 0" }}>
                 {isAuthenticated && (
-                  <GridContainer justify="flex-end">
+                  <GridContainer justifyContent="flex-end">
                     <Button onClick={() => setIsEditing(true)}>
                       <EditIcon />
                       Edit Content

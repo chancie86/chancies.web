@@ -52,8 +52,8 @@ export default function AddElementDivider({
             open={Boolean(anchorEl)}
             onClose={handleCloseMenu}
         >
-            <MenuItem onClick={handleAddHtml}>Html</MenuItem>
-            <MenuItem onClick={handleAddImages}>Image Carousel</MenuItem>
+            <MenuItem onClick={handleAddHtml}>Text</MenuItem>
+            <MenuItem onClick={handleAddImages}>Images</MenuItem>
         </Menu>
     </Divider>;
 }

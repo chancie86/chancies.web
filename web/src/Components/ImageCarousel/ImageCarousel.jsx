@@ -25,6 +25,7 @@ const getImages = (images, references) => {
     images.forEach(x => {
         if (references[x.path]) {
             result.push({
+                path: x.path,
                 url: references[x.path],
                 title: x.title
             });
@@ -34,7 +35,7 @@ const getImages = (images, references) => {
     return result;
 };
 
-export default function ImageViewer({ images }) {
+export default function ImageCarousel({ images }) {
     const classes = useStyles();
 
     const carouselSettings = {
@@ -52,25 +53,23 @@ export default function ImageViewer({ images }) {
 
     return <Grid container className={classes.container}>
         <Grid item xs={12} sm={12} md={9}>
-            <Card carousel>
+            <Card carousel style={{ backgroundColor: "black" }}>
                 <Carousel {...carouselSettings}>
-                    {imagesToRender.map(x => <>
+                    {imagesToRender.map(x => <div key={x.path}>
                         <img src={x.url} alt={x.title} className="slick-image" />
                         <div className="slick-caption">
                             <h4>{x.title}</h4>
                         </div>
-                    </>)}
+                    </div>)}
                 </Carousel>
             </Card>
         </Grid>
     </Grid>;
 };
 
-ImageViewer.propTypes = {
+ImageCarousel.propTypes = {
     images: PropTypes.arrayOf(PropTypes.shape({
-        reference: PropTypes.shape({
-            url: PropTypes.string.isRequired,
-        }).isRequired,
+        path: PropTypes.string.isRequired,
         title: PropTypes.string,
     })).isRequired,
 };
