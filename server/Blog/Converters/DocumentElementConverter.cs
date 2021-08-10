@@ -24,6 +24,8 @@ namespace chancies.Blog.Converters
                     return new HtmlDocumentElement();
                 case DocumentElementType.Images:
                     return new ImagesDocumentElement();
+                case DocumentElementType.Video:
+                    return new VideoDocumentElement();
                 default:
                     throw new InvalidDataException($"Type not specified");
             }

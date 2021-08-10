@@ -73,12 +73,10 @@ export default function ImageElementEditor({
 
 ImageElementEditor.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape({
-      reference: PropTypes.shape({
-          url: PropTypes.string.isRequired,
-      }).isRequired,
+      path: PropTypes.string.isRequired,
       title: PropTypes.string,
   })).isRequired,
   onUp: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired
 };

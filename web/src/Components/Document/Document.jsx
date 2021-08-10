@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 import parseHtml from 'html-react-parser';
+import ResponsiveEmbed from 'react-responsive-embed';
 
 // @material-ui/core components
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -105,6 +106,11 @@ export default function Document({ id }) {
             case "Images":
               elements.push(<div key={x.id}>
                 <ImageCarousel images={x.images} />
+              </div>);
+              break;
+            case "Video":
+              elements.push(<div key={x.id}>
+                <ResponsiveEmbed src={x.url} allowFullScreen />
               </div>);
               break;
             default:

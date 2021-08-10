@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -41,9 +42,18 @@ export default function AddElementDivider({
         handleCloseMenu();
     };
 
+    const handleAddVideo = () => {
+        onAdd(index, {
+            id: uuidv4(),
+            type: "Video",
+            url: ""
+        });
+        handleCloseMenu();
+    };
+
     return <Divider>
-        <IconButton size="small">
-            <AddIcon onClick={showMenuClick} fontSize="inherit" />
+        <IconButton onClick={showMenuClick} size="small">
+            <AddIcon fontSize="inherit" />
         </IconButton>
         <Menu
             id="simple-menu"
@@ -54,7 +64,12 @@ export default function AddElementDivider({
         >
             <MenuItem onClick={handleAddHtml}>Text</MenuItem>
             <MenuItem onClick={handleAddImages}>Images</MenuItem>
+            <MenuItem onClick={handleAddVideo}>Video</MenuItem>
         </Menu>
     </Divider>;
 }
 
+AddElementDivider.propTypes = {
+    index: PropTypes.number.isRequired,
+    onAdd: PropTypes.func.isRequired,
+};

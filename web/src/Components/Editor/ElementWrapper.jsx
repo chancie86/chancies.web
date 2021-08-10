@@ -25,7 +25,7 @@ export default function ElementWrapper({
   const classes = useStyles();
 
   return <Grid container direction="column">
-    <Grid container justify="flex-end">
+    <Grid container justifyContent="flex-end">
         <IconButton onClick={onUp}>
             <ArrowUpwardIcon />
         </IconButton>

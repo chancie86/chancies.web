@@ -10,6 +10,7 @@ import AddElementDivider from "./AddElementDivider";
 import ElementWrapper from "./ElementWrapper";
 import HtmlEditor from "./HtmlEditor";
 import ImageElementEditor from "./ImageElementEditor";
+import VideoElementEditor from "./VideoElementEditor";
 
 export default function Editor({
   documentElements,
@@ -27,8 +28,6 @@ export default function Editor({
       switch(element.type) {
         case "Html":
           element.content = elementRefs.current[elementId].getContent();
-          break;
-        case "Images":
           break;
         default:
           break;
@@ -152,11 +151,21 @@ export default function Editor({
     setElementMap(newElementMap);
   };
 
+  const handleVideoUrlChange = (element, url) => {
+    const newElementMap = { ...elementMap };
+    newElementMap[element.id] = {
+      ...element,
+      url
+    };
+    
+    setElementMap(newElementMap);
+  };
+
   const elements = [];
 
   for (let i = 0; i < elementIds.length; i++) {
     const id = elementIds[i]; 
-    elements.push(<AddElementDivider index={i} onAdd={handleAddElement} />);
+    elements.push(<AddElementDivider key={`divider-${i}`} index={i} onAdd={handleAddElement} />);
 
     const element = elementMap[id];
 
@@ -177,12 +186,17 @@ export default function Editor({
           />
         </ElementWrapper>);
         break;
+      case "Video":
+        elements.push(<ElementWrapper key={id} onUp={() => handleUpElement(id)} onDown={() => handleDownElement(id)} onDelete={() => handleDeleteElement(id)}>
+          <VideoElementEditor value={element.url} onChange={value => handleVideoUrlChange(element, value)} />
+        </ElementWrapper>);
+        break;
       default:
         break;
     };
   }
 
-  elements.push(<AddElementDivider index={elements.length} onAdd={handleAddElement} />);
+  elements.push(<AddElementDivider key={`divider-${elements.length}`} index={elements.length} onAdd={handleAddElement} />);
 
   return <>
     {elements}

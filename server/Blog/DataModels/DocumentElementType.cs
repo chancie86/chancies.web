@@ -7,6 +7,7 @@ namespace chancies.Blog.DataModels
     public enum DocumentElementType
     {
         Html,
-        Images
+        Images,
+        Video
     }
 }
