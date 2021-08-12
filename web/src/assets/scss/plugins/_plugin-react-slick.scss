@@ -48,9 +48,9 @@
     top: 5px;
   }
   .slick-image {
-    width: auto !important;
     display: inline-flex !important;
-    max-height: 30em;
+    height: auto;
+    width: 100%;
   }
 }
 

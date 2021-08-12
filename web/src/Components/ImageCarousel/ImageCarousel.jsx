@@ -13,9 +13,15 @@ const useStyles = makeStyles({
     container: {
         justifyContent: "center"
     },
-    imageContainer: {
-        display: "flex",
-        justifyContent: "center"
+    singleImageContainer: {
+        justifyContent: "center",
+        width: 'auto',
+    },
+    singleImage: {
+        maxWidth: "100%",
+        height: "auto",
+        borderRadius: "6px !important",
+        boxShadow: "0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
     }
 });
 
@@ -52,18 +58,24 @@ export default function ImageCarousel({ images }) {
     const imagesToRender = getImages(images, imageReferences);
 
     return <Grid container className={classes.container}>
-        <Grid item xs={12} sm={12} md={9}>
-            <Card carousel style={{ backgroundColor: "black" }}>
-                <Carousel {...carouselSettings}>
-                    {imagesToRender.map(x => <div key={x.path}>
-                        <img src={x.url} alt={x.title} className="slick-image" />
-                        <div className="slick-caption">
-                            <h4>{x.title}</h4>
-                        </div>
-                    </div>)}
-                </Carousel>
+        {imagesToRender.length === 1 ? (
+            <Card className={classes.singleImageContainer}>
+                <img src={imagesToRender[0].url} alt={imagesToRender[0].title} style={{ maxHeight: '30em' }} className={classes.singleImage} />
             </Card>
-        </Grid>
+        ) : (
+            <Grid item xs={12} sm={12} md={9}>
+                <Card carousel style={{ backgroundColor: "black" }}>
+                    <Carousel {...carouselSettings}>
+                        {imagesToRender.map(x => <div key={x.path}>
+                            <img src={x.url} alt={x.title} className="slick-image" />
+                            <div className="slick-caption">
+                                <h4>{x.title}</h4>
+                            </div>
+                        </div>)}
+                    </Carousel>
+                </Card>
+            </Grid>
+        )}
     </Grid>;
 };
 

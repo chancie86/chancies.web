@@ -104,7 +104,7 @@ export default function Document({ id }) {
               elements.push(<div key={x.id}>{parseHtml(x.content)}</div>);
               break;
             case "Images":
-              elements.push(<div key={x.id}>
+              elements.push(<div key={x.id} style={{ display: 'flex' }}>
                 <ImageCarousel images={x.images} />
               </div>);
               break;
