@@ -26,3 +26,9 @@ export async function listImages(documentId) {
 }
 
 export function createSection() {}
+
+export async function saveSection(sectionId, name) {
+  return await authClient.put(`section/${sectionId}`, {
+    name
+  })
+}

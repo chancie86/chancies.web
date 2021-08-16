@@ -5,15 +5,16 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Divider from "@material-ui/core/Divider";
+import Grow from "@material-ui/core/Grow";
+import Icon from "@material-ui/core/Icon";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Paper from "@material-ui/core/Paper";
-import Grow from "@material-ui/core/Grow";
-import Divider from "@material-ui/core/Divider";
-import Icon from "@material-ui/core/Icon";
 import Popper from "@material-ui/core/Popper";
+import { makeStyles } from "@material-ui/core/styles";
 
 // core components
 import Button from "Components/CustomButtons/Button.js";
@@ -45,7 +46,9 @@ export default function CustomDropdown(props) {
   };
   const classes = useStyles();
   const {
-    buttonText,
+    primaryButtonNode,
+    secondaryButtonNode,
+    secondaryButtonAction,
     buttonIcon,
     dropdownList,
     buttonProps,
@@ -83,17 +86,30 @@ export default function CustomDropdown(props) {
   return (
     <div>
       <div>
-        <Button
-          aria-label="Notifications"
-          aria-owns={anchorEl ? "menu-list" : null}
-          aria-haspopup="true"
-          {...buttonProps}
-          onClick={handleClick}
-        >
-          {icon}
-          {buttonText !== undefined ? buttonText : null}
-          {caret ? <b className={caretClasses} /> : null}
-        </Button>
+        <ButtonGroup color="outlined" variant="contained" aria-label="split button" disableElevation style={{
+          border: "white",
+          borderStyle: "solid",
+          margin: "0 0.3em"
+        }}>
+          {secondaryButtonNode && secondaryButtonAction && <Button size="small" onClick={secondaryButtonAction} style={{
+            margin: 0,
+            padding: 0,
+            backgroundColor: "transparent",
+          }}>
+            {secondaryButtonNode}
+          </Button>}
+          <Button
+            aria-label="Notifications"
+            aria-owns={anchorEl ? "menu-list" : null}
+            aria-haspopup="true"
+            {...buttonProps}
+            onClick={handleClick}
+          >
+            {icon}
+            {primaryButtonNode !== undefined ? primaryButtonNode : null}
+            {caret ? <b className={caretClasses} /> : null}
+          </Button>
+        </ButtonGroup>
       </div>
       <Popper
         open={Boolean(anchorEl)}
@@ -180,7 +196,8 @@ CustomDropdown.propTypes = {
     "danger",
     "rose"
   ]),
-  buttonText: PropTypes.node,
+  primaryButtonNode: PropTypes.node,
+  secondaryButtonNode: PropTypes.node,
   buttonIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   dropdownList: PropTypes.array,
   buttonProps: PropTypes.object,
