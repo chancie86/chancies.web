@@ -56,6 +56,11 @@ export default function sectionReducer(state = initialState, action) {
         }
       };
     }
+    case actionTypes.EDIT_SECTION_SUCCESS: {
+      const result = { ...state };
+      result.sections.byId[action.payload.id] = action.payload;
+      return result;
+    }
     default:
       return state;
   }

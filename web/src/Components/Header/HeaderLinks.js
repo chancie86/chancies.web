@@ -20,8 +20,7 @@ import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { useAuth } from "Hooks/useAuth";
 
-import { listSections, listDocuments } from "../../actions/headerActions";
-import { saveSection } from "../../actions/sectionActions";
+import { listSections, listDocuments, saveSection } from "../../actions/headerActions";
 import { showErrorStatus } from "../../actions/statusActions";
 import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
 import AuthButton from "../CustomButtons/AuthButton";
@@ -56,7 +55,7 @@ const SectionDropdown = ({ section, showEdit, showEditDialog }) => {
       noLiPadding
       primaryButtonNode={section.name}
       secondaryButtonNode={showEdit ? <EditIcon /> : null}
-      secondaryButtonAction={() => showEditDialog(section.name)}
+      secondaryButtonAction={() => showEditDialog(section.id, section.name)}
       buttonProps={{
         className: classes.navLink,
         color: "transparent"
@@ -80,8 +79,8 @@ export default function HeaderLinks() {
   const [editSectionId, setEditSectionId] = useState(null);
   const [editSectionTitleValue, setEditSectionTitleValue] = useState(null);
   
-  const onSaveSection = async () => {
-    await dispatch(saveSection(editSectionId, editSectionTitleValue));
+  const onSaveSection = async (newTitle) => {
+    await dispatch(saveSection(editSectionId, newTitle));
   }
 
   React.useEffect(() => {
@@ -145,6 +144,7 @@ export default function HeaderLinks() {
       isOpen={isEditSectionDialogOpen}
       title={editSectionTitleValue}
       onClose={() => setIsEditSectionDialogOpen(false)}
-      onSave={() => onSaveSection()} />
+      onSave={(x) => onSaveSection(x)}
+      title={editSectionTitleValue} />
   </>;
 }

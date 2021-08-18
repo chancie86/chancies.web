@@ -15,6 +15,11 @@ import {
 } from "assets/jss/material-kit-react.js";
 
 const customDropdownStyle = theme => ({
+  buttonGroup: {
+    border: "white",
+    borderStyle: "solid",
+    margin: "0 0.3em"
+  },
   popperClose: {
     pointerEvents: "none"
   },

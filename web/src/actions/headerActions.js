@@ -16,3 +16,18 @@ export const listDocuments = () => {
     return Promise.resolve();
   };
 };
+
+export const saveSection = (id, name) => {
+  return async (dispatch, getState) => {
+    dispatch({ type: actionTypes.EDIT_SECTION_REQUEST });
+    await api.saveSection(id, name);
+    dispatch({
+      type: actionTypes.EDIT_SECTION_SUCCESS,
+      payload: {
+        id,
+        name
+      }
+    });
+    return Promise.resolve()
+  };
+};

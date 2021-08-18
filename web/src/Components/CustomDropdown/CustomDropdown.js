@@ -44,6 +44,7 @@ export default function CustomDropdown(props) {
     }
     setAnchorEl(null);
   };
+
   const classes = useStyles();
   const {
     primaryButtonNode,
@@ -72,6 +73,7 @@ export default function CustomDropdown(props) {
     [classes.dropdownItemRTL]: rtlActive
   });
   let icon = null;
+
   switch (typeof buttonIcon) {
     case "object":
       icon = <props.buttonIcon className={classes.buttonIcon} />;
@@ -83,33 +85,34 @@ export default function CustomDropdown(props) {
       icon = null;
       break;
   }
+
+  const showSecondaryButton = secondaryButtonNode && secondaryButtonAction;
+  const PrimaryButton = () => <Button
+    aria-label="Notifications"
+    aria-owns={anchorEl ? "menu-list" : null}
+    aria-haspopup="true"
+    {...buttonProps}
+    onClick={handleClick}
+  >
+    {icon}
+    {primaryButtonNode !== undefined ? primaryButtonNode : null}
+    {caret ? <b className={caretClasses} /> : null}
+  </Button>;
+
   return (
     <div>
       <div>
-        <ButtonGroup color="outlined" variant="contained" aria-label="split button" disableElevation style={{
-          border: "white",
-          borderStyle: "solid",
-          margin: "0 0.3em"
-        }}>
-          {secondaryButtonNode && secondaryButtonAction && <Button size="small" onClick={secondaryButtonAction} style={{
+        {showSecondaryButton && <ButtonGroup color="outlined" variant="contained" aria-label="split button" disableElevation className={classes.buttonGroup}>
+          {<Button size="small" onClick={secondaryButtonAction} style={{
             margin: 0,
             padding: 0,
             backgroundColor: "transparent",
           }}>
             {secondaryButtonNode}
           </Button>}
-          <Button
-            aria-label="Notifications"
-            aria-owns={anchorEl ? "menu-list" : null}
-            aria-haspopup="true"
-            {...buttonProps}
-            onClick={handleClick}
-          >
-            {icon}
-            {primaryButtonNode !== undefined ? primaryButtonNode : null}
-            {caret ? <b className={caretClasses} /> : null}
-          </Button>
-        </ButtonGroup>
+          <PrimaryButton />
+        </ButtonGroup>}
+        {!showSecondaryButton && <PrimaryButton />}
       </div>
       <Popper
         open={Boolean(anchorEl)}
