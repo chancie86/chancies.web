@@ -14,12 +14,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import EditIcon from "@material-ui/icons/Edit";
+import TitleIcon from '@material-ui/icons/Title';
+import SubjectIcon from '@material-ui/icons/Subject';
 
 // styles for table of contents
 import tocbot from "tocbot/src/js";
 
 // core components
+import { showSuccessStatus } from "../../actions/statusActions";
 import { useAuth } from "../../Hooks/useAuth";
 import Button from "../../Components/CustomButtons/Button";
 import Editor from "../../Components/Editor";
@@ -30,13 +32,10 @@ import GridItem from "../../Components/Grid/GridItem.js";
 import HeaderLinks from "../../Components/Header/HeaderLinks.js";
 import ImageCarousel from "../../Components/ImageCarousel";
 import Parallax from "../../Components/Parallax/Parallax.js";
-
 import styles from "../../assets/jss/material-kit-react/views/basePageStyle.js";
-
 import { getDocument, saveDocument } from "../../actions/documentActions";
-
+import EditTitleDialog from "./EditTitleDialog";
 import config from "config.json";
-import { showSuccessStatus } from "actions/statusActions";
 
 const dashboardRoutes = [];
 
@@ -58,6 +57,10 @@ export default function Document({ id }) {
   const theme = useTheme();
   const mediaMatch = useMediaQuery(theme.breakpoints.up("lg"));
   const [isEditing, setIsEditing] = useState(false);
+  const [isEditTitleDialogOpen, setIsEditTitleDialogOpen] = useState(false);
+
+  const document = useSelector(state => state.document);
+  const isLoading = useSelector(state => state.document.isLoading);
 
   useEffect(() => {
     tocbot.init({
@@ -90,8 +93,14 @@ export default function Document({ id }) {
     setIsEditing(false);
   };
 
-  const document = useSelector(state => state.document);
-  const isLoading = useSelector(state => state.document.isLoading);
+  const onSaveTitle = async title => {
+    if (!document) {
+      return;
+    }
+
+    await dispatch(saveDocument(document.id, title, document.elements, document.section.id))
+    dispatch(showSuccessStatus("Saved"));
+  };
 
   const getContent = () => {
     let elements = [];
@@ -184,8 +193,12 @@ export default function Document({ id }) {
                 {isAuthenticated && (
                   <GridContainer justifyContent="flex-end">
                     <Button onClick={() => setIsEditing(true)}>
-                      <EditIcon />
+                      <SubjectIcon />
                       Edit Content
+                    </Button>
+                    <Button onClick={() => setIsEditTitleDialogOpen(true)}>
+                      <TitleIcon />
+                      Edit Title
                     </Button>
                   </GridContainer>
                 )}
@@ -197,6 +210,11 @@ export default function Document({ id }) {
         </GridItem>
       </div>
       <Footer />
+      <EditTitleDialog
+        isOpen={isEditTitleDialogOpen}
+        onClose={() => setIsEditTitleDialogOpen(false)}
+        onSave={(x) => onSaveTitle(x)}
+        title={document.name} />
     </div>
   );
 }

@@ -15,7 +15,7 @@ const getImageReferencesByPath = (payload) => {
   return result;
 };
 
-export default function sectionReducer(state = initialState, action) {
+export default function documentReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.FETCH_IMAGEREFERENCES_REQUEST:
     case actionTypes.FETCH_DOCUMENT_REQUEST:

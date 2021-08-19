@@ -142,7 +142,6 @@ export default function HeaderLinks() {
     </List>
     <EditSectionDialog
       isOpen={isEditSectionDialogOpen}
-      title={editSectionTitleValue}
       onClose={() => setIsEditSectionDialogOpen(false)}
       onSave={(x) => onSaveSection(x)}
       title={editSectionTitleValue} />
