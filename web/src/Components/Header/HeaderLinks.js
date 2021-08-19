@@ -12,6 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 // @material-ui/icons
+import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import HomeIcon from '@material-ui/icons/Home';
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
@@ -20,11 +21,12 @@ import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { useAuth } from "Hooks/useAuth";
 
-import { listSections, listDocuments, saveSection } from "../../actions/headerActions";
+import { createDocument, listSections, listDocuments, saveSection } from "../../actions/headerActions";
 import { showErrorStatus } from "../../actions/statusActions";
 import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
 import AuthButton from "../CustomButtons/AuthButton";
 import Button from "../CustomButtons/Button.js";
+import AddDocumentDialog from "./AddDocumentDialog";
 import EditSectionDialog from "./EditSectionDialog";
 
 const useStyles = makeStyles(styles);
@@ -47,25 +49,37 @@ const getSections = state => {
   return result;
 }
 
-const SectionDropdown = ({ section, showEdit, showEditDialog }) => {
+const SectionDropdown = ({ section, isAuthenticated, showSectionEditDialog, showAddDocumentDialog }) => {
   const classes = useStyles();
+
+  const dropDownList = section.documents.map(d =>
+    <Link key={d.id} to={`/document/${d.id}`} className={classes.dropdownLink}>
+      {d.name}
+    </Link>);
+
+  if (isAuthenticated) {
+    dropDownList.push(<Link key={`${section.id}-add`} onClick={() => showAddDocumentDialog(section.id)} className={classes.dropdownLink}>
+      <div style={{
+        display: "flex",
+        alignItems: "center"
+      }}>
+        <AddIcon fontSize="small" /> New Document
+      </div>
+    </Link>);
+  }
 
   return <ListItem key={section.id} className={classes.listItem}>
     <CustomDropdown
       noLiPadding
       primaryButtonNode={section.name}
-      secondaryButtonNode={showEdit ? <EditIcon /> : null}
-      secondaryButtonAction={() => showEditDialog(section.id, section.name)}
+      secondaryButtonNode={isAuthenticated ? <EditIcon /> : null}
+      secondaryButtonAction={() => showSectionEditDialog(section.id, section.name)}
       buttonProps={{
         className: classes.navLink,
         color: "transparent"
       }}
       buttonIcon={WorkOutlineIcon}
-      dropdownList={section.documents.map(d =>
-        <Link key={d.id} to={`/document/${d.id}`} className={classes.dropdownLink}>
-          {d.name}
-        </Link>)
-      }
+      dropdownList={dropDownList}
     />
   </ListItem>
 };
@@ -75,12 +89,18 @@ export default function HeaderLinks() {
   const classes = useStyles();
   const { isAuthenticated } = useAuth();
   const sections = useSelector(state => getSections(state));
+  const [isAddDocumentDialogOpen, setIsAddDocumentDialogOpen] = useState(false);
   const [isEditSectionDialogOpen, setIsEditSectionDialogOpen] = useState(false);
   const [editSectionId, setEditSectionId] = useState(null);
   const [editSectionTitleValue, setEditSectionTitleValue] = useState(null);
   
   const onSaveSection = async (newTitle) => {
     await dispatch(saveSection(editSectionId, newTitle));
+  }
+
+  const handleCreateDocument = async (title) => {
+    await dispatch(createDocument(title, editSectionId))
+    await dispatch(listDocuments());
   }
 
   React.useEffect(() => {
@@ -110,12 +130,17 @@ export default function HeaderLinks() {
       {sections.map(s => <SectionDropdown
         section={s}
         key={s.id}
-        showEdit={isAuthenticated}
-        showEditDialog={(id, title) => {
+        isAuthenticated={isAuthenticated}
+        showSectionEditDialog={(id, title) => {
           setEditSectionId(id)
           setEditSectionTitleValue(title);
           setIsEditSectionDialogOpen(true);
-      }} />)}
+        }}
+        showAddDocumentDialog={(sectionId) => {
+          setEditSectionId(sectionId);
+          setIsAddDocumentDialogOpen(true);
+        }}
+      />)}
       <ListItem className={classes.listItem}>
         <Button
           href="https://github.com/chancie86"
@@ -144,6 +169,12 @@ export default function HeaderLinks() {
       isOpen={isEditSectionDialogOpen}
       onClose={() => setIsEditSectionDialogOpen(false)}
       onSave={(x) => onSaveSection(x)}
-      title={editSectionTitleValue} />
+      title={editSectionTitleValue}
+    />
+    <AddDocumentDialog
+      isOpen={isAddDocumentDialogOpen}
+      onClose={() => setIsAddDocumentDialogOpen(false)}
+      onSave={(title) => handleCreateDocument(title)}
+    />
   </>;
 }

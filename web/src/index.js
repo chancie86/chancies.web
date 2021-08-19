@@ -30,6 +30,7 @@ ReactDOM.render(
           <Switch>
             <Route path="/" component={LandingPage} exact />
             <Route path="/3dPrinting" component={Printing} />
+            <Route path="/document/new" component={DocumentPage} />
             <Route path="/document/:documentId" component={DocumentPage} />
             <Route path="/Sandbox" component={Sandbox} />
           </Switch>

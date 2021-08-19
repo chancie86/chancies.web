@@ -31,3 +31,11 @@ export const saveSection = (id, name) => {
     return Promise.resolve()
   };
 };
+
+export const createDocument = (title, sectionId) => {
+  return async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CREATE_DOCUMENT_REQUEST });
+    await api.createDocument(title, sectionId);
+    dispatch({ type: actionTypes.CREATE_DOCUMENT_SUCCESS });
+  };
+};

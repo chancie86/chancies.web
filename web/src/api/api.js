@@ -21,11 +21,17 @@ export async function saveDocument(id, name, elements, sectionId) {
   });
 }
 
+export async function createDocument(title, sectionId) {
+  return await authClient.post(`document`, {
+    name: title,
+    elements: [],
+    sectionId: sectionId
+  });
+}
+
 export async function listImages(documentId) {
   return await client.get(`document/${documentId}/images`);
 }
-
-export function createSection() {}
 
 export async function saveSection(sectionId, name) {
   return await authClient.put(`section/${sectionId}`, {
