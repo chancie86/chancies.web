@@ -52,6 +52,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'personalwe-uks-app'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_fdea1d225674401cb6682a5373239dad }}
+        publish-profile: ${{ secrets.APPSERVICE_PUBLISH_PROFILE }}
         package: .
