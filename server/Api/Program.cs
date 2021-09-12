@@ -22,10 +22,6 @@ namespace chancies.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                //.ConfigureLogging(builder => {
-                //    builder.ClearProviders(); 
-                //    builder.AddConsole();
-                //})
                 .UseSerilog()
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder =>
