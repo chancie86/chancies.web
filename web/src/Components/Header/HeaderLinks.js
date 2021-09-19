@@ -1,56 +1,40 @@
 /*eslint-disable*/
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
+import history from '../../history';
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 // @material-ui/icons
 import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import HomeIcon from '@material-ui/icons/Home';
-import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 
 // core components
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { useAuth } from "Hooks/useAuth";
 
-import { createDocument, listSections, listDocuments, saveSection } from "../../actions/headerActions";
+import { createDocument, listSections, listDocuments } from "../../actions/headerActions";
 import { showErrorStatus } from "../../actions/statusActions";
-import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
+import { getSections } from "../../selectors/sectionSelectors";
 import AuthButton from "../CustomButtons/AuthButton";
 import Button from "../CustomButtons/Button.js";
 import AddDocumentDialog from "./AddDocumentDialog";
-import EditSectionDialog from "./EditSectionDialog";
 
 const useStyles = makeStyles(styles);
 
-const getSections = state => {
-  const sections = state.header.sections.ids.map(id => state.header.sections.byId[id]);
-  const result = [];
-  
-  sections.forEach(s => {
-    const docList = state.header.documents.bySectionId[s.id];
-    if (docList) {
-      result.push({
-        documents: docList,
-        id: s.id,
-        name: s.name
-      });
-    }
-  });
-
-  return result;
-}
-
-const SectionDropdown = ({ section, isAuthenticated, showSectionEditDialog, showAddDocumentDialog }) => {
+const SectionDropdown = ({ section, isAuthenticated, showAddDocumentDialog }) => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const dropDownList = section.documents.map(d =>
     <Link key={d.id} to={`/document/${d.id}`} className={classes.dropdownLink}>
@@ -58,29 +42,40 @@ const SectionDropdown = ({ section, isAuthenticated, showSectionEditDialog, show
     </Link>);
 
   if (isAuthenticated) {
-    dropDownList.push(<Link key={`${section.id}-add`} onClick={() => showAddDocumentDialog(section.id)} className={classes.dropdownLink}>
+    dropDownList.push(<div key={`${section.id}-add`} onClick={() => showAddDocumentDialog(section.id)} className={classes.dropdownLink}>
       <div style={{
         display: "flex",
         alignItems: "center"
       }}>
         <AddIcon fontSize="small" /> New Document
       </div>
-    </Link>);
+    </div>);
   }
 
   return <ListItem key={section.id} className={classes.listItem}>
-    <CustomDropdown
-      noLiPadding
-      primaryButtonNode={section.name}
-      secondaryButtonNode={isAuthenticated ? <EditIcon /> : null}
-      secondaryButtonAction={() => showSectionEditDialog(section.id, section.name)}
-      buttonProps={{
-        className: classes.navLink,
-        color: "transparent"
-      }}
-      buttonIcon={WorkOutlineIcon}
-      dropdownList={dropDownList}
-    />
+    <Button
+      className={classes.navLink}
+      color="transparent"
+      onClick={(event) => setAnchorEl(event.currentTarget)}
+    >
+      {section.name}
+      <ArrowDropDownIcon style={{ margin: 0 }} />
+    </Button>
+    <Menu
+      anchorEl={anchorEl}
+      keepMounted
+      open={Boolean(anchorEl)}
+      onClose={() => setAnchorEl(null)}
+    >
+      {dropDownList.map((prop, key) => (
+        <MenuItem
+          key={key}
+          onClick={() => setAnchorEl(null)}
+        >
+          {prop}
+        </MenuItem>
+      ))}
+    </Menu>
   </ListItem>
 };
 
@@ -88,22 +83,16 @@ export default function HeaderLinks() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { isAuthenticated } = useAuth();
-  const sections = useSelector(state => getSections(state));
-  const [isAddDocumentDialogOpen, setIsAddDocumentDialogOpen] = useState(false);
-  const [isEditSectionDialogOpen, setIsEditSectionDialogOpen] = useState(false);
+  const sections = useSelector(state => getSections(state), shallowEqual);
   const [editSectionId, setEditSectionId] = useState(null);
-  const [editSectionTitleValue, setEditSectionTitleValue] = useState(null);
-  
-  const onSaveSection = async (newTitle) => {
-    await dispatch(saveSection(editSectionId, newTitle));
-  }
+  const [isAddDocumentDialogOpen, setIsAddDocumentDialogOpen] = useState(false);
 
   const handleCreateDocument = async (title) => {
     await dispatch(createDocument(title, editSectionId))
     await dispatch(listDocuments());
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     const load = async () => {
       try {
         await dispatch(listSections());
@@ -124,18 +113,13 @@ export default function HeaderLinks() {
           color="transparent"
           className={classes.navLink}
         >
-          <HomeIcon />
+          <HomeIcon /> Home
         </Button>
       </ListItem>
       {sections.map(s => <SectionDropdown
         section={s}
         key={s.id}
         isAuthenticated={isAuthenticated}
-        showSectionEditDialog={(id, title) => {
-          setEditSectionId(id)
-          setEditSectionTitleValue(title);
-          setIsEditSectionDialogOpen(true);
-        }}
         showAddDocumentDialog={(sectionId) => {
           setEditSectionId(sectionId);
           setIsAddDocumentDialogOpen(true);
@@ -162,15 +146,19 @@ export default function HeaderLinks() {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
+        <Button
+          className={classes.navLink}
+          color="transparent"
+          onClick={() => history.push("/admin")}
+        >
+          Admin
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <AuthButton />
       </ListItem>
     </List>
-    <EditSectionDialog
-      isOpen={isEditSectionDialogOpen}
-      onClose={() => setIsEditSectionDialogOpen(false)}
-      onSave={(x) => onSaveSection(x)}
-      title={editSectionTitleValue}
-    />
+
     <AddDocumentDialog
       isOpen={isAddDocumentDialogOpen}
       onClose={() => setIsAddDocumentDialogOpen(false)}

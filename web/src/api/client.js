@@ -1,5 +1,7 @@
+import appConfig from "../config.json";
+
 export async function client(endpoint, { method, body, ...customConfig } = {}) {
-  const baseUrl = "https://localhost:5001";
+  const baseUrl = appConfig.apiUrl;
 
   const headers = { "Content-Type": "application/json" };
   const config = {

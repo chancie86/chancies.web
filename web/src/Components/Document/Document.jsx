@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 
-import parseHtml from 'html-react-parser';
-import ResponsiveEmbed from 'react-responsive-embed';
+import parseHtml from "html-react-parser";
+import ResponsiveEmbed from "react-responsive-embed";
 
 // @material-ui/core components
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import TitleIcon from '@material-ui/icons/Title';
-import SubjectIcon from '@material-ui/icons/Subject';
+import TitleIcon from "@material-ui/icons/Title";
+import SubjectIcon from "@material-ui/icons/Subject";
 
 // styles for table of contents
 import tocbot from "tocbot/src/js";
@@ -41,14 +41,14 @@ const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
 
-const getDate = (dateTime) => {
+const getDate = dateTime => {
   const date = new Date(dateTime);
   return date.toLocaleDateString("en-GB", {
     day: "numeric",
     month: "long",
     year: "numeric"
   });
-}
+};
 
 export default function Document({ id }) {
   const dispatch = useDispatch();
@@ -106,26 +106,29 @@ export default function Document({ id }) {
     let elements = [];
 
     if (document?.elements) {
-      document.elements.forEach(x => 
-        {
-          switch(x.type) {
-            case "Html":
-              elements.push(<div key={x.id}>{parseHtml(x.content)}</div>);
-              break;
-            case "Images":
-              elements.push(<div key={x.id} style={{ display: 'flex' }}>
+      document.elements.forEach(x => {
+        switch (x.type) {
+          case "Html":
+            elements.push(<div key={x.id}>{parseHtml(x.content)}</div>);
+            break;
+          case "Images":
+            elements.push(
+              <div key={x.id} style={{ display: "flex" }}>
                 <ImageCarousel images={x.images} />
-              </div>);
-              break;
-            case "Video":
-              elements.push(<div key={x.id}>
+              </div>
+            );
+            break;
+          case "Video":
+            elements.push(
+              <div key={x.id}>
                 <ResponsiveEmbed src={x.url} allowFullScreen />
-              </div>);
-              break;
-            default:
-              break;
-          }
-        });
+              </div>
+            );
+            break;
+          default:
+            break;
+        }
+      });
     }
 
     return elements;
@@ -177,8 +180,7 @@ export default function Document({ id }) {
               )}
             />
             {isLoading && <CircularProgress />}
-            {!isLoading && isEditing && document
-            ? (
+            {!isLoading && isEditing && document ? (
               <GridContainer>
                 <GridItem>
                   <Editor
@@ -213,8 +215,9 @@ export default function Document({ id }) {
       <EditTitleDialog
         isOpen={isEditTitleDialogOpen}
         onClose={() => setIsEditTitleDialogOpen(false)}
-        onSave={(x) => onSaveTitle(x)}
-        title={document.name} />
+        onSave={x => onSaveTitle(x)}
+        title={document.name}
+      />
     </div>
   );
 }

@@ -18,7 +18,7 @@ import Parallax from "../../Components/Parallax/Parallax.js";
 
 import styles from "../../assets/jss/material-kit-react/views/landingPage.js";
 
-import config from 'config.json';
+import config from "config.json";
 
 // Sections for this page
 import * as Sections from "./Sections";
@@ -50,8 +50,10 @@ export default function LandingPage(props) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Welcome.</h1>
               <h4 className={classes.subtitle}>
-                Hello, you've accidentally stumbled upon my personal website. You poor soul! Joking aside, you'll find some
-                general information about my professional self as well as links to social media for getting in touch.
+                Hello, you&apos;ve accidentally stumbled upon my personal
+                website. You poor soul! Joking aside, you&apos;ll find some
+                general information about my professional self as well as links
+                to social media for getting in touch.
               </h4>
               <br />
             </GridItem>

@@ -28,7 +28,7 @@ export const saveSection = (id, name) => {
         name
       }
     });
-    return Promise.resolve()
+    return Promise.resolve();
   };
 };
 

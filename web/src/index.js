@@ -12,8 +12,8 @@ import App from "./App";
 import "assets/scss/material-kit-react.scss?v=1.8.0";
 
 // pages for this product
+import Admin from "./Views/Admin";
 import LandingPage from "./Views/LandingPage";
-import Printing from "./Views/3dPrinting";
 import DocumentPage from "./Views/DocumentPage";
 import Sandbox from "./Views/Sandbox";
 
@@ -29,9 +29,9 @@ ReactDOM.render(
         <Router history={history}>
           <Switch>
             <Route path="/" component={LandingPage} exact />
-            <Route path="/3dPrinting" component={Printing} />
             <Route path="/document/new" component={DocumentPage} />
             <Route path="/document/:documentId" component={DocumentPage} />
+            <Route path="/admin" component={Admin} />
             <Route path="/Sandbox" component={Sandbox} />
           </Switch>
         </Router>
