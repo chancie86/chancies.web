@@ -22,17 +22,35 @@ jobs:
         dotnet-version: '3.1.301'
         include-prerelease: true
 
-    - name: Build with dotnet
+    - name: Build service
       run: dotnet build server/PersonalWeb.Server.sln --configuration Release 
 
     - name: dotnet publish
       run: dotnet publish server/PersonalWeb.Server.sln -c Release -o ${{env.DOTNET_ROOT}}/output
 
-    - name: Upload artifact for deployment job
+    - name: Set up yarn
+      working-directory: ./web
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+    - name: Build web app
+      working-directory: ./web
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: build
+
+    - name: Upload server artifact
       uses: actions/upload-artifact@v2
       with:
         name: personalweb-server
         path: ${{env.DOTNET_ROOT}}/output
+
+    - name: Upload web artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: personalweb-web
+        path: ./web/build
 
   deploy:
     runs-on: windows-latest
