@@ -29,16 +29,14 @@ jobs:
       run: dotnet publish server/PersonalWeb.Server.sln -c Release -o ${{env.DOTNET_ROOT}}/output
 
     - name: Set up yarn
-      working-directory: ./web
       - uses: borales/actions-yarn@v2.3.0
         with:
-          cmd: install
+          cmd: --cwd web install
 
     - name: Build web app
-      working-directory: ./web
       - uses: borales/actions-yarn@v2.3.0
         with:
-          cmd: build
+          cmd: --cwd web build
 
     - name: Upload server artifact
       uses: actions/upload-artifact@v2
