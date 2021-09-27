@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - personalweb-uks-app
+name: Build and deploy server to Azure App Service - personalweb-uks-app
 
 on:
   push:
@@ -28,27 +28,11 @@ jobs:
     - name: dotnet publish
       run: dotnet publish server/PersonalWeb.Server.sln -c Release -o ${{env.DOTNET_ROOT}}/output
 
-    - name: Set up yarn
-      uses: borales/actions-yarn@v2.3.0
-      with:
-        cmd: --cwd web install
-
-    - name: Build web app
-      uses: borales/actions-yarn@v2.3.0
-      with:
-        cmd: --cwd web build
-
     - name: Upload server artifact
       uses: actions/upload-artifact@v2
       with:
         name: personalweb-server
         path: ${{env.DOTNET_ROOT}}/output
-
-    - name: Upload web artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: personalweb-web
-        path: ./web/build
 
   deploy:
     runs-on: windows-latest
