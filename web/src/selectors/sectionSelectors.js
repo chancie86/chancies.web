@@ -21,3 +21,5 @@ export const getSections = state => {
 
   return result;
 };
+
+export const getIsLoading = state => state.header.sections.isLoading;

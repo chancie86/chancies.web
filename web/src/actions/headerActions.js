@@ -3,6 +3,7 @@ import * as actionTypes from "./headerActionTypes";
 
 export const listSections = () => {
   return async (dispatch, getState) => {
+    dispatch({ type: actionTypes.LIST_SECTIONS_REQUEST });
     const response = await api.listSections();
     dispatch({ type: actionTypes.LIST_SECTIONS_SUCCESS, payload: response });
     return Promise.resolve();

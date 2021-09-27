@@ -8,6 +8,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import history from '../../history';
 
 // @material-ui/core components
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -21,14 +22,14 @@ import HomeIcon from '@material-ui/icons/Home';
 
 // core components
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-import { useAuth } from "Hooks/useAuth";
-
+import { useAuth } from "../../Hooks/useAuth";
 import { createDocument, listSections, listDocuments } from "../../actions/headerActions";
 import { showErrorStatus } from "../../actions/statusActions";
-import { getSections } from "../../selectors/sectionSelectors";
+import { getIsLoading, getSections } from "../../selectors/sectionSelectors";
 import AuthButton from "../CustomButtons/AuthButton";
 import Button from "../CustomButtons/Button.js";
 import AddDocumentDialog from "./AddDocumentDialog";
+import HeaderButton from "./HeaderButton";
 
 const useStyles = makeStyles(styles);
 
@@ -53,14 +54,12 @@ const SectionDropdown = ({ section, isAuthenticated, showAddDocumentDialog }) =>
   }
 
   return <ListItem key={section.id} className={classes.listItem}>
-    <Button
-      className={classes.navLink}
-      color="transparent"
+    <HeaderButton
       onClick={(event) => setAnchorEl(event.currentTarget)}
     >
       {section.name}
       <ArrowDropDownIcon style={{ margin: 0 }} />
-    </Button>
+    </HeaderButton>
     <Menu
       anchorEl={anchorEl}
       keepMounted
@@ -84,6 +83,7 @@ export default function HeaderLinks() {
   const classes = useStyles();
   const { isAuthenticated } = useAuth();
   const sections = useSelector(state => getSections(state), shallowEqual);
+  const isLoading = useSelector(state => getIsLoading(state));
   const [editSectionId, setEditSectionId] = useState(null);
   const [isAddDocumentDialogOpen, setIsAddDocumentDialogOpen] = useState(false);
 
@@ -116,15 +116,21 @@ export default function HeaderLinks() {
           <HomeIcon /> Home
         </Button>
       </ListItem>
-      {sections.map(s => <SectionDropdown
-        section={s}
-        key={s.id}
-        isAuthenticated={isAuthenticated}
-        showAddDocumentDialog={(sectionId) => {
-          setEditSectionId(sectionId);
-          setIsAddDocumentDialogOpen(true);
-        }}
-      />)}
+      {isLoading
+        ? <ListItem className={classes.listItem}>
+            <CircularProgress />
+          </ListItem>
+        : sections.map(s => <SectionDropdown
+          section={s}
+          key={s.id}
+          isAuthenticated={isAuthenticated}
+          isLoading={isLoading}
+          showAddDocumentDialog={(sectionId) => {
+            setEditSectionId(sectionId);
+            setIsAddDocumentDialogOpen(true);
+          }}
+        />)
+      }
       <ListItem className={classes.listItem}>
         <Button
           href="https://github.com/chancie86"
@@ -145,15 +151,13 @@ export default function HeaderLinks() {
           <i className={classes.socialIcons + " fab fa-linkedin"} />
         </Button>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          className={classes.navLink}
-          color="transparent"
+      {isAuthenticated && (<ListItem className={classes.listItem}>
+        <HeaderButton
           onClick={() => history.push("/admin")}
         >
           Admin
-        </Button>
-      </ListItem>
+        </HeaderButton>
+      </ListItem>)}
       <ListItem className={classes.listItem}>
         <AuthButton />
       </ListItem>

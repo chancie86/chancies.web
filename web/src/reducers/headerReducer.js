@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/headerActionTypes";
 const initialState = {
   sections: {
     byId: {},
-    ids: []
+    ids: [],
+    isLoading: false,
   },
   documents: {
     byId: {},
@@ -14,6 +15,16 @@ const initialState = {
 
 export default function sectionReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.LIST_SECTIONS_REQUEST: {
+      return {
+        ...state,
+        sections: {
+          byId: {},
+          ids: [],
+          isLoading: true,
+        }
+      };
+    }
     case actionTypes.LIST_SECTIONS_SUCCESS: {
       const ids = [];
       const byId = {};
@@ -27,7 +38,8 @@ export default function sectionReducer(state = initialState, action) {
         ...state,
         sections: {
           byId,
-          ids
+          ids,
+          isLoading: false,
         }
       };
     }

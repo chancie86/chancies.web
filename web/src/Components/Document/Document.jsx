@@ -11,6 +11,7 @@ import ResponsiveEmbed from "react-responsive-embed";
 
 // @material-ui/core components
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -179,8 +180,10 @@ export default function Document({ id }) {
                 mediaMatch ? classes.tocVisible : ""
               )}
             />
-            {isLoading && <CircularProgress />}
-            {!isLoading && isEditing && document ? (
+            {isLoading && <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '10rem' }}>
+              <CircularProgress />
+            </Grid>}
+            {!isLoading && isEditing && document && (
               <GridContainer>
                 <GridItem>
                   <Editor
@@ -190,7 +193,8 @@ export default function Document({ id }) {
                   />
                 </GridItem>
               </GridContainer>
-            ) : (
+            )}
+            {!isLoading && !isEditing && document &&
               <div className="js-toc-content" style={{ padding: "70px 0 0 0" }}>
                 {isAuthenticated && (
                   <GridContainer justifyContent="flex-end">
@@ -206,7 +210,7 @@ export default function Document({ id }) {
                 )}
                 <GridItem>{getContent()}</GridItem>
               </div>
-            )}
+            }
           </GridItem>
           <GridItem sm={1} md={2} xl={3}></GridItem>
         </GridItem>
