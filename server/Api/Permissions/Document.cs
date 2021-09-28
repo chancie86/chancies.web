@@ -8,6 +8,7 @@ namespace chancies.Api.Permissions
         private const string EntityName = "document";
 
         public const string Create = EntityName + ":" + CreatePermission;
+        public const string Read = EntityName + ":" + ReadPermission;
         public const string Update = EntityName + ":" + UpdatePermission;
         public const string Delete = EntityName + ":" + DeletePermission;
     }

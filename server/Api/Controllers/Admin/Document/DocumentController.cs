@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using chancies.Api.Controllers.Admin.Document.Dto;
+using chancies.Api.Controllers.Public.Document.Dto;
+using chancies.Api.Controllers.Public.Document.Dto.Extensions;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,23 +26,31 @@ namespace chancies.Api.Controllers.Admin.Document
             _imageService = imageService;
         }
 
-        [Authorize(Permissions.Document.Create)]
+        [HttpGet("{id}")]
+        [Authorize(Permissions.Document.Read)]
+        public async Task<ActionResult<DocumentDto>> GetById(Guid id)
+        {
+            var document = await _documentService.Get(id);
+            return document.ToDocumentDto();
+        }
+
         [HttpPost]
+        [Authorize(Permissions.Document.Create)]
         public async Task<Guid> Create(CreateDocumentDto dto)
         {
             return await _documentService.Create(dto.ToModel());
         }
 
-        [Authorize(Permissions.Document.Delete)]
         [HttpDelete("{id}")]
+        [Authorize(Permissions.Document.Delete)]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _documentService.Delete(id);
             return base.NoContent();
         }
 
-        [Authorize(Permissions.Document.Update)]
         [HttpPut("{id}")]
+        [Authorize(Permissions.Document.Update)]
         public async Task<IActionResult> Update(Guid id, UpdateDocumentDto payload)
         {
             await _documentService.Update(new Blog.DataModels.Document

@@ -80,7 +80,7 @@ export default function Document({ id }) {
 
   React.useEffect(() => {
     if (id) {
-      dispatch(getDocument(id));
+      dispatch(getDocument(isAuthenticated, id));
     }
   }, [id, dispatch]);
 
@@ -91,7 +91,7 @@ export default function Document({ id }) {
 
     await dispatch(saveDocument(document.id, document.name, elements, document.section.id))
     dispatch(showSuccessStatus("Saved"));
-    await dispatch(getDocument(id));
+    await dispatch(getDocument(isAuthenticated, id));
     setIsEditing(false);
   };
 

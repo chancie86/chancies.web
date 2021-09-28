@@ -9,7 +9,11 @@ export async function listDocuments() {
   return await client.get("public/document");
 }
 
-export async function getDocument(id) {
+export async function getDocument(isAuthenticated, id) {
+  if (isAuthenticated) {
+    return await authClient.get(`admin/document/${id}`);
+  }
+
   return await client.get(`public/document/${id}`);
 }
 

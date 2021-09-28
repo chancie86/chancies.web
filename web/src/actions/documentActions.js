@@ -1,11 +1,11 @@
 import * as api from "../api";
 import * as actionTypes from "./documentActionTypes";
 
-export const getDocument = id => {
+export const getDocument = (isAuthenticated, id) => {
   return async (dispatch, getState) => {
     dispatch({ type: actionTypes.FETCH_DOCUMENT_REQUEST });
     const responses = await Promise.all([
-      api.getDocument(id),
+      api.getDocument(isAuthenticated, id),
       api.listImages(id)
     ]);
     
