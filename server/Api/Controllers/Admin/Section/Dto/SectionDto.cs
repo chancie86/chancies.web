@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace chancies.Api.Controllers.Section.Dto
+namespace chancies.Api.Controllers.Admin.Section.Dto
 {
     public class SectionDto
     {

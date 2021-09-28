@@ -37,10 +37,12 @@ const SectionDropdown = ({ section, isAuthenticated, showAddDocumentDialog }) =>
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const dropDownList = section.documents.map(d =>
-    <Link key={d.id} to={`/document/${d.id}`} className={classes.dropdownLink}>
-      {d.name}
-    </Link>);
+  const dropDownList = section.documents
+    .filter(d => isAuthenticated || d.published)
+    .map(d =>
+      <Link key={d.id} to={`/document/${d.id}`} className={classes.dropdownLink}>
+        {d.name}
+      </Link>);
 
   if (isAuthenticated) {
     dropDownList.push(<div key={`${section.id}-add`} onClick={() => showAddDocumentDialog(section.id)} className={classes.dropdownLink}>
@@ -117,8 +119,8 @@ export default function HeaderLinks() {
         </Button>
       </ListItem>
       {isLoading
-        ? <ListItem className={classes.listItem}>
-            <CircularProgress />
+        ? <ListItem className={classes.listItem} style={{ padding: '15px' }}>
+            <CircularProgress style={{ color: 'white' }} size="1rem" />
           </ListItem>
         : sections.map(s => <SectionDropdown
           section={s}

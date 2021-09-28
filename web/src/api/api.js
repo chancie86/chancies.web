@@ -2,27 +2,31 @@ import { client } from "./client";
 import { authClient } from "./authClient";
 
 export async function listSections() {
-  return await client.get("section");
+  return await client.get("public/section");
 }
 
 export async function listDocuments() {
-  return await client.get("document");
+  return await client.get("public/document");
 }
 
 export async function getDocument(id) {
-  return await client.get(`document/${id}`);
+  return await client.get(`public/document/${id}`);
 }
 
 export async function saveDocument(id, name, elements, sectionId) {
-  return await authClient.put(`document/${id}`, {
+  return await authClient.put(`admin/document/${id}`, {
     name,
     elements,
     sectionId
   });
 }
 
+export async function publishDocument(id, publish) {
+  return await authClient.put(`admin/document/${id}/publish/?publish=${!!publish}`);
+}
+
 export async function createDocument(title, sectionId) {
-  return await authClient.post(`document`, {
+  return await authClient.post(`admin/document`, {
     name: title,
     elements: [],
     sectionId: sectionId
@@ -30,11 +34,11 @@ export async function createDocument(title, sectionId) {
 }
 
 export async function listImages(documentId) {
-  return await client.get(`document/${documentId}/images`);
+  return await client.get(`public/document/${documentId}/images`);
 }
 
 export async function saveSection(sectionId, name) {
-  return await authClient.put(`section/${sectionId}`, {
+  return await authClient.put(`admin/section/${sectionId}`, {
     name
   })
 }

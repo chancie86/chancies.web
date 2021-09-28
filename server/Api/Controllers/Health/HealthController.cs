@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using chancies.Api.Controllers.Document.Dto;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chancies.Api.Controllers.Health
@@ -15,7 +13,7 @@ namespace chancies.Api.Controllers.Health
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<DocumentListItemDto>>> List()
+        public async Task<IActionResult> Get()
         {
             return Ok();
         }

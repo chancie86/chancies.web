@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace chancies.Api.Controllers.Document.Dto
+namespace chancies.Api.Controllers.Public.Document.Dto
 {
     public class DocumentListItemDto
     {

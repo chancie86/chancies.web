@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using chancies.Api.Controllers.Document.Dto;
-using chancies.Api.Controllers.Document.Dto.Extensions;
-using chancies.Blog.DataModels;
+using chancies.Api.Controllers.Admin.Document.Dto;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace chancies.Api.Controllers.Document
+namespace chancies.Api.Controllers.Admin.Document
 {
     [ApiController]
-    [Route("document")]
+    [Authorize]
+    [Route("admin/document")]
     public class DocumentController
         : ControllerBase
     {
@@ -24,18 +22,6 @@ namespace chancies.Api.Controllers.Document
         {
             _documentService = documentService;
             _imageService = imageService;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IList<DocumentListItemDto>>> List()
-        {
-            return (await _documentService.List()).Select(s => s.ToDocumentListItemDto()).ToArray();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DocumentDto>> GetById(Guid id)
-        {
-            return (await _documentService.Get(id)).ToDocumentDto();
         }
 
         [Authorize(Permissions.Document.Create)]
@@ -69,6 +55,7 @@ namespace chancies.Api.Controllers.Document
         }
 
         [HttpPost("{id}/images")]
+        [Authorize(Permissions.Document.Update)]
         public async Task<IActionResult> UploadImage(Guid id, ICollection<IFormFile> files)
         {
             if (files.Count == 0)
@@ -88,14 +75,8 @@ namespace chancies.Api.Controllers.Document
             return Ok();
         }
 
-        [HttpGet("{id}/images")]
-        public async Task<IList<ImageReference>> ListImages(Guid id)
-        {
-            var result = await _imageService.List(id);
-            return result;
-        }
-
         [HttpDelete("{id}/images")]
+        [Authorize(Permissions.Document.Delete)]
         public async Task<IActionResult> Delete(Guid id, string filePath)
         {
             await _imageService.Delete(id, filePath);
@@ -103,6 +84,7 @@ namespace chancies.Api.Controllers.Document
         }
 
         [HttpPut("{id}/publish/")]
+        [Authorize(Permissions.Document.Update)]
         public async Task<IActionResult> Publish(Guid id, bool publish)
         {
             await _documentService.Publish(id, publish);

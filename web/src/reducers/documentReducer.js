@@ -37,6 +37,12 @@ export default function documentReducer(state = initialState, action) {
         isLoading: false
       };
     }
+    case actionTypes.PUBLISH_DOCUMENT_SUCCESS: {
+      return {
+        ...state,
+        published: action.payload.published
+      }
+    }
     case actionTypes.FETCH_IMAGEREFERENCES_SUCCESS: {
       return {
         ...state,

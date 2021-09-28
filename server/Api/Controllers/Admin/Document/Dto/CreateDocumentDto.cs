@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using chancies.Blog.DataModels;
 
-namespace chancies.Api.Controllers.Document.Dto
+namespace chancies.Api.Controllers.Admin.Document.Dto
 {
     public class CreateDocumentDto
     {

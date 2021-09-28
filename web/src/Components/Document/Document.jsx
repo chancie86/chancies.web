@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import PublishIcon from '@material-ui/icons/Publish';
 import TitleIcon from "@material-ui/icons/Title";
 import SubjectIcon from "@material-ui/icons/Subject";
 
@@ -34,7 +35,7 @@ import HeaderLinks from "../../Components/Header/HeaderLinks.js";
 import ImageCarousel from "../../Components/ImageCarousel";
 import Parallax from "../../Components/Parallax/Parallax.js";
 import styles from "../../assets/jss/material-kit-react/views/basePageStyle.js";
-import { getDocument, saveDocument } from "../../actions/documentActions";
+import { getDocument, saveDocument, publishDocument } from "../../actions/documentActions";
 import EditTitleDialog from "./EditTitleDialog";
 import config from "config.json";
 
@@ -135,6 +136,10 @@ export default function Document({ id }) {
     return elements;
   };
 
+  const handlePublish = (id) => {
+    dispatch(publishDocument(id, !document.published));
+  };
+
   if (document?.created) {
     const date = new Date(document.created);
     document.created = getDate(date);
@@ -205,6 +210,10 @@ export default function Document({ id }) {
                     <Button onClick={() => setIsEditTitleDialogOpen(true)}>
                       <TitleIcon />
                       Edit Title
+                    </Button>
+                    <Button onClick={() => handlePublish(document.id)}>
+                      <PublishIcon />
+                      {document.published ? "Unpublish" : "Publish"}
                     </Button>
                   </GridContainer>
                 )}

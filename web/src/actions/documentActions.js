@@ -31,3 +31,16 @@ export const saveDocument = (id, name, elements, sectionId) => {
     return Promise.resolve()
   };
 };
+
+export const publishDocument = (id, publish) => {
+  return async (dispatch) => {
+    await api.publishDocument(id, publish);
+    dispatch({
+      type: actionTypes.PUBLISH_DOCUMENT_SUCCESS,
+      payload: {
+        id,
+        published: publish
+      }
+    });
+  };
+}

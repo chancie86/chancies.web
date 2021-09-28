@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using chancies.Api.Controllers.Section.Dto;
+using chancies.Api.Controllers.Public.Section.Dto;
 using chancies.Blog.DataModels;
 
-namespace chancies.Api.Controllers.Document.Dto
+namespace chancies.Api.Controllers.Public.Document.Dto
 {
     public class DocumentDto
     {

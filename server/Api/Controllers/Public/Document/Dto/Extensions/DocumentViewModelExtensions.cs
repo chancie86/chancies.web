@@ -1,8 +1,8 @@
-﻿using chancies.Api.Controllers.Section.Dto;
+﻿using chancies.Api.Controllers.Public.Section.Dto;
 using chancies.Blog.DataModels;
 using chancies.Blog.ViewModels;
 
-namespace chancies.Api.Controllers.Document.Dto.Extensions
+namespace chancies.Api.Controllers.Public.Document.Dto.Extensions
 {
     public static class DocumentViewModelExtensions
     {

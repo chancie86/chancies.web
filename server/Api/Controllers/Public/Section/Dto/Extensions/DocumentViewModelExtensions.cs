@@ -1,6 +1,6 @@
 ﻿using chancies.Blog.DataModels;
 
-namespace chancies.Api.Controllers.Section.Dto.Extensions
+namespace chancies.Api.Controllers.Public.Section.Dto.Extensions
 {
     public static class SectionExtensions
     {

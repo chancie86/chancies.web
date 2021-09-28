@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using chancies.Api.Controllers.Section.Dto;
-using chancies.Api.Controllers.Section.Dto.Extensions;
+using chancies.Api.Controllers.Admin.Section.Dto;
 using chancies.Blog.DataModels;
 using chancies.Blog.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace chancies.Api.Controllers.Section
+namespace chancies.Api.Controllers.Admin.Section
 {
+    [Authorize]
     [ApiController]
-    [Route("section")]
+    [Route("admin/section")]
     public class SectionController
         : ControllerBase
     {
@@ -21,18 +19,6 @@ namespace chancies.Api.Controllers.Section
         public SectionController(ISectionService sectionService)
         {
             _sectionService = sectionService;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IList<SectionDto>>> List()
-        {
-            return (await _sectionService.List()).Select(s => s.ToDto()).ToList();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SectionDto>> GetById(Guid id)
-        {
-            return (await _sectionService.Get(id)).ToDto();
         }
 
         [Authorize(Permissions.Section.Create)]
