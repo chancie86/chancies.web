@@ -15,7 +15,7 @@ namespace chancies.Persistence.Cosmos.Repository
 
         public override async Task<IList<DocumentListItem>> List()
         {
-            return await ListInternal("sectionId");
+            return await ListInternal("sectionId", "published");
         }
     }
 }

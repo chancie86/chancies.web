@@ -13,5 +13,6 @@ namespace chancies.Api.Controllers.Document.Dto
         public DateTime LastUpdated { get; set; }
         public IList<DocumentElement> Elements { get; set; }
         public SectionDto Section { get; set; }
+        public bool Published { get; set; }
     }
 }

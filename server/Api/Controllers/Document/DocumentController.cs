@@ -65,7 +65,7 @@ namespace chancies.Api.Controllers.Document
                 SectionId = payload.SectionId
             });
 
-            return base.NoContent();
+            return NoContent();
         }
 
         [HttpPost("{id}/images")]
@@ -96,9 +96,17 @@ namespace chancies.Api.Controllers.Document
         }
 
         [HttpDelete("{id}/images")]
-        public async Task Delete(Guid id, string filePath)
+        public async Task<IActionResult> Delete(Guid id, string filePath)
         {
             await _imageService.Delete(id, filePath);
+            return Ok();
+        }
+
+        [HttpPut("{id}/publish/")]
+        public async Task<IActionResult> Publish(Guid id, bool publish)
+        {
+            await _documentService.Publish(id, publish);
+            return NoContent();
         }
     }
 }

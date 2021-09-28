@@ -24,6 +24,8 @@ namespace chancies.Blog.ViewModels
 
         public Section Section { get; }
 
+        public bool Published => Document.Published;
+
         private Document Document { get; }
     }
 }

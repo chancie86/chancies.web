@@ -19,7 +19,8 @@ namespace chancies.Api.Controllers.Document.Dto.Extensions
                 {
                     Id = self.Section.Id,
                     Name = self.Section.Name,
-                }
+                },
+                Published = self.Published
             };
         }
 
@@ -29,7 +30,8 @@ namespace chancies.Api.Controllers.Document.Dto.Extensions
             {
                 Id = self.Id,
                 Name = self.Name,
-                SectionId = self.SectionId
+                SectionId = self.SectionId,
+                Published = self.Published
             };
         }
     }

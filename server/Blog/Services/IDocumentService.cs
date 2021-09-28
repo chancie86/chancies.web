@@ -12,5 +12,6 @@ namespace chancies.Blog.Services
         Task<IList<DocumentListItem>> List();
         Task Delete(DocumentId id);
         Task Update(Document document);
+        Task Publish(DocumentId id, bool publish);
     }
 }

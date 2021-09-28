@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace chancies.Blog.DataModels
 {
@@ -13,5 +14,8 @@ namespace chancies.Blog.DataModels
         public DateTime LastUpdated { get; set; }
 
         public IList<DocumentElement> Elements { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool Published { get; set; }
     }
 }

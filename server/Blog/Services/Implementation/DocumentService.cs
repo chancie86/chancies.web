@@ -59,6 +59,14 @@ namespace chancies.Blog.Services.Implementation
             var doc = await _documentRepository.Read(document.Id);
             document.Created = doc.Created;
             document.LastUpdated = DateTime.UtcNow;
+            document.Published = doc.Published;
+            await _documentRepository.Update(document);
+        }
+
+        public async Task Publish(DocumentId id, bool publish)
+        {
+            var document = await _documentRepository.Read(id);
+            document.Published = publish;
             await _documentRepository.Update(document);
         }
 
