@@ -82,7 +82,7 @@ export default function Document({ id }) {
     if (id) {
       dispatch(getDocument(isAuthenticated, id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, isAuthenticated]);
 
   const onSave = async elements => {
     if (!document) {

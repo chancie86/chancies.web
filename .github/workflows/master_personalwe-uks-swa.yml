@@ -1,4 +1,4 @@
-name: Build and deploy web app to Azure Static Web App - personalweb-uks-swa
+name: Build and deploy web UI - personalweb-uks-swa
 
 on:
   push:
