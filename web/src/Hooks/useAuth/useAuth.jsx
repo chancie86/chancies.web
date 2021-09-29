@@ -19,6 +19,6 @@ export default function useAuth() {
   return {
     isAuthenticated,
     loginWithRedirect,
-    logout,
+    logout: () => logout({ returnTo: window.location.origin }),
   };
 }
