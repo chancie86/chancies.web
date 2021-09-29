@@ -1,14 +1,11 @@
-import * as api from "../api";
-import * as actionTypes from "./documentActionTypes";
+import * as api from '../api';
+import * as actionTypes from './documentActionTypes';
 
-export const getDocument = (isAuthenticated, id) => {
-  return async (dispatch, getState) => {
+export const getDocument = (id) => {
+  return async (dispatch) => {
     dispatch({ type: actionTypes.FETCH_DOCUMENT_REQUEST });
-    const responses = await Promise.all([
-      api.getDocument(isAuthenticated, id),
-      api.listImages(id)
-    ]);
-    
+    const responses = await Promise.all([api.getDocument(id), api.listImages(id)]);
+
     const documentResponse = responses[0];
     const imageResponses = responses[1];
 
@@ -19,16 +16,16 @@ export const getDocument = (isAuthenticated, id) => {
 };
 
 export const saveDocument = (id, name, elements, sectionId) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     await api.saveDocument(id, name, elements, sectionId);
     dispatch({
       type: actionTypes.SAVE_DOCUMENT_SUCCESS,
       payload: {
         name,
-        elements
-      }
+        elements,
+      },
     });
-    return Promise.resolve()
+    return Promise.resolve();
   };
 };
 
@@ -39,8 +36,8 @@ export const publishDocument = (id, publish) => {
       type: actionTypes.PUBLISH_DOCUMENT_SUCCESS,
       payload: {
         id,
-        published: publish
-      }
+        published: publish,
+      },
     });
   };
-}
+};

@@ -1,16 +1,18 @@
-import { client } from "./client";
-import { authClient } from "./authClient";
+import { client } from './client';
+import { authClient } from './authClient';
 
 export async function listSections() {
-  return await client.get("public/section");
+  return await client.get('public/section');
 }
 
 export async function listDocuments() {
-  return await client.get("public/document");
+  return await client.get('public/document');
 }
 
-export async function getDocument(isAuthenticated, id) {
+export async function getDocument(id) {
+  const isAuthenticated = !!window.localStorage.getItem('token');
   if (isAuthenticated) {
+    // Admin getter allows us to retrieve unpublished documents
     return await authClient.get(`admin/document/${id}`);
   }
 
@@ -21,7 +23,7 @@ export async function saveDocument(id, name, elements, sectionId) {
   return await authClient.put(`admin/document/${id}`, {
     name,
     elements,
-    sectionId
+    sectionId,
   });
 }
 
@@ -33,7 +35,7 @@ export async function createDocument(title, sectionId) {
   return await authClient.post(`admin/document`, {
     name: title,
     elements: [],
-    sectionId: sectionId
+    sectionId: sectionId,
   });
 }
 
@@ -43,6 +45,6 @@ export async function listImages(documentId) {
 
 export async function saveSection(sectionId, name) {
   return await authClient.put(`admin/section/${sectionId}`, {
-    name
-  })
+    name,
+  });
 }
