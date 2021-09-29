@@ -1,16 +1,16 @@
-import appConfig from "../config.json";
+import appConfig from '../config.json';
 
 export async function client(endpoint, { method, body, ...customConfig } = {}) {
   const baseUrl = appConfig.apiUrl;
 
-  const headers = { "Content-Type": "application/json" };
+  const headers = { 'Content-Type': 'application/json' };
   const config = {
     method: method,
     ...customConfig,
     headers: {
       ...headers,
-      ...customConfig.headers
-    }
+      ...customConfig.headers,
+    },
   };
 
   if (body) {
@@ -21,7 +21,7 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
   try {
     const response = await window.fetch(`${baseUrl}/${endpoint}`, config);
     if (response.ok) {
-      switch(response.status) {
+      switch (response.status) {
         case 200:
         case 500:
           data = await response.json();
@@ -37,27 +37,27 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
   }
 }
 
-client.get = function(endpoint) {
+client.get = function (endpoint) {
   const config = {
-    method: "GET"
+    method: 'GET',
   };
 
   return client(endpoint, config);
 };
 
-client.post = function(endpoint, body) {
+client.post = function (endpoint, body) {
   const config = {
-    method: "POST",
-    body: body
+    method: 'POST',
+    body: body,
   };
 
   return client(endpoint, config);
 };
 
-client.put = function(endpoint, body) {
+client.put = function (endpoint, body) {
   const config = {
-    method: "PUT",
-    body: body
+    method: 'PUT',
+    body: body,
   };
 
   return client(endpoint, config);

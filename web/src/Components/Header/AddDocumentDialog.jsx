@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import DialogContentText from "@material-ui/core/DialogContentText";
-import TextField from "@material-ui/core/TextField";
+import DialogContentText from '@material-ui/core/DialogContentText';
+import TextField from '@material-ui/core/TextField';
 
-import Dialog from "../Dialog";
+import Dialog from '../Dialog';
 
 export default function AddDocumentDialog({ isOpen, onClose, onSave }) {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
 
   const buttons = [
     {
-      color: "primary",
-      content: "Create",
-      key: "create",
+      color: 'primary',
+      content: 'Create',
+      key: 'create',
       onClick: () => {
         onSave(title);
         onClose();
-      }
+      },
     },
     {
-      color: "secondary",
-      content: "Cancel",
-      key: "close",
-      onClick: onClose
-    }
+      color: 'secondary',
+      content: 'Cancel',
+      key: 'close',
+      onClick: onClose,
+    },
   ];
 
   return (
@@ -36,7 +36,7 @@ export default function AddDocumentDialog({ isOpen, onClose, onSave }) {
         id="title"
         label="Title"
         fullWidth
-        onChange={event => setTitle(event.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
         value={title}
       />
     </Dialog>
@@ -46,5 +46,5 @@ export default function AddDocumentDialog({ isOpen, onClose, onSave }) {
 AddDocumentDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired
+  onSave: PropTypes.func.isRequired,
 };

@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,40 +11,37 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles({
-    deleteButton: {
-        color: "red"
-    }
+  deleteButton: {
+    color: 'red',
+  },
 });
-  
-export default function ElementWrapper({
-  children,
-  onUp,
-  onDown,
-  onDelete
-}) {  
+
+export default function ElementWrapper({ children, onUp, onDown, onDelete }) {
   const classes = useStyles();
 
-  return <Grid container direction="column">
-    <Grid container justifyContent="flex-end">
+  return (
+    <Grid container direction="column">
+      <Grid container justifyContent="flex-end">
         <IconButton onClick={onUp}>
-            <ArrowUpwardIcon />
+          <ArrowUpwardIcon />
         </IconButton>
         <IconButton onClick={onDown}>
-            <ArrowDownwardIcon />
+          <ArrowDownwardIcon />
         </IconButton>
         <IconButton onClick={onDelete} className={classes.deleteButton}>
-            <DeleteForeverIcon />
+          <DeleteForeverIcon />
         </IconButton>
-    </Grid>
-    <Grid item style={{ width: "100%" }}>
+      </Grid>
+      <Grid item style={{ width: '100%' }}>
         {children}
+      </Grid>
     </Grid>
-  </Grid>;
+  );
 }
 
 ElementWrapper.propTypes = {
-    children: PropTypes.node.isRequired,
-    onUp: PropTypes.func.isRequired,
-    onDown: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+  children: PropTypes.node.isRequired,
+  onUp: PropTypes.func.isRequired,
+  onDown: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };

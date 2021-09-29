@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function EditSectionDialog({ isOpen, onClose, onSave, title }) {
-  const [newTitle, setNewTitle] = useState("");
+  const [newTitle, setNewTitle] = useState('');
 
   const handleSave = () => {
     if (newTitle) {
@@ -30,16 +30,14 @@ export default function EditSectionDialog({ isOpen, onClose, onSave, title }) {
     <Dialog open={isOpen} onClose={onClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Edit Section Name</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Enter the new name for this section.
-        </DialogContentText>
+        <DialogContentText>Enter the new name for this section.</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           id="name"
           label="Name"
           fullWidth
-          onChange={event => setNewTitle(event.target.value)}
+          onChange={(event) => setNewTitle(event.target.value)}
           value={newTitle}
         />
       </DialogContent>
@@ -59,5 +57,5 @@ EditSectionDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };

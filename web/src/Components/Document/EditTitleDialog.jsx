@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,13 +10,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function EditTitleDialog({
-  isOpen,
-  onClose,
-  onSave,
-  title
-}) {
-  const [newTitle, setNewTitle] = useState("");
+export default function EditTitleDialog({ isOpen, onClose, onSave, title }) {
+  const [newTitle, setNewTitle] = useState('');
 
   const handleSave = () => {
     if (newTitle) {
@@ -31,34 +26,34 @@ export default function EditTitleDialog({
     }
   }, [title]);
 
-  return <Dialog open={isOpen} onClose={onClose} aria-labelledby="form-dialog-title">
-    <DialogTitle id="form-dialog-title">Edit Document Name</DialogTitle>
-    <DialogContent>
-      <DialogContentText>
-        Enter the new name for this document.
-      </DialogContentText>
-      <TextField
-        autoFocus
-        margin="dense"
-        id="name"
-        label="Name"
-        fullWidth
-        onChange={(event) => setNewTitle(event.target.value)}
-        value={newTitle}
-      />
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={onClose} color="secondary">
-        Cancel
-      </Button>
-      <Button onClick={handleSave} color="primary">
-        Save
-      </Button>
-    </DialogActions>
-  </Dialog>;    
+  return (
+    <Dialog open={isOpen} onClose={onClose} aria-labelledby="form-dialog-title">
+      <DialogTitle id="form-dialog-title">Edit Document Name</DialogTitle>
+      <DialogContent>
+        <DialogContentText>Enter the new name for this document.</DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Name"
+          fullWidth
+          onChange={(event) => setNewTitle(event.target.value)}
+          value={newTitle}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="secondary">
+          Cancel
+        </Button>
+        <Button onClick={handleSave} color="primary">
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
 
-EditTitleDialog.props = {
+EditTitleDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

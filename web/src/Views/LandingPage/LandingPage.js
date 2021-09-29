@@ -1,27 +1,27 @@
-import React from "react";
+import React from 'react';
 
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 // @material-ui/icons
 
 // core components
-import Header from "../../Components/Header/Header.js";
-import Footer from "../../Components/Footer/Footer.js";
-import GridContainer from "../../Components/Grid/GridContainer.js";
-import GridItem from "../../Components/Grid/GridItem.js";
-import HeaderLinks from "../../Components/Header/HeaderLinks.js";
-import Parallax from "../../Components/Parallax/Parallax.js";
+import Header from '../../Components/Header/Header.js';
+import Footer from '../../Components/Footer/Footer.js';
+import GridContainer from '../../Components/Grid/GridContainer.js';
+import GridItem from '../../Components/Grid/GridItem.js';
+import HeaderLinks from '../../Components/Header/HeaderLinks.js';
+import Parallax from '../../Components/Parallax/Parallax.js';
 
-import styles from "../../assets/jss/material-kit-react/views/landingPage.js";
+import styles from '../../assets/jss/material-kit-react/views/landingPage.js';
 
-import config from "config.json";
+import config from 'config.json';
 
 // Sections for this page
-import * as Sections from "./Sections";
+import * as Sections from './Sections';
 
 const dashboardRoutes = [];
 
@@ -40,20 +40,19 @@ export default function LandingPage(props) {
         fixed
         changeColorOnScroll={{
           height: 400,
-          color: "white"
+          color: 'white',
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/office-bg.jpg")}>
+      <Parallax filter image={require('assets/img/office-bg.jpg')}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Welcome.</h1>
               <h4 className={classes.subtitle}>
-                Hello, you&apos;ve accidentally stumbled upon my personal
-                website. You poor soul! Joking aside, you&apos;ll find some
-                general information about my professional self as well as links
-                to social media for getting in touch.
+                Hello, you&apos;ve accidentally stumbled upon my personal website. You poor soul!
+                Joking aside, you&apos;ll find some general information about my professional self
+                as well as links to social media for getting in touch.
               </h4>
               <br />
             </GridItem>

@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
-import { hideStatus } from "./actions/statusActions";
-import CookieConsent from "./Components/CookieConsent";
+import { hideStatus } from './actions/statusActions';
+import CookieConsent from './Components/CookieConsent';
 
-const getStatus = state => {
+const getStatus = (state) => {
   return state.status;
 };
 
@@ -23,7 +23,7 @@ export default function App({ children, history }) {
     dispatch(hideStatus);
   };
 
-  const status = useSelector(state => getStatus(state));
+  const status = useSelector((state) => getStatus(state));
 
   return (
     <div>
@@ -40,5 +40,5 @@ export default function App({ children, history }) {
 
 App.propTypes = {
   children: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };

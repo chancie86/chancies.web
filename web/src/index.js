@@ -1,21 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider } from '@auth0/auth0-react';
 
-import store from "./store";
-import history from "./history";
+import store from './store';
+import history from './history';
 
-import App from "./App";
-import "assets/scss/material-kit-react.scss?v=1.8.0";
+import App from './App';
+import 'assets/scss/material-kit-react.scss?v=1.8.0';
 
 // pages for this product
-import Admin from "./Views/Admin";
-import LandingPage from "./Views/LandingPage";
-import DocumentPage from "./Views/DocumentPage";
-import Sandbox from "./Views/Sandbox";
+import Admin from './Views/Admin';
+import LandingPage from './Views/LandingPage';
+import DocumentPage from './Views/DocumentPage';
+import Sandbox from './Views/Sandbox';
 
 ReactDOM.render(
   <Auth0Provider
@@ -38,5 +38,5 @@ ReactDOM.render(
       </App>
     </Provider>
   </Auth0Provider>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

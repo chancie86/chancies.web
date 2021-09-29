@@ -17,7 +17,7 @@ export async function authClient(endpoint, { headers, ...rest }) {
   });
 }
 
-authClient.get = function(endpoint) {
+authClient.get = function (endpoint) {
   const config = {
     method: 'GET',
   };
@@ -25,7 +25,7 @@ authClient.get = function(endpoint) {
   return authClient(endpoint, config);
 };
 
-authClient.post = function(endpoint, body) {
+authClient.post = function (endpoint, body) {
   const config = {
     method: 'POST',
     body: body,
@@ -34,7 +34,7 @@ authClient.post = function(endpoint, body) {
   return authClient(endpoint, config);
 };
 
-authClient.put = function(endpoint, body) {
+authClient.put = function (endpoint, body) {
   const config = {
     method: 'PUT',
     body: body,

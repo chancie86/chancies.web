@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { Grid } from "@material-ui/core";
+import { Grid } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -13,23 +13,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Button from "../CustomButtons/Button";
+import Button from '../CustomButtons/Button';
 import ImageCarousel from '../ImageCarousel';
 import ImageSelectorDialog from './ImageSelectorDialog';
 
 const useStyles = makeStyles({
   deleteButton: {
-      color: "red"
-  }
+    color: 'red',
+  },
 });
 
-export default function ImageElementEditor({
-  images,
-  onAdd,
-  onUp,
-  onDown,
-  onRemove
-}) {
+export default function ImageElementEditor({ images, onAdd, onUp, onDown, onRemove }) {
   const classes = useStyles();
   const [importDialogVisible, setImportDialogVisible] = useState(false);
 
@@ -37,29 +31,33 @@ export default function ImageElementEditor({
     onAdd(caption, path);
     setImportDialogVisible(false);
   };
-  
+
   return (
     <Grid container direction="column">
       <ImageCarousel images={images} />
       <List dense>
-        {images.map((x, index) => <ListItem key={x.path}>
-          <ListItemIcon>
-            <IconButton onClick={() => onRemove(index)} className={classes.deleteButton}>
-              <ClearIcon />
-            </IconButton>
-            {index !== 0 && <IconButton onClick={() => onUp(index)}>
-              <ArrowUpwardIcon />
-            </IconButton>}
-            {(index !== images.length-1) && <IconButton onClick={() => onDown(index)}>
-              <ArrowDownwardIcon />
-            </IconButton>}
-          </ListItemIcon>
-          <ListItemText primary={x.path} secondary={x.title} />
-        </ListItem>)}
+        {images.map((x, index) => (
+          <ListItem key={x.path}>
+            <ListItemIcon>
+              <IconButton onClick={() => onRemove(index)} className={classes.deleteButton}>
+                <ClearIcon />
+              </IconButton>
+              {index !== 0 && (
+                <IconButton onClick={() => onUp(index)}>
+                  <ArrowUpwardIcon />
+                </IconButton>
+              )}
+              {index !== images.length - 1 && (
+                <IconButton onClick={() => onDown(index)}>
+                  <ArrowDownwardIcon />
+                </IconButton>
+              )}
+            </ListItemIcon>
+            <ListItemText primary={x.path} secondary={x.title} />
+          </ListItem>
+        ))}
       </List>
-      <Button
-        onClick={() => setImportDialogVisible(true)}
-      >
+      <Button onClick={() => setImportDialogVisible(true)}>
         <WebAssetIcon /> Add Existing Image
       </Button>
       <ImageSelectorDialog
@@ -69,14 +67,16 @@ export default function ImageElementEditor({
       />
     </Grid>
   );
-};
+}
 
 ImageElementEditor.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape({
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
       path: PropTypes.string.isRequired,
       title: PropTypes.string,
-  })).isRequired,
+    }),
+  ).isRequired,
   onUp: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
 };

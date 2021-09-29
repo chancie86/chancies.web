@@ -63,6 +63,7 @@ export default function Document({ id }) {
 
   const document = useSelector((state) => state.document);
   const isLoading = useSelector((state) => state.document.isLoading);
+  const isPublished = useSelector((state) => state.header?.documents.byId[id]?.published);
 
   useEffect(() => {
     tocbot.init({
@@ -78,13 +79,21 @@ export default function Document({ id }) {
     });
   }, [mediaMatch]);
 
-  React.useEffect(() => {
-    if (!id) {
-      return;
-    }
+  React.useEffect(
+    () => {
+      if (!id) {
+        return;
+      }
 
-    dispatch(getDocument(id));
-  }, [id, dispatch]);
+      if (!isPublished && !isAuthenticated) {
+        return;
+      }
+
+      dispatch(getDocument(id));
+    },
+    // eslint-disable-next-line
+    [id, dispatch, isPublished, isAuthenticated]
+  );
 
   const onSave = async (elements) => {
     if (!document) {

@@ -1,44 +1,44 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // @material-ui/core components
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Divider from "@material-ui/core/Divider";
-import Grow from "@material-ui/core/Grow";
-import Icon from "@material-ui/core/Icon";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import { makeStyles } from "@material-ui/core/styles";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Divider from '@material-ui/core/Divider';
+import Grow from '@material-ui/core/Grow';
+import Icon from '@material-ui/core/Icon';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import Button from "Components/CustomButtons/Button.js";
+import Button from 'Components/CustomButtons/Button.js';
 
-import styles from "assets/jss/material-kit-react/components/customDropdownStyle.js";
+import styles from 'assets/jss/material-kit-react/components/customDropdownStyle.js';
 
 const useStyles = makeStyles(styles);
 
 export default function CustomDropdown(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = event => {
+  const handleClick = (event) => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
     } else {
       setAnchorEl(event.currentTarget);
     }
   };
-  const handleClose = param => {
+  const handleClose = (param) => {
     setAnchorEl(null);
     if (props && props.onClick) {
       props.onClick(param);
     }
   };
-  const handleCloseAway = event => {
+  const handleCloseAway = (event) => {
     if (anchorEl.contains(event.target)) {
       return;
     }
@@ -59,26 +59,26 @@ export default function CustomDropdown(props) {
     hoverColor,
     left,
     rtlActive,
-    noLiPadding
+    noLiPadding,
   } = props;
   const caretClasses = classNames({
     [classes.caret]: true,
     [classes.caretActive]: Boolean(anchorEl),
-    [classes.caretRTL]: rtlActive
+    [classes.caretRTL]: rtlActive,
   });
   const dropdownItem = classNames({
     [classes.dropdownItem]: true,
-    [classes[hoverColor + "Hover"]]: true,
+    [classes[hoverColor + 'Hover']]: true,
     [classes.noLiPadding]: noLiPadding,
-    [classes.dropdownItemRTL]: rtlActive
+    [classes.dropdownItemRTL]: rtlActive,
   });
   let icon = null;
 
   switch (typeof buttonIcon) {
-    case "object":
+    case 'object':
       icon = <props.buttonIcon className={classes.buttonIcon} />;
       break;
-    case "string":
+    case 'string':
       icon = <Icon className={classes.buttonIcon}>{props.buttonIcon}</Icon>;
       break;
     default:
@@ -87,31 +87,47 @@ export default function CustomDropdown(props) {
   }
 
   const showSecondaryButton = secondaryButtonNode && secondaryButtonAction;
-  const PrimaryButton = () => <Button
-    aria-label="Notifications"
-    aria-owns={anchorEl ? "menu-list" : null}
-    aria-haspopup="true"
-    {...buttonProps}
-    onClick={handleClick}
-  >
-    {icon}
-    {primaryButtonNode !== undefined ? primaryButtonNode : null}
-    {caret ? <b className={caretClasses} /> : null}
-  </Button>;
+  const PrimaryButton = () => (
+    <Button
+      aria-label="Notifications"
+      aria-owns={anchorEl ? 'menu-list' : null}
+      aria-haspopup="true"
+      {...buttonProps}
+      onClick={handleClick}
+    >
+      {icon}
+      {primaryButtonNode !== undefined ? primaryButtonNode : null}
+      {caret ? <b className={caretClasses} /> : null}
+    </Button>
+  );
 
   return (
     <div>
       <div>
-        {showSecondaryButton && <ButtonGroup color="outlined" variant="contained" aria-label="split button" disableElevation className={classes.buttonGroup}>
-          {<Button size="small" onClick={secondaryButtonAction} style={{
-            margin: 0,
-            padding: 0,
-            backgroundColor: "transparent",
-          }}>
-            {secondaryButtonNode}
-          </Button>}
-          <PrimaryButton />
-        </ButtonGroup>}
+        {showSecondaryButton && (
+          <ButtonGroup
+            color="outlined"
+            variant="contained"
+            aria-label="split button"
+            disableElevation
+            className={classes.buttonGroup}
+          >
+            {
+              <Button
+                size="small"
+                onClick={secondaryButtonAction}
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  backgroundColor: 'transparent',
+                }}
+              >
+                {secondaryButtonNode}
+              </Button>
+            }
+            <PrimaryButton />
+          </ButtonGroup>
+        )}
         {!showSecondaryButton && <PrimaryButton />}
       </div>
       <Popper
@@ -119,29 +135,17 @@ export default function CustomDropdown(props) {
         anchorEl={anchorEl}
         transition
         disablePortal
-        placement={
-          dropup
-            ? left
-              ? "top-start"
-              : "top"
-            : left
-            ? "bottom-start"
-            : "bottom"
-        }
+        placement={dropup ? (left ? 'top-start' : 'top') : left ? 'bottom-start' : 'bottom'}
         className={classNames({
           [classes.popperClose]: !anchorEl,
-          [classes.popperResponsive]: true
+          [classes.popperResponsive]: true,
         })}
       >
         {() => (
           <Grow
             in={Boolean(anchorEl)}
             id="menu-list"
-            style={
-              dropup
-                ? { transformOrigin: "0 100% 0" }
-                : { transformOrigin: "0 0 0" }
-            }
+            style={dropup ? { transformOrigin: '0 100% 0' } : { transformOrigin: '0 0 0' }}
           >
             <Paper className={classes.dropdown}>
               <ClickAwayListener onClickAway={handleCloseAway}>
@@ -159,7 +163,7 @@ export default function CustomDropdown(props) {
                       return (
                         <Divider
                           key={key}
-                          onClick={() => handleClose("divider")}
+                          onClick={() => handleClose('divider')}
                           className={classes.dropdownDividerItem}
                         />
                       );
@@ -186,19 +190,11 @@ export default function CustomDropdown(props) {
 
 CustomDropdown.defaultProps = {
   caret: true,
-  hoverColor: "primary"
+  hoverColor: 'primary',
 };
 
 CustomDropdown.propTypes = {
-  hoverColor: PropTypes.oneOf([
-    "black",
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose"
-  ]),
+  hoverColor: PropTypes.oneOf(['black', 'primary', 'info', 'success', 'warning', 'danger', 'rose']),
   primaryButtonNode: PropTypes.node,
   secondaryButtonNode: PropTypes.node,
   buttonIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -211,5 +207,5 @@ CustomDropdown.propTypes = {
   left: PropTypes.bool,
   noLiPadding: PropTypes.bool,
   // function that retuns the selected item
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };

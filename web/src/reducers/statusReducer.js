@@ -1,9 +1,9 @@
-import * as actionTypes from "../actions/statusActionTypes";
+import * as actionTypes from '../actions/statusActionTypes';
 
 const initialState = {
   isOpen: false,
   message: null,
-  severity: "info"
+  severity: 'info',
 };
 
 export default function statusReducer(state = initialState, action) {
@@ -12,7 +12,7 @@ export default function statusReducer(state = initialState, action) {
       return {
         isOpen: true,
         message: action.payload.message,
-        severity: action.payload.severity
+        severity: action.payload.severity,
       };
     }
     case actionTypes.SNACKBAR_CLOSE: {

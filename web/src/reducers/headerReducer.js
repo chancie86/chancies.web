@@ -1,4 +1,4 @@
-import * as actionTypes from "../actions/headerActionTypes";
+import * as actionTypes from '../actions/headerActionTypes';
 
 const initialState = {
   sections: {
@@ -9,8 +9,8 @@ const initialState = {
   documents: {
     byId: {},
     bySectionId: {},
-    ids: []
-  }
+    ids: [],
+  },
 };
 
 export default function sectionReducer(state = initialState, action) {
@@ -22,14 +22,14 @@ export default function sectionReducer(state = initialState, action) {
           byId: {},
           ids: [],
           isLoading: true,
-        }
+        },
       };
     }
     case actionTypes.LIST_SECTIONS_SUCCESS: {
       const ids = [];
       const byId = {};
 
-      action.payload.forEach(x => {
+      action.payload.forEach((x) => {
         ids.push(x.id);
         byId[x.id] = x;
       });
@@ -40,7 +40,7 @@ export default function sectionReducer(state = initialState, action) {
           byId,
           ids,
           isLoading: false,
-        }
+        },
       };
     }
     case actionTypes.LIST_DOCUMENTS_SUCCESS: {
@@ -48,7 +48,7 @@ export default function sectionReducer(state = initialState, action) {
       const byId = {};
       const bySectionId = {};
 
-      action.payload.forEach(x => {
+      action.payload.forEach((x) => {
         ids.push(x.id);
         byId[x.id] = x;
 
@@ -64,8 +64,8 @@ export default function sectionReducer(state = initialState, action) {
         documents: {
           byId,
           ids,
-          bySectionId
-        }
+          bySectionId,
+        },
       };
     }
     case actionTypes.EDIT_SECTION_SUCCESS: {

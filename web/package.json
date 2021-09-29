@@ -54,6 +54,7 @@
     "build": "react-app-rewired build && gulp licenses",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
+    "fix": "eslint src --fix --ext .jsx,.js",
     "lint:check": "eslint . --ext=js,jsx;  exit 0",
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",

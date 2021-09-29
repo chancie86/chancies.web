@@ -1,15 +1,15 @@
-import * as actionTypes from "../actions/documentActionTypes";
+import * as actionTypes from '../actions/documentActionTypes';
 
 const initialState = {
   imageReferences: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const getImageReferencesByPath = (payload) => {
   const result = {};
 
-  payload.forEach(x => {
-    result[x.path] = x.url
+  payload.forEach((x) => {
+    result[x.path] = x.url;
   });
 
   return result;
@@ -21,33 +21,33 @@ export default function documentReducer(state = initialState, action) {
     case actionTypes.FETCH_DOCUMENT_REQUEST:
       return {
         ...initialState,
-        isLoading: true
+        isLoading: true,
       };
     case actionTypes.FETCH_DOCUMENT_SUCCESS: {
       return {
         ...state,
         ...action.payload,
-        isLoading: false
+        isLoading: false,
       };
     }
     case actionTypes.SAVE_DOCUMENT_SUCCESS: {
       return {
         ...state,
         ...action.payload,
-        isLoading: false
+        isLoading: false,
       };
     }
     case actionTypes.PUBLISH_DOCUMENT_SUCCESS: {
       return {
         ...state,
-        published: action.payload.published
-      }
+        published: action.payload.published,
+      };
     }
     case actionTypes.FETCH_IMAGEREFERENCES_SUCCESS: {
       return {
         ...state,
-        imageReferences: getImageReferencesByPath(action.payload)
-      }
+        imageReferences: getImageReferencesByPath(action.payload),
+      };
     }
     default:
       return state;
