@@ -6,6 +6,11 @@ export default function useAuth() {
   const [hasReceivedToken, setHasReceivedToken] = useState(false);
 
   useEffect(() => {
+    if (hasReceivedToken) {
+      // We're already authenticated. Nothing to do.
+      return;
+    }
+
     if (isAuthenticated) {
       const getAccessToken = async () => {
         const token = await getAccessTokenSilently();
@@ -13,15 +18,16 @@ export default function useAuth() {
         setHasReceivedToken(true);
       };
       getAccessToken();
-    } else {
-      window.localStorage.removeItem('token');
-      setHasReceivedToken(false);
     }
-  }, [isAuthenticated, getAccessTokenSilently]);
+  }, [isAuthenticated, getAccessTokenSilently, hasReceivedToken]);
 
   return {
-    isAuthenticated: isAuthenticated && hasReceivedToken,
+    isAuthenticated: hasReceivedToken,
     loginWithRedirect,
-    logout: () => logout({ returnTo: window.location.origin }),
+    logout: () => {
+      logout({ returnTo: window.location.origin });
+      window.localStorage.removeItem('token');
+      setHasReceivedToken(false);
+    },
   };
 }

@@ -244,12 +244,14 @@ export default function Document({ id }) {
         </GridItem>
       </div>
       <Footer />
-      <EditTitleDialog
-        isOpen={isEditTitleDialogOpen}
-        onClose={() => setIsEditTitleDialogOpen(false)}
-        onSave={(x) => onSaveTitle(x)}
-        title={document.name}
-      />
+      {!!document?.title && (
+        <EditTitleDialog
+          isOpen={isEditTitleDialogOpen}
+          onClose={() => setIsEditTitleDialogOpen(false)}
+          onSave={(x) => onSaveTitle(x)}
+          title={document.name}
+        />
+      )}
     </div>
   );
 }
