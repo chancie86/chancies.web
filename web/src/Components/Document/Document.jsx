@@ -102,7 +102,7 @@ export default function Document({ id }) {
 
     await dispatch(saveDocument(document.id, document.name, elements, document.section.id));
     dispatch(showSuccessStatus('Saved'));
-    await dispatch(getDocument(isAuthenticated, id));
+    await dispatch(getDocument(id));
     setIsEditing(false);
   };
 
