@@ -23,6 +23,8 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
     if (response.ok) {
       switch (response.status) {
         case 200:
+        case 401:
+          window.localStorage.removeItem('token');
         case 500:
           data = await response.json();
           break;
