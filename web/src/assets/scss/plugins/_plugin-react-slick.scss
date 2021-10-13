@@ -49,8 +49,10 @@
   }
   .slick-image {
     display: inline-flex !important;
-    height: auto;
-    width: 100%;
+    // height: auto;
+    // width: 100%;
+    max-width: 100%;
+    max-height: 30rem;
   }
 }
 
@@ -85,7 +87,8 @@
   top: 0;
   left: 0;
 
-  display: block;
+  display: flex;
+  align-items: center;
   margin-left: auto;
   margin-right: auto;
 }
