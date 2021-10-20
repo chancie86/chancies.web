@@ -13,10 +13,11 @@ import ResponsiveEmbed from 'react-responsive-embed';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
+import EditIcon from '@material-ui/icons/Edit';
 import PublishIcon from '@material-ui/icons/Publish';
-import TitleIcon from '@material-ui/icons/Title';
 import SubjectIcon from '@material-ui/icons/Subject';
 
 // styles for table of contents
@@ -178,7 +179,16 @@ export default function Document({ id }) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>{document?.name}</h1>
+              <h1 className={classes.title}>
+                {document?.name}
+                <IconButton
+                  aria-label="Edit title"
+                  onClick={() => setIsEditTitleDialogOpen(true)}
+                  style={{ color: 'white' }}
+                >
+                  <EditIcon />
+                </IconButton>
+              </h1>
               <br />
               <p className={classes.title}>
                 {document?.created}{' '}
@@ -226,10 +236,6 @@ export default function Document({ id }) {
                       <SubjectIcon />
                       Edit Content
                     </Button>
-                    <Button onClick={() => setIsEditTitleDialogOpen(true)}>
-                      <TitleIcon />
-                      Edit Title
-                    </Button>
                     <Button onClick={() => handlePublish(document.id)}>
                       <PublishIcon />
                       {document.published ? 'Unpublish' : 'Publish'}
@@ -244,7 +250,7 @@ export default function Document({ id }) {
         </GridItem>
       </div>
       <Footer />
-      {!!document?.title && (
+      {!!document?.name && (
         <EditTitleDialog
           isOpen={isEditTitleDialogOpen}
           onClose={() => setIsEditTitleDialogOpen(false)}
