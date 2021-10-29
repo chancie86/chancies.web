@@ -37,7 +37,7 @@ export default function ImageElementEditor({ images, onAdd, onUp, onDown, onRemo
       <ImageCarousel images={images} />
       <List dense>
         {images.map((x, index) => (
-          <ListItem key={x.path}>
+          <ListItem key={`${index}-${x.path}`}>
             <ListItemIcon>
               <IconButton onClick={() => onRemove(index)} className={classes.deleteButton}>
                 <ClearIcon />
@@ -76,6 +76,7 @@ ImageElementEditor.propTypes = {
       title: PropTypes.string,
     }),
   ).isRequired,
+  onAdd: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,

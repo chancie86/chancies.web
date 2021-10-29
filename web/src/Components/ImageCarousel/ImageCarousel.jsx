@@ -13,6 +13,11 @@ const useStyles = makeStyles({
   container: {
     justifyContent: 'center',
   },
+  imageContainer: {
+    alignItems: 'center',
+    display: 'flex !important',
+    justifyContent: 'center',
+  },
   singleImageContainer: {
     justifyContent: 'center',
     width: 'auto',
@@ -73,7 +78,7 @@ export default function ImageCarousel({ images }) {
           <Card carousel style={{ backgroundColor: 'black' }}>
             <Carousel {...carouselSettings}>
               {imagesToRender.map((x) => (
-                <div key={x.path}>
+                <div key={x.path} className={classes.imageContainer}>
                   <img src={x.url} alt={x.title} className="slick-image" />
                   <div className="slick-caption">
                     <h4>{x.title}</h4>

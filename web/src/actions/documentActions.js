@@ -41,3 +41,10 @@ export const publishDocument = (id, publish) => {
     });
   };
 };
+
+export const getImages = (id) => {
+  return async (dispatch) => {
+    const response = await api.listImages(id);
+    dispatch({ type: actionTypes.FETCH_IMAGEREFERENCES_SUCCESS, payload: response });
+  };
+};

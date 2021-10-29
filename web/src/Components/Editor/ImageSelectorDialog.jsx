@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,6 +17,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
+import { getImages } from '../../actions/documentActions';
+
 const useStyles = makeStyles({
   radio: {
     color: 'white',
@@ -25,10 +27,24 @@ const useStyles = makeStyles({
 
 export default function ImageSelectorDialog({ isOpen, onSave, onCancel }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
+  const documentId = useSelector((state) => state.document.id);
   const imageRefs = useSelector((state) => state.document.imageReferences);
   const [caption, setCaption] = useState('');
   const [selectedImage, setSelectedImage] = React.useState();
+
+  const handleSave = (caption, selectedImage) => {
+    onSave(caption, selectedImage);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      dispatch(getImages(documentId));
+    } else {
+      setCaption('');
+    }
+  }, [dispatch, documentId, isOpen]);
 
   return (
     <Dialog onClose={onCancel} aria-labelledby="customized-dialog-title" open={isOpen}>
@@ -74,7 +90,7 @@ export default function ImageSelectorDialog({ isOpen, onSave, onCancel }) {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={() => onSave(caption, selectedImage)} color="primary">
+        <Button autoFocus onClick={() => handleSave(caption, selectedImage)} color="primary">
           Save
         </Button>
         <Button autoFocus onClick={onCancel} color="primary">
@@ -86,6 +102,7 @@ export default function ImageSelectorDialog({ isOpen, onSave, onCancel }) {
 }
 
 ImageSelectorDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
