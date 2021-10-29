@@ -37,6 +37,7 @@ import ImageCarousel from '../../Components/ImageCarousel';
 import Parallax from '../../Components/Parallax/Parallax.js';
 import styles from '../../assets/jss/material-kit-react/views/basePageStyle.js';
 import { getDocument, saveDocument, publishDocument } from '../../actions/documentActions';
+import { listDocuments } from "../../actions/headerActions";
 import EditTitleDialog from './EditTitleDialog';
 import config from 'config.json';
 
@@ -113,6 +114,7 @@ export default function Document({ id }) {
     }
 
     await dispatch(saveDocument(document.id, title, document.elements, document.section.id));
+    await dispatch(listDocuments());
     dispatch(showSuccessStatus('Saved'));
   };
 
@@ -178,16 +180,18 @@ export default function Document({ id }) {
       <Parallax small filter image={require('assets/img/3dprinting.jpg')}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
+            <GridItem>
               <h1 className={classes.title}>
                 {document?.name}
-                <IconButton
-                  aria-label="Edit title"
-                  onClick={() => setIsEditTitleDialogOpen(true)}
-                  style={{ color: 'white' }}
-                >
-                  <EditIcon />
-                </IconButton>
+                {isAuthenticated && (
+                  <IconButton
+                    aria-label="Edit title"
+                    onClick={() => setIsEditTitleDialogOpen(true)}
+                    style={{ color: 'white' }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                )}
               </h1>
               <br />
               <p className={classes.title}>

@@ -22,9 +22,11 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
     const response = await window.fetch(`${baseUrl}/${endpoint}`, config);
     if (response.ok) {
       switch (response.status) {
-        case 200:
         case 401:
           window.localStorage.removeItem('token');
+          throw new Error("Unauthorized");
+          break;
+        case 200:
         case 500:
           data = await response.json();
           break;

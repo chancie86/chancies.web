@@ -19,6 +19,8 @@ const useStyles = makeStyles({
     justifyContent: 'center',
   },
   singleImageContainer: {
+    backgroundColor: 'black',
+    color: 'white',
     justifyContent: 'center',
     width: 'auto',
   },
@@ -65,14 +67,17 @@ export default function ImageCarousel({ images }) {
   return (
     <Grid container className={classes.container}>
       {imagesToRender.length === 1 ? (
-        <Card className={classes.singleImageContainer}>
-          <img
-            src={imagesToRender[0].url}
-            alt={imagesToRender[0].title}
-            style={{ maxHeight: '30em' }}
-            className={classes.singleImage}
-          />
-        </Card>
+        <div>
+          <Card className={classes.singleImageContainer}>
+            <img
+              src={imagesToRender[0].url}
+              alt={imagesToRender[0].title}
+              style={{ maxHeight: '30em' }}
+              className={classes.singleImage}
+            />
+            {imagesToRender[0].title && <h4 style={{ textAlign: 'center' }}>{imagesToRender[0].title}</h4>}
+          </Card>
+        </div>
       ) : (
         <Grid item xs={12} sm={12} md={9}>
           <Card carousel style={{ backgroundColor: 'black' }}>
