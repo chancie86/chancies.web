@@ -25,7 +25,6 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
         case 401:
           window.localStorage.removeItem('token');
           throw new Error("Unauthorized");
-          break;
         case 200:
         case 500:
           data = await response.json();
