@@ -35,8 +35,9 @@ export async function client(endpoint, { method, body, ...customConfig } = {}) {
         case 401:
           window.localStorage.removeItem('token');
           throw new Error('Unauthorized');
+        default:
+          throw new Error(response.statusText);
       }
-      throw new Error(response.statusText);
     }
   } catch (err) {
     return Promise.reject(err.message ? err.message : data);
