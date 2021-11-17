@@ -119,8 +119,8 @@ export default function HeaderLinks() {
         </Button>
       </ListItem>
       {isLoading
-        ? <ListItem className={classes.listItem} style={{ padding: '15px' }}>
-            <CircularProgress style={{ color: 'white' }} size="1rem" />
+        ? <ListItem className={classes.listItem} style={{  }}>
+            <CircularProgress style={{ color: 'inherit', margin: '15px' }} size="1rem" />
           </ListItem>
         : sections.map(s => <SectionDropdown
           section={s}
