@@ -28,20 +28,14 @@ import { showSuccessStatus } from '../../actions/statusActions';
 import { useAuth } from '../../Hooks/useAuth';
 import Button from '../../Components/CustomButtons/Button';
 import Editor from '../../Components/Editor';
-import Header from '../../Components/Header/Header.js';
-import Footer from '../../Components/Footer/Footer.js';
 import GridContainer from '../../Components/Grid/GridContainer.js';
 import GridItem from '../../Components/Grid/GridItem.js';
-import HeaderLinks from '../../Components/Header/HeaderLinks.js';
 import ImageCarousel from '../../Components/ImageCarousel';
-import Parallax from '../../Components/Parallax/Parallax.js';
+import Page from '../../Components/Page';
 import styles from '../../assets/jss/material-kit-react/views/basePageStyle.js';
 import { getDocument, saveDocument, publishDocument } from '../../actions/documentActions';
-import { listDocuments } from "../../actions/headerActions";
+import { listDocuments } from '../../actions/headerActions';
 import EditTitleDialog from './EditTitleDialog';
-import config from 'config.json';
-
-const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
 
@@ -164,96 +158,77 @@ export default function Document({ id }) {
     document.lastUpdated = getDate(date);
   }
 
+  const Header = () => (
+    <>
+      <h1 className={classes.title}>
+        {document?.name}
+        {isAuthenticated && (
+          <IconButton
+            aria-label="Edit title"
+            onClick={() => setIsEditTitleDialogOpen(true)}
+            style={{ color: 'white' }}
+          >
+            <EditIcon />
+          </IconButton>
+        )}
+      </h1>
+      <br />
+      <p className={classes.title}>
+        {document?.created}{' '}
+        {document?.created !== document?.lastUpdated ? `(updated ${document?.lastUpdated})` : null}
+      </p>
+    </>
+  );
+
   return (
-    <div>
-      <Header
-        color="transparent"
-        routes={dashboardRoutes}
-        brand={config.brandName}
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: 'white',
-        }}
-      />
-      <Parallax small filter image={require('assets/img/3dprinting.jpg')}>
-        <div className={classes.container}>
-          <GridContainer>
-            <GridItem>
-              <h1 className={classes.title}>
-                {document?.name}
-                {isAuthenticated && (
-                  <IconButton
-                    aria-label="Edit title"
-                    onClick={() => setIsEditTitleDialogOpen(true)}
-                    style={{ color: 'white' }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                )}
-              </h1>
-              <br />
-              <p className={classes.title}>
-                {document?.created}{' '}
-                {document?.created !== document?.lastUpdated
-                  ? `(updated ${document?.lastUpdated})`
-                  : null}
-              </p>
-            </GridItem>
-          </GridContainer>
-        </div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <GridItem container alignItems="center">
-          <GridItem sm={1} md={2} lg={3}></GridItem>
-          <GridItem xs={12} sm={10} md={8} lg={6}>
-            <nav
-              className={classNames('js-toc', classes.toc, mediaMatch ? classes.tocVisible : '')}
-            />
-            {isLoading && (
-              <Grid
-                container
-                justifyContent="center"
-                alignItems="center"
-                style={{ minHeight: '10rem' }}
-              >
-                <CircularProgress />
-              </Grid>
-            )}
-            {!isLoading && isEditing && document && (
-              <GridContainer>
-                <GridItem>
-                  <Editor
-                    documentElements={document.elements}
-                    onSave={onSave}
-                    onCancel={() => setIsEditing(false)}
-                  />
-                </GridItem>
-              </GridContainer>
-            )}
-            {!isLoading && !isEditing && document && (
-              <div className="js-toc-content" style={{ padding: '70px 0 0 0' }}>
-                {isAuthenticated && (
-                  <GridContainer justifyContent="flex-end">
-                    <Button onClick={() => setIsEditing(true)}>
-                      <SubjectIcon />
-                      Edit Content
-                    </Button>
-                    <Button onClick={() => handlePublish(document.id)}>
-                      <PublishIcon />
-                      {document.published ? 'Unpublish' : 'Publish'}
-                    </Button>
-                  </GridContainer>
-                )}
-                <GridItem>{getContent()}</GridItem>
-              </div>
-            )}
-          </GridItem>
-          <GridItem sm={1} md={2} xl={3}></GridItem>
+    <Page HeaderContent={Header}>
+      <GridItem container alignItems="center">
+        <GridItem sm={1} md={2} lg={3}></GridItem>
+        <GridItem xs={12} sm={10} md={8} lg={6}>
+          <nav
+            className={classNames('js-toc', classes.toc, mediaMatch ? classes.tocVisible : '')}
+          />
+          {isLoading && (
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              style={{ minHeight: '10rem' }}
+            >
+              <CircularProgress />
+            </Grid>
+          )}
+          {!isLoading && isEditing && document && (
+            <GridContainer>
+              <GridItem>
+                <Editor
+                  documentElements={document.elements}
+                  onSave={onSave}
+                  onCancel={() => setIsEditing(false)}
+                />
+              </GridItem>
+            </GridContainer>
+          )}
+          {!isLoading && !isEditing && document && (
+            <div className="js-toc-content" style={{ padding: '70px 0 0 0' }}>
+              {isAuthenticated && (
+                <GridContainer justifyContent="flex-end">
+                  <Button onClick={() => setIsEditing(true)}>
+                    <SubjectIcon />
+                    Edit Content
+                  </Button>
+                  <Button onClick={() => handlePublish(document.id)}>
+                    <PublishIcon />
+                    {document.published ? 'Unpublish' : 'Publish'}
+                  </Button>
+                </GridContainer>
+              )}
+              <GridItem>{getContent()}</GridItem>
+            </div>
+          )}
         </GridItem>
-      </div>
-      <Footer />
+        <GridItem sm={1} md={2} xl={3}></GridItem>
+      </GridItem>
       {!!document?.name && (
         <EditTitleDialog
           isOpen={isEditTitleDialogOpen}
@@ -262,7 +237,7 @@ export default function Document({ id }) {
           title={document.name}
         />
       )}
-    </div>
+    </Page>
   );
 }
 
