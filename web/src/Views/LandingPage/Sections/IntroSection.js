@@ -61,7 +61,7 @@ export default function IntroSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={8} container alignItems="center">
             <p className={classes.description}>
-              I have been a software developer for over 10 years. At my humbled beginnings I began
+              I have been a software developer for over 15 years. At my humbled beginnings I began
               with an internship working on mobile OS software. Since then I have progressed my
               career as an engineer at companies ranging from large multibillion dollar enterprises
               to small startups in a variety of areas including virtualisation, devops, desktop app

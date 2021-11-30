@@ -16,13 +16,13 @@ import config from 'config.json';
 
 const useStyles = makeStyles(styles);
 
-export default function Page({ HeaderContent, headerImageSrc, children }) {
+export default function Page({ HeaderContent, headerImageSrc, largeHeader, children }) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdBreakpoint = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
-    <div>
+    <>
       <Header
         color="transparent"
         brand={config.brandName}
@@ -33,20 +33,18 @@ export default function Page({ HeaderContent, headerImageSrc, children }) {
           color: 'white',
         }}
       />
-      <Parallax small filter image={headerImageSrc}>
-        <div className={classes.container}>
-          <Grid container>
-            <Grid item>
-              <HeaderContent />
-            </Grid>
+      <Parallax small={!largeHeader} filter image={headerImageSrc}>
+        <Grid container className={classes.container}>
+          <Grid item>
+            <HeaderContent />
           </Grid>
-        </div>
+        </Grid>
       </Parallax>
       <div className={classNames(classes.main, isMdBreakpoint ? classes.mainRaised : null)}>
         {children}
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 
@@ -54,9 +52,11 @@ Page.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   HeaderContent: PropTypes.elementType.isRequired,
   headerImageSrc: PropTypes.string,
+  largeHeader: PropTypes.bool,
 };
 
 Page.defaultProps = {
   HeaderContent: null,
   headerImageSrc: require('assets/img/office-bg.jpg'),
+  largeHeader: false,
 };

@@ -28,8 +28,6 @@ import { showSuccessStatus } from '../../actions/statusActions';
 import { useAuth } from '../../Hooks/useAuth';
 import Button from '../../Components/CustomButtons/Button';
 import Editor from '../../Components/Editor';
-import GridContainer from '../../Components/Grid/GridContainer.js';
-import GridItem from '../../Components/Grid/GridItem.js';
 import ImageCarousel from '../../Components/ImageCarousel';
 import Page from '../../Components/Page';
 import styles from '../../assets/jss/material-kit-react/views/basePageStyle.js';
@@ -182,9 +180,8 @@ export default function Document({ id }) {
 
   return (
     <Page HeaderContent={Header}>
-      <GridItem container alignItems="center">
-        <GridItem sm={1} md={2} lg={3}></GridItem>
-        <GridItem xs={12} sm={10} md={8} lg={6}>
+      <Grid container justifyContent="center">
+        <Grid item xs={11} sm={10} md={8} lg={6}>
           <nav
             className={classNames('js-toc', classes.toc, mediaMatch ? classes.tocVisible : '')}
           />
@@ -199,20 +196,20 @@ export default function Document({ id }) {
             </Grid>
           )}
           {!isLoading && isEditing && document && (
-            <GridContainer>
-              <GridItem>
+            <Grid container>
+              <Grid item>
                 <Editor
                   documentElements={document.elements}
                   onSave={onSave}
                   onCancel={() => setIsEditing(false)}
                 />
-              </GridItem>
-            </GridContainer>
+              </Grid>
+            </Grid>
           )}
           {!isLoading && !isEditing && document && (
             <div className="js-toc-content" style={{ padding: '70px 0 0 0' }}>
               {isAuthenticated && (
-                <GridContainer justifyContent="flex-end">
+                <Grid container justifyContent="flex-end">
                   <Button onClick={() => setIsEditing(true)}>
                     <SubjectIcon />
                     Edit Content
@@ -221,14 +218,13 @@ export default function Document({ id }) {
                     <PublishIcon />
                     {document.published ? 'Unpublish' : 'Publish'}
                   </Button>
-                </GridContainer>
+                </Grid>
               )}
-              <GridItem>{getContent()}</GridItem>
+              <Grid item>{getContent()}</Grid>
             </div>
           )}
-        </GridItem>
-        <GridItem sm={1} md={2} xl={3}></GridItem>
-      </GridItem>
+        </Grid>
+      </Grid>
       {!!document?.name && (
         <EditTitleDialog
           isOpen={isEditTitleDialogOpen}
