@@ -196,15 +196,11 @@ export default function Document({ id }) {
             </Grid>
           )}
           {!isLoading && isEditing && document && (
-            <Grid container>
-              <Grid item>
-                <Editor
-                  documentElements={document.elements}
-                  onSave={onSave}
-                  onCancel={() => setIsEditing(false)}
-                />
-              </Grid>
-            </Grid>
+            <Editor
+              documentElements={document.elements}
+              onSave={onSave}
+              onCancel={() => setIsEditing(false)}
+            />
           )}
           {!isLoading && !isEditing && document && (
             <div className="js-toc-content" style={{ padding: '70px 0 0 0' }}>
