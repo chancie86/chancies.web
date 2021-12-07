@@ -75,7 +75,9 @@ export default function ImageCarousel({ images }) {
               style={{ maxHeight: '30em' }}
               className={classes.singleImage}
             />
-            {imagesToRender[0].title && <h4 style={{ textAlign: 'center' }}>{imagesToRender[0].title}</h4>}
+            {imagesToRender[0].title && (
+              <h4 style={{ textAlign: 'center' }}>{imagesToRender[0].title}</h4>
+            )}
           </Card>
         </div>
       ) : (

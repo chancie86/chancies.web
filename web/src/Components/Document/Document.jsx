@@ -60,6 +60,10 @@ export default function Document({ id }) {
   const isPublished = useSelector((state) => state.header?.documents.byId[id]?.published);
 
   useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
     tocbot.init({
       // Where to render the table of contents.
       tocSelector: '.js-toc',
@@ -71,7 +75,7 @@ export default function Document({ id }) {
       hasInnerContainers: false,
       scrollSmoothDuration: 1000,
     });
-  }, [mediaMatch]);
+  }, [isLoading, mediaMatch]);
 
   React.useEffect(
     () => {
@@ -86,7 +90,7 @@ export default function Document({ id }) {
       dispatch(getDocument(id));
     },
     // eslint-disable-next-line
-    [id, dispatch, isPublished, isAuthenticated]
+    [id, dispatch, isPublished, isAuthenticated],
   );
 
   const onSave = async (elements) => {

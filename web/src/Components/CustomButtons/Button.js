@@ -53,6 +53,7 @@ const RegularButton = React.forwardRef((props, ref) => {
     </Button>
   );
 });
+RegularButton.displayName = 'RegularButton';
 
 RegularButton.propTypes = {
   color: PropTypes.oneOf([

@@ -1,4 +1,5 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+import PropTypes from 'prop-types';
 
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -59,3 +60,7 @@ init={{
 }
 
 export default forwardRef(HtmlEditor);
+
+HtmlEditor.propTypes = {
+  content: PropTypes.object.isRequired,
+};

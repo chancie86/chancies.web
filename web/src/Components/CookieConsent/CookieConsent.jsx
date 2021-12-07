@@ -84,8 +84,8 @@ export default function CookieConsent() {
             <Grid className={classes.message}>
               <span>
                 This site uses Google Analytics which helps to analyze web traffic. This helps to
-                understand how the website is being used to improve content. Click 'Allow' to grant
-                permission to collect tracking information about how you use the website.
+                understand how the website is being used to improve content. Click ^apos;Allow^apos;
+                to grant permission to collect tracking information about how you use the website.
               </span>
             </Grid>
           </Grid>

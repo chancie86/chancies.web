@@ -12,7 +12,7 @@ import { Editor } from '@tinymce/tinymce-react';
 
 //const useStyles = makeStyles(styles);
 
-export default function LandingPage(props) {
+export default function LandingPage() {
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
