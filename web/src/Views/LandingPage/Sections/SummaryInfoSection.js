@@ -99,15 +99,19 @@ export default function SummaryInfo() {
                       After working for a very large company I decided that I wanted experience
                       working for smaller companies. My next position would be at InPhase who have a
                       web based performance management tool. The skills I gained here were mostly
-                      related to ASP.NET front and back end.
+                      related to ASP.NET back end and Razor front end.
                     </p>
                     <p>
-                      My current and relatively recent appointed position at&nbsp;
-                      <ExternalLink href="https://www.hvmd.io">Hivemind</ExternalLink> takes me to
-                      the world of startups as a back end software engineer. Most of my time so far
-                      has been spent working with Azure, .NET Core and React to ready&nbsp;
-                      <ExternalLink href="https://www.hvmd.io/agora">AGORA</ExternalLink> for its
-                      initial beta launch.
+                      My position at&nbsp;
+                      <ExternalLink href="https://www.hvmd.io">Hivemind</ExternalLink> took me to
+                      the world of startups as a full stack software engineer. My first major task
+                      was to productize their prediction market product&nbsp;
+                      <ExternalLink href="https://www.hvmd.io/agora">AGORA</ExternalLink> to prepare
+                      for its beta and full product launches. Later, I would contribute to the
+                      Hivemind task platform which helped their clients to create bespoke datasets
+                      from messy unstructured data. My time at Hivemind afforded me the opportunity
+                      to work on all aspects of the stack including Azure, AWS, Kubernetes, .NET
+                      Core and ReactJS.
                     </p>
                   </span>
                 ),
