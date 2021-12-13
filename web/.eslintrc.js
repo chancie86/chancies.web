@@ -21,7 +21,7 @@ module.exports = {
     'prettier/standard',
   ],
   rules: {
-    'max-len': ['error', { code: 120, tabWidth: 4 }],
+    'max-len': ['error', { code: 200, tabWidth: 4 }],
     'prettier/prettier': 'error',
   },
 };

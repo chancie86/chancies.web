@@ -40,8 +40,8 @@ export default function SummaryInfo() {
                     <p>
                       I am extremely proud of my educational achievements. Coming from a migrant
                       family who moved to seek better standards of living and work, I am part of my
-                      family's first generation to attend higher education, let alone be able to
-                      complete formal education. Whilst studying in state schools I discovered a
+                      family&apos;s first generation to attend higher education, let alone be able
+                      to complete formal education. Whilst studying in state schools I discovered a
                       passion for science and technology and had tenatively chosen my degree course
                       by the age of 13. By this point, all of my choices of study subjects were
                       guided by the desire to learn more about physics, electronics and computing.

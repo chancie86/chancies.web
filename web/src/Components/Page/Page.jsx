@@ -57,6 +57,6 @@ Page.propTypes = {
 
 Page.defaultProps = {
   HeaderContent: null,
-  headerImageSrc: require('assets/img/office-bg.jpg'),
+  headerImageSrc: require('assets/img/office-bg.jpg').default,
   largeHeader: false,
 };
