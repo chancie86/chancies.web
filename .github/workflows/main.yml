@@ -24,5 +24,6 @@ jobs:
         with:
           node-version: 16
           cache: 'yarn'
-        run: yarn insall
-        run: yarn build
+        run: |
+          yarn insall
+          yarn build
